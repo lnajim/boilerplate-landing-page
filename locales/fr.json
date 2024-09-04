@@ -1,0 +1,46 @@
+{
+  "Header": {
+    "salonName": "Lumina",
+    "home": "Accueil",
+    "services": "Services",
+    "about": "À propos",
+    "contact": "Contact",
+    "languageSelector": "Langue"
+  },
+  "HeroSection": {
+    "title": "Une Beauté Radieuse Vous Attend",
+    "description": "Découvrez un monde de beauté et de soins chez Lumina Beauty Studio. Laissez nos experts styliste révéler votre véritable éclat.",
+    "buttonText": "Réservez Votre Expérience"
+  },
+  "ServicesSection": {
+    "sectionTitle": "Nos Services Capillaires",
+    "haircuts": {
+      "title": "Coupes de Cheveux Experts",
+      "description": "Obtenez la coupe parfaite adaptée à votre style et à votre personnalité."
+    },
+    "coloring": {
+      "title": "Coloration Professionnelle",
+      "description": "Transformez votre look avec nos traitements de couleur personnalisés."
+    },
+    "styling": {
+      "title": "Coiffures Élégantes",
+      "description": "Que ce soit pour une journée décontractée ou un événement spécial, nos stylistes vous couvrent."
+    },
+    "treatments": {
+      "title": "Soins Capillaires Nourrissants",
+      "description": "Revitalisez vos cheveux avec notre gamme de traitements réparateurs."
+    }
+  },
+  "ContactForm": {
+    "sectionTitle": "Contactez-Nous",
+    "callButton": "Appelez-Nous Maintenant",
+    "namePlaceholder": "Votre Nom",
+    "emailPlaceholder": "Votre Email",
+    "subjectPlaceholder": "Sujet",
+    "messagePlaceholder": "Votre Message",
+    "submitButton": "Envoyer le Message"
+  },
+  "Footer": {
+    "copyright": "© {year} Lumina Beauty Studio. Tous droits réservés."
+  }
+}
