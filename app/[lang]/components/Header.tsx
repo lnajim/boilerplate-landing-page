@@ -1,11 +1,12 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import useTranslationStore from '@/stores/TranslationStore'
 import LanguageSelector from './LanguageSelector'
-import { appConfig } from '@/app.config'
+import { headerConfig } from '@/app/config/headerConfig'
 import AuthenticationButton from './AuthenticationButton'
+import { appConfig } from '@/app.config'
 
 const Header: React.FC = () => {
 	const { language, dictionary, setLanguage } = useTranslationStore()
@@ -17,8 +18,8 @@ const Header: React.FC = () => {
 		loadTranslations()
 	}, [setLanguage, language])
 
-
-	const navItems = ['home', 'services', 'about', 'contact'] as const;
+	// Define the type of navItems more explicitly
+	const navItems = headerConfig.map((item) => item.key) as Array<keyof typeof dictionary.Header>
 
 	return (
 		<header className="bg-gradient-to-r from-purple-500 to-pink-500 p-4" data-header-id="main-header">
@@ -30,7 +31,7 @@ const Header: React.FC = () => {
 					<ul className="flex items-center space-x-4">
 						{navItems.map((item) => (
 							<li key={item}>
-								<Link href={`#`} className="text-white hover:text-purple-200">
+								<Link href={headerConfig.find((config) => config.key === item)?.path || '#'} className="text-white hover:text-purple-200">
 									{dictionary.Header[item]}
 								</Link>
 							</li>
