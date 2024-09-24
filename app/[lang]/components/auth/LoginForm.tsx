@@ -18,7 +18,22 @@ const loginSchema = z.object({
 
 type LoginFormData = z.infer<typeof loginSchema>
 
-export default function Component() {
+interface LoginFormProps {
+	dictionary: {
+		title: string;
+		description: string;
+		emailLabel: string;
+		passwordLabel: string;
+		signInButton: string;
+		orContinueWith: string;
+		githubButton: string;
+		googleButton: string;
+		noAccountText: string;
+		signUpLink: string;
+	}
+}
+
+export const LoginForm: React.FC<LoginFormProps> = ({ dictionary }) => {
 	const [isLoading, setIsLoading] = useState(false)
 	const form = useForm<LoginFormData>({
 		resolver: zodResolver(loginSchema),
@@ -37,11 +52,11 @@ export default function Component() {
 	}
 
 	return (
-		<Card className="w-[350px]">
+		<Card>
 			<CardHeader className="space-y-1">
-				<CardTitle className="text-2xl">Login</CardTitle>
+				<CardTitle className="text-2xl">{dictionary?.title}</CardTitle>
 				<CardDescription>
-					Enter your email and password to login
+					{dictionary?.description}
 				</CardDescription>
 			</CardHeader>
 			<CardContent className="grid gap-4">
@@ -52,7 +67,7 @@ export default function Component() {
 							name="email"
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>Email</FormLabel>
+									<FormLabel>{dictionary?.emailLabel}</FormLabel>
 									<FormControl>
 										<Input placeholder="m@example.com" {...field} />
 									</FormControl>
@@ -65,7 +80,7 @@ export default function Component() {
 							name="password"
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>Password</FormLabel>
+									<FormLabel>{dictionary?.passwordLabel}</FormLabel>
 									<FormControl>
 										<Input type="password" {...field} />
 									</FormControl>
@@ -77,7 +92,7 @@ export default function Component() {
 							{isLoading && (
 								<Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
 							)}
-							Sign In
+							{dictionary?.signInButton}
 						</Button>
 					</form>
 				</Form>
@@ -87,29 +102,31 @@ export default function Component() {
 					</div>
 					<div className="relative flex justify-center text-xs uppercase">
 						<span className="bg-background px-2 text-muted-foreground">
-							Or continue with
+							{dictionary?.orContinueWith}
 						</span>
 					</div>
 				</div>
 				<div className="grid grid-cols-2 gap-6">
 					<Button variant="outline">
 						<Icons.gitHub className="mr-2 h-4 w-4" />
-						Github
+						{dictionary?.githubButton}
 					</Button>
 					<Button variant="outline">
 						<Icons.google className="mr-2 h-4 w-4" />
-						Google
+						{dictionary?.googleButton}
 					</Button>
 				</div>
 			</CardContent>
 			<CardFooter>
 				<p className="text-xs text-center text-gray-700 mt-4">
-					Don't have an account?{" "}
+					{dictionary?.noAccountText}{" "}
 					<Link href="#" className="text-blue-600 hover:underline">
-						Sign up
+						{dictionary?.signUpLink}
 					</Link>
 				</p>
 			</CardFooter>
-		</Card>
+		</Card >
 	)
 }
+
+export default LoginForm
