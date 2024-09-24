@@ -44,9 +44,9 @@ const LanguageSelector: React.FC = () => {
 					<ChevronDown className="ml-2 h-4 w-4" />
 				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent>
+			<DropdownMenuContent className='outline-none'>
 				{languages.map((lang) => (
-					<DropdownMenuItem key={lang.code} onSelect={() => changeLanguage(lang.code)}>
+					<DropdownMenuItem key={lang.code} onSelect={() => changeLanguage(lang.code)} className="outline-none focus-visible::outline-none">
 						<span className="mr-2">{lang.flag}</span>
 						<span>{lang.name}</span>
 						<span className="ml-2 text-xs text-gray-500">({lang.code.toUpperCase()})</span>
