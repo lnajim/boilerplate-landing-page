@@ -9,29 +9,17 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { ChevronDown } from 'lucide-react'
-import { useLanguageStore } from '@/stores/LanguageStore'
-import { useEffect } from 'react'
-
-interface LanguageSelectorProps {
-	dictionary: {
-		languageSelector: string;
-	};
-	lang: string;
-}
+import useTranslationStore from '@/stores/TranslationStore'
 
 const languages = [
 	{ code: 'en', name: 'English', flag: '🇬🇧' },
 	{ code: 'fr', name: 'Français', flag: '🇫🇷' },
 ]
 
-const LanguageSelector: React.FC<LanguageSelectorProps> = ({ dictionary, lang }) => {
+const LanguageSelector: React.FC = () => {
 	const router = useRouter()
 	const pathname = usePathname()
-	const { language, setLanguage } = useLanguageStore()
-
-	useEffect(() => {
-		setLanguage(lang)
-	}, [lang, setLanguage])
+	const { language, setLanguage, dictionary } = useTranslationStore()
 
 	const changeLanguage = (langCode: string) => {
 		setLanguage(langCode)

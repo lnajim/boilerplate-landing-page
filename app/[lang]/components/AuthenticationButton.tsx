@@ -4,48 +4,30 @@ import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import LoginForm from '@/app/[lang]/components/auth/LoginForm'
+import useTranslationStore from '@/stores/TranslationStore'
 
-interface AuthenticationButtonProps {
-	dictionary: {
-		login: string;
-		loginDescription: string;
-		close: string;
-	};
-	loginFormDictionary: {
-		title: string;
-		description: string;
-		emailLabel: string;
-		passwordLabel: string;
-		signInButton: string;
-		orContinueWith: string;
-		githubButton: string;
-		googleButton: string;
-		noAccountText: string;
-		signUpLink: string;
-	};
-}
-
-const AuthenticationButton: React.FC<AuthenticationButtonProps> = ({ dictionary, loginFormDictionary }) => {
+const AuthenticationButton = () => {
 	const [showLoginDialog, setShowLoginDialog] = useState(false)
+	const { dictionary } = useTranslationStore()
 
 	return (
 		<Dialog open={showLoginDialog} onOpenChange={setShowLoginDialog}>
 			<DialogTrigger>
 				<Button variant="link" className="text-white hover:text-purple-200 hover:bg-transparent ">
-					{dictionary.login}
+					{dictionary.Header.login}
 				</Button>
 			</DialogTrigger>
 			<DialogContent className='flex flex-col'>
 				<DialogHeader>
-					<DialogTitle>{dictionary.login}</DialogTitle>
+					<DialogTitle>{dictionary.LoginForm.title}</DialogTitle>
 					<DialogDescription>
-						{dictionary.loginDescription}
+						{dictionary.LoginForm.description}
 					</DialogDescription>
 				</DialogHeader>
-				<LoginForm dictionary={loginFormDictionary} />
+				<LoginForm />
 				<DialogFooter>
 					<Button variant="outline" onClick={() => setShowLoginDialog(false)}>
-						{dictionary.close}
+						{dictionary.Header.close}
 					</Button>
 				</DialogFooter>
 			</DialogContent>
