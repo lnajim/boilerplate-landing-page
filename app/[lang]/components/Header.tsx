@@ -1,66 +1,72 @@
 'use client'
 
 import Link from 'next/link'
-import { headerConfig } from '@/app/config/headerConfig'
-import { appConfig } from '@/app.config'
+import { useEffect, useState } from 'react'
+import useTranslationStore from '@/stores/TranslationStore'
 import LanguageSelector from './LanguageSelector'
-import AuthenticationButton from './AuthenticationButton'
+import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import LoginForm from '@/app/[lang]/components/auth/LoginForm'
 
-interface HeaderProps {
-	dictionary: {
-		Header: {
-			salonName: string;
-			languageSelector: string;
-			login: string;
-			loginDescription: string;
-			close: string;
-		},
-		LoginForm: {
-			title: string;
-			description: string;
-			emailLabel: string;
-			passwordLabel: string;
-			signInButton: string;
-			orContinueWith: string;
-			githubButton: string;
-			googleButton: string;
-			noAccountText: string;
-			signUpLink: string;
+const Header: React.FC = () => {
+	const { language, dictionary, setLanguage } = useTranslationStore()
+	const [isLoading, setIsLoading] = useState(true)
+	const [showLoginDialog, setShowLoginDialog] = useState(false)
+
+	useEffect(() => {
+		const loadTranslations = async () => {
+			await setLanguage(language)
+			setIsLoading(false)
 		}
-	}
-	lang: string;
-}
+		loadTranslations()
+	}, [setLanguage, language])
 
-const Header: React.FC<HeaderProps> = ({ dictionary, lang }) => {
+	if (isLoading) {
+		return <div>Loading...</div>
+	}
+
+	const navItems = ['home', 'services', 'about', 'contact'] as const;
+
 	return (
-		<header className="bg-gradient-to-r from-purple-500 to-pink-500 p-4">
+		<header className="bg-gradient-to-r from-purple-500 to-pink-500 p-4" data-header-id="main-header">
 			<div className="container mx-auto flex justify-between items-center">
 				<Link href="/" className="text-white text-2xl font-cursive">
-					{dictionary.Header.salonName}
+					{dictionary.Header.salonName || "Lumina"}
 				</Link>
 				<nav className="flex items-center">
-					<ul className="flex items-center space-x-4">
-						{headerConfig.map((item) => (
-							<li key={item.key}>
-								<Link href={`/${lang}${item.path}`} className="text-white hover:text-purple-200">
-									{dictionary.Header[item.key as keyof typeof dictionary.Header]}
+					<ul className="flex space-x-4 mr-4">
+						{navItems.map((item) => (
+							<li key={item}>
+								<Link href={`#`} className="text-white hover:text-purple-200">
+									{dictionary.Header[item]}
 								</Link>
 							</li>
 						))}
-						{appConfig.header.authentifcation && (
-							<li>
-								<AuthenticationButton
-									dictionary={dictionary.Header}
-									loginFormDictionary={dictionary.LoginForm}
-								/>
-							</li>
-						)}
-						{appConfig.header.i18n && (
-							<li>
-								<LanguageSelector dictionary={dictionary.Header} lang={lang} />
-							</li>
-						)}
+						<li>
+							<Dialog open={showLoginDialog} onOpenChange={setShowLoginDialog}>
+								<DialogTrigger asChild>
+									<Button variant="ghost" className="text-white hover:text-purple-200 hover:bg-transparent">
+										{dictionary.Header.login}
+									</Button>
+								</DialogTrigger>
+								<DialogContent>
+									<DialogHeader>
+										<DialogTitle>{dictionary.LoginForm.title}</DialogTitle>
+										<DialogDescription>
+											{dictionary.LoginForm.description}
+										</DialogDescription>
+									</DialogHeader>
+									<LoginForm />
+									<DialogFooter>
+										<Button variant="outline" onClick={() => setShowLoginDialog(false)}>
+											{dictionary.Header.close}
+										</Button>
+									</DialogFooter>
+								</DialogContent>
+							</Dialog>
+						</li>
 					</ul>
+					<LanguageSelector dictionary={dictionary.Header} lang={language} />
 				</nav>
 			</div>
 		</header>

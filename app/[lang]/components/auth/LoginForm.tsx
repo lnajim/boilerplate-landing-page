@@ -19,21 +19,10 @@ const loginSchema = z.object({
 type LoginFormData = z.infer<typeof loginSchema>
 
 interface LoginFormProps {
-	dictionary: {
-		title: string;
-		description: string;
-		emailLabel: string;
-		passwordLabel: string;
-		signInButton: string;
-		orContinueWith: string;
-		githubButton: string;
-		googleButton: string;
-		noAccountText: string;
-		signUpLink: string;
-	}
+
 }
 
-export const LoginForm: React.FC<LoginFormProps> = ({ dictionary }) => {
+export const LoginForm: React.FC<LoginFormProps> = () => {
 	const [isLoading, setIsLoading] = useState(false)
 	const form = useForm<LoginFormData>({
 		resolver: zodResolver(loginSchema),
