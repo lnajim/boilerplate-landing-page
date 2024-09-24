@@ -13,15 +13,12 @@ export default function Home() {
   return (
     <div>
       <Header />
-      {
-        /**
-         * 
-         * <HeroSection dictionary={dictionary} />
-      <ServiceSection dictionary={dictionary} />
-      <ContactForm dictionary={dictionary} />
-      <Footer dictionary={dictionary} />
-         */
-      }
+      <HeroSection />
+      <ServiceSection />
+      <ContactForm />
+
+
+      <Footer />
     </div>
   )
 }
