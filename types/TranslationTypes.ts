@@ -57,6 +57,20 @@ export interface TranslationState {
       noAccountText: string;
       signUpLink: string;
     };
+    RegistrationForm: {
+      title: string;
+      description: string;
+      nameLabel: string;
+      emailLabel: string;
+      passwordLabel: string;
+      confirmPasswordLabel: string;
+      signUpButton: string;
+      orContinueWith: string;
+      githubButton: string;
+      googleButton: string;
+      alreadyHaveAccountText: string;
+      signInLink: string;
+    };
     Footer: {
       copyright: string;
     };

@@ -8,7 +8,8 @@
     "login": "Login",
     "loginDescription": "Enter your email and password to login",
     "close": "Close",
-    "gallery": "Gallery"
+    "gallery": "Gallery",
+    "register": "Register"
   },
   "HeroSection": {
     "title": "Radiant Beauty Awaits You",
@@ -57,5 +58,19 @@
   },
   "Footer": {
     "copyright": "© {year} Lumina Beauty Studio. All rights reserved."
+  },
+  "RegistrationForm": {
+    "title": "Create an account",
+    "description": "Enter your information to create an account",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "confirmPasswordLabel": "Confirm Password",
+    "signUpButton": "Sign Up",
+    "orContinueWith": "Or continue with",
+    "githubButton": "GitHub",
+    "googleButton": "Google",
+    "alreadyHaveAccountText": "Already have an account?",
+    "signInLink": "Sign in"
   }
 }

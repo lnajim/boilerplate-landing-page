@@ -12,29 +12,36 @@ import { Icons } from '@/components/ui/icons'
 import useTranslationStore from '@/stores/TranslationStore'
 import { useAuthModals } from '@/app/[lang]/components/AuthModalsProvider'
 
-const loginSchema = z.object({
+const registrationSchema = z.object({
+	name: z.string().min(2, { message: "Name must be at least 2 characters" }),
 	email: z.string().email({ message: "Invalid email address" }),
 	password: z.string().min(6, { message: "Password must be at least 6 characters" }),
+	confirmPassword: z.string()
+}).refine((data) => data.password === data.confirmPassword, {
+	message: "Passwords don't match",
+	path: ["confirmPassword"],
 })
 
-type LoginFormData = z.infer<typeof loginSchema>
+type RegistrationFormData = z.infer<typeof registrationSchema>
 
-interface LoginFormProps { }
+interface RegistrationFormProps { }
 
-export const LoginForm: React.FC<LoginFormProps> = () => {
+export const RegistrationForm: React.FC<RegistrationFormProps> = () => {
 	const { dictionary } = useTranslationStore()
-	const { openRegisterDialog } = useAuthModals()
+	const { openLoginDialog } = useAuthModals()
 
 	const [isLoading, setIsLoading] = useState(false)
-	const form = useForm<LoginFormData>({
-		resolver: zodResolver(loginSchema),
+	const form = useForm<RegistrationFormData>({
+		resolver: zodResolver(registrationSchema),
 		defaultValues: {
+			name: "",
 			email: "",
 			password: "",
+			confirmPassword: "",
 		},
 	})
 
-	async function onSubmit(data: LoginFormData) {
+	async function onSubmit(data: RegistrationFormData) {
 		setIsLoading(true)
 		// Simulate API call
 		await new Promise(resolve => setTimeout(resolve, 2000))
@@ -45,9 +52,9 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 	return (
 		<Card>
 			<CardHeader className="space-y-1">
-				<CardTitle className="text-2xl">{dictionary?.LoginForm.title}</CardTitle>
+				<CardTitle className="text-2xl">{dictionary?.RegistrationForm.title || 'Create an account'}</CardTitle>
 				<CardDescription>
-					{dictionary?.LoginForm.description}
+					{dictionary?.RegistrationForm.description || 'Enter your information to create an account'}
 				</CardDescription>
 			</CardHeader>
 			<CardContent className="grid gap-4">
@@ -55,10 +62,23 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
 						<FormField
 							control={form.control}
+							name="name"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>{dictionary?.RegistrationForm.nameLabel || 'Name'}</FormLabel>
+									<FormControl>
+										<Input placeholder="John Doe" {...field} />
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
 							name="email"
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>{dictionary?.LoginForm.emailLabel}</FormLabel>
+									<FormLabel>{dictionary?.RegistrationForm.emailLabel || 'Email'}</FormLabel>
 									<FormControl>
 										<Input placeholder="m@example.com" {...field} />
 									</FormControl>
@@ -71,7 +91,20 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 							name="password"
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>{dictionary?.LoginForm.passwordLabel}</FormLabel>
+									<FormLabel>{dictionary?.RegistrationForm.passwordLabel || 'Password'}</FormLabel>
+									<FormControl>
+										<Input type="password" {...field} />
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name="confirmPassword"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>{dictionary?.RegistrationForm.confirmPasswordLabel || 'Confirm Password'}</FormLabel>
 									<FormControl>
 										<Input type="password" {...field} />
 									</FormControl>
@@ -83,7 +116,7 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 							{isLoading && (
 								<Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
 							)}
-							{dictionary?.LoginForm.signInButton}
+							{dictionary?.RegistrationForm.signUpButton || 'Sign Up'}
 						</Button>
 					</form>
 				</Form>
@@ -93,26 +126,26 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 					</div>
 					<div className="relative flex justify-center text-xs uppercase">
 						<span className="bg-background px-2 text-muted-foreground">
-							{dictionary?.LoginForm.orContinueWith}
+							{dictionary?.RegistrationForm.orContinueWith || 'Or continue with'}
 						</span>
 					</div>
 				</div>
 				<div className="grid grid-cols-2 gap-6">
 					<Button variant="outline">
 						<Icons.gitHub className="mr-2 h-4 w-4" />
-						{dictionary?.LoginForm.githubButton}
+						{dictionary?.RegistrationForm.githubButton || 'GitHub'}
 					</Button>
 					<Button variant="outline">
 						<Icons.google className="mr-2 h-4 w-4" />
-						{dictionary?.LoginForm.googleButton}
+						{dictionary?.RegistrationForm.googleButton || 'Google'}
 					</Button>
-				</div>
+				</div> {/* Added missing closing div tag */}
 			</CardContent>
 			<CardFooter>
 				<p className="text-xs text-center text-gray-700 mt-4">
-					{dictionary?.LoginForm.noAccountText}{" "}
-					<span onClick={openRegisterDialog} className="text-blue-600 hover:underline cursor-pointer">
-						{dictionary?.LoginForm.signUpLink}
+					{dictionary?.RegistrationForm.alreadyHaveAccountText || 'Already have an account?'}{" "}
+					<span onClick={openLoginDialog} className="text-blue-600 hover:underline cursor-pointer">
+						{dictionary?.RegistrationForm.signInLink || 'Sign in'}
 					</span>
 				</p>
 			</CardFooter>
@@ -120,4 +153,4 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 	)
 }
 
-export default LoginForm
+export default RegistrationForm
