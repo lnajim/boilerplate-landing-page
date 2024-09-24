@@ -22,7 +22,7 @@ const getUrlLanguage = () => {
 const getStoredLanguage = () => {
   if (typeof window !== "undefined") {
     const storedLang = localStorage.getItem("language");
-    return ["en", "fr"].includes(storedLang) ? storedLang : null;
+    return ["en", "fr"].includes(storedLang as string) ? storedLang : null;
   }
   return null;
 };
@@ -35,6 +35,12 @@ const useTranslationStore = create<TranslationState>((set) => ({
     if (translations) {
       localStorage.setItem("language", lang);
       set({ language: lang, dictionary: translations });
+      // Update the URL to reflect the new language
+      const newPathname = window.location.pathname.replace(
+        `/${getUrlLanguage()}`,
+        `/${lang}`
+      );
+      window.history.pushState({}, "", newPathname);
     } else {
       console.error(`Failed to load translations for ${lang}`);
     }
