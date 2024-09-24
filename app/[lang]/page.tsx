@@ -11,7 +11,7 @@ export default async function Home({ params: { lang } }: { params: { lang: Local
 
   return (
     <>
-      <Header dictionary={dictionary.Header} lang={lang} />
+      <Header dictionary={dictionary} lang={lang} />
       <main>
         <Hero dictionary={dictionary.HeroSection} />
         <Service dictionary={dictionary.ServicesSection} />

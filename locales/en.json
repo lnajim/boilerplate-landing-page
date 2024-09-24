@@ -5,7 +5,11 @@
     "services": "Services",
     "about": "About",
     "contact": "Contact",
-    "languageSelector": "Language"
+    "languageSelector": "Language",
+    "login": "Login",
+    "loginDescription": "Enter your email and password to login",
+    "close": "Close",
+    "gallery": "Gallery"
   },
   "HeroSection": {
     "title": "Radiant Beauty Awaits You",
@@ -39,6 +43,18 @@
     "subjectPlaceholder": "Subject",
     "messagePlaceholder": "Your Message",
     "submitButton": "Send Message"
+  },
+  "LoginForm": {
+    "title": "Login",
+    "description": "Enter your email and password to login",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "signInButton": "Sign In",
+    "orContinueWith": "Or continue with",
+    "githubButton": "Github",
+    "googleButton": "Google",
+    "noAccountText": "Don't have an account?",
+    "signUpLink": "Sign up"
   },
   "Footer": {
     "copyright": "© {year} Lumina Beauty Studio. All rights reserved."

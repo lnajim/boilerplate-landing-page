@@ -5,7 +5,11 @@
     "services": "Services",
     "about": "À propos",
     "contact": "Contact",
-    "languageSelector": "Langue"
+    "languageSelector": "Langue",
+    "login": "Connexion",
+    "loginDescription": "Entrez votre email et mot de passe pour vous connecter",
+    "close": "Fermer",
+    "gallery": "Galerie"
   },
   "HeroSection": {
     "title": "Une Beauté Radieuse Vous Attend",
@@ -39,6 +43,18 @@
     "subjectPlaceholder": "Sujet",
     "messagePlaceholder": "Votre Message",
     "submitButton": "Envoyer le Message"
+  },
+  "LoginForm": {
+    "title": "Connexion",
+    "description": "Entrez votre email et mot de passe pour vous connecter",
+    "emailLabel": "Email",
+    "passwordLabel": "Mot de passe",
+    "signInButton": "Se connecter",
+    "orContinueWith": "Ou continuer avec",
+    "githubButton": "Github",
+    "googleButton": "Google",
+    "noAccountText": "Vous n'avez pas de compte?",
+    "signUpLink": "S'inscrire"
   },
   "Footer": {
     "copyright": "© {year} Lumina Beauty Studio. Tous droits réservés."
