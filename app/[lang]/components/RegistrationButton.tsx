@@ -1,32 +1,32 @@
 'use client'
 
+import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import LoginForm from '@/app/[lang]/components/auth/LoginForm'
+import RegistrationForm from '@/app/[lang]/components/auth/RegistrationForm'
 import useTranslationStore from '@/stores/TranslationStore'
-import { useAuthModals } from '@/app/[lang]/components/AuthModalsProvider'
 
-const AuthenticationButton = () => {
-	const { showLoginDialog, setShowLoginDialog } = useAuthModals()
+const RegistrationButton = () => {
+	const [showRegisterDialog, setShowRegisterDialog] = useState(false)
 	const { dictionary } = useTranslationStore()
 
 	return (
-		<Dialog open={showLoginDialog} onOpenChange={setShowLoginDialog}>
+		<Dialog open={showRegisterDialog} onOpenChange={setShowRegisterDialog}>
 			<DialogTrigger>
 				<Button variant="link" className="text-white hover:text-purple-200 hover:bg-transparent ">
-					{dictionary.Header.login}
+					{dictionary.Header.register}
 				</Button>
 			</DialogTrigger>
 			<DialogContent className='flex flex-col'>
 				<DialogHeader>
-					<DialogTitle>{dictionary.LoginForm.title}</DialogTitle>
+					<DialogTitle>{dictionary.RegistrationForm.title}</DialogTitle>
 					<DialogDescription>
-						{dictionary.LoginForm.description}
+						{dictionary.RegistrationForm.description}
 					</DialogDescription>
 				</DialogHeader>
-				<LoginForm />
+				<RegistrationForm />
 				<DialogFooter>
-					<Button variant="outline" onClick={() => setShowLoginDialog(false)}>
+					<Button variant="outline" onClick={() => setShowRegisterDialog(false)}>
 						{dictionary.Header.close}
 					</Button>
 				</DialogFooter>
@@ -35,4 +35,4 @@ const AuthenticationButton = () => {
 	)
 }
 
-export default AuthenticationButton
+export default RegistrationButton

@@ -9,7 +9,8 @@
     "login": "Connexion",
     "loginDescription": "Entrez votre email et mot de passe pour vous connecter",
     "close": "Fermer",
-    "gallery": "Galerie"
+    "gallery": "Galerie",
+    "register": "S'inscrire"
   },
   "HeroSection": {
     "title": "Une Beauté Radieuse Vous Attend",
@@ -55,6 +56,20 @@
     "googleButton": "Google",
     "noAccountText": "Vous n'avez pas de compte?",
     "signUpLink": "S'inscrire"
+  },
+  "RegistrationForm": {
+    "title": "Créer un compte",
+    "description": "Entrez vos informations pour créer un compte",
+    "nameLabel": "Nom",
+    "emailLabel": "Email",
+    "passwordLabel": "Mot de passe",
+    "confirmPasswordLabel": "Confirmez le mot de passe",
+    "signUpButton": "S'inscrire",
+    "orContinueWith": "Ou continuer avec",
+    "githubButton": "GitHub",
+    "googleButton": "Google",
+    "alreadyHaveAccountText": "Vous avez déjà un compte?",
+    "signInLink": "Se connecter"
   },
   "Footer": {
     "copyright": "© {year} Lumina Beauty Studio. Tous droits réservés."
