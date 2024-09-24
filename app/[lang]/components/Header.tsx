@@ -9,19 +9,14 @@ import AuthenticationButton from './AuthenticationButton'
 
 const Header: React.FC = () => {
 	const { language, dictionary, setLanguage } = useTranslationStore()
-	const [isLoading, setIsLoading] = useState(true)
 
 	useEffect(() => {
 		const loadTranslations = async () => {
-			await setLanguage(language)
-			setIsLoading(false)
+			setLanguage(language)
 		}
 		loadTranslations()
 	}, [setLanguage, language])
 
-	if (isLoading) {
-		return <div>Loading...</div>
-	}
 
 	const navItems = ['home', 'services', 'about', 'contact'] as const;
 

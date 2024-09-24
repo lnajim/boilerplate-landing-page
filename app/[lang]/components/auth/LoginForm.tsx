@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Icons } from '@/components/ui/icons'
+import useTranslationStore from '@/stores/TranslationStore'
 
 const loginSchema = z.object({
 	email: z.string().email({ message: "Invalid email address" }),
@@ -23,6 +24,8 @@ interface LoginFormProps {
 }
 
 export const LoginForm: React.FC<LoginFormProps> = () => {
+	const { dictionary } = useTranslationStore()
+
 	const [isLoading, setIsLoading] = useState(false)
 	const form = useForm<LoginFormData>({
 		resolver: zodResolver(loginSchema),
@@ -43,9 +46,9 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 	return (
 		<Card>
 			<CardHeader className="space-y-1">
-				<CardTitle className="text-2xl">{dictionary?.title}</CardTitle>
+				<CardTitle className="text-2xl">{dictionary?.LoginForm.title}</CardTitle>
 				<CardDescription>
-					{dictionary?.description}
+					{dictionary?.LoginForm.description}
 				</CardDescription>
 			</CardHeader>
 			<CardContent className="grid gap-4">
@@ -56,7 +59,7 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 							name="email"
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>{dictionary?.emailLabel}</FormLabel>
+									<FormLabel>{dictionary?.LoginForm.emailLabel}</FormLabel>
 									<FormControl>
 										<Input placeholder="m@example.com" {...field} />
 									</FormControl>
@@ -69,7 +72,7 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 							name="password"
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>{dictionary?.passwordLabel}</FormLabel>
+									<FormLabel>{dictionary?.LoginForm.passwordLabel}</FormLabel>
 									<FormControl>
 										<Input type="password" {...field} />
 									</FormControl>
@@ -81,7 +84,7 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 							{isLoading && (
 								<Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
 							)}
-							{dictionary?.signInButton}
+							{dictionary?.LoginForm.signInButton}
 						</Button>
 					</form>
 				</Form>
@@ -91,26 +94,26 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 					</div>
 					<div className="relative flex justify-center text-xs uppercase">
 						<span className="bg-background px-2 text-muted-foreground">
-							{dictionary?.orContinueWith}
+							{dictionary?.LoginForm.orContinueWith}
 						</span>
 					</div>
 				</div>
 				<div className="grid grid-cols-2 gap-6">
 					<Button variant="outline">
 						<Icons.gitHub className="mr-2 h-4 w-4" />
-						{dictionary?.githubButton}
+						{dictionary?.LoginForm.githubButton}
 					</Button>
 					<Button variant="outline">
 						<Icons.google className="mr-2 h-4 w-4" />
-						{dictionary?.googleButton}
+						{dictionary?.LoginForm.googleButton}
 					</Button>
 				</div>
 			</CardContent>
 			<CardFooter>
 				<p className="text-xs text-center text-gray-700 mt-4">
-					{dictionary?.noAccountText}{" "}
+					{dictionary?.LoginForm.noAccountText}{" "}
 					<Link href="#" className="text-blue-600 hover:underline">
-						{dictionary?.signUpLink}
+						{dictionary?.LoginForm.signUpLink}
 					</Link>
 				</p>
 			</CardFooter>

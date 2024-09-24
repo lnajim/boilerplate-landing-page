@@ -20,14 +20,14 @@ const languages = [
 const LanguageSelector: React.FC = () => {
 	const router = useRouter()
 	const pathname = usePathname()
-	const { language, setLanguage, dictionary } = useTranslationStore()
+	const { language, setLanguage } = useTranslationStore()
 
 	useEffect(() => {
 		const urlLang = pathname.split('/')[1]
 		if (urlLang && urlLang !== language) {
 			setLanguage(urlLang)
 		}
-	}, [pathname, language, setLanguage])
+	}, [pathname, setLanguage])
 
 	const changeLanguage = (langCode: string) => {
 		setLanguage(langCode)
@@ -38,7 +38,7 @@ const LanguageSelector: React.FC = () => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button variant="ghost" className="text-white hover:text-purple-200 hover:bg-transparent">
+				<Button variant="ghost" className="text-white hover:text-purple-200 hover:bg-transparent outline-none active:outline-none focus:outline-none focus-visible:outline-none">
 					<span className="mr-2">{languages.find(l => l.code === language)?.flag}</span>
 					<span>{language?.toUpperCase()}</span>
 					<ChevronDown className="ml-2 h-4 w-4" />
@@ -46,7 +46,7 @@ const LanguageSelector: React.FC = () => {
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className='outline-none'>
 				{languages.map((lang) => (
-					<DropdownMenuItem key={lang.code} onSelect={() => changeLanguage(lang.code)} className="outline-none focus-visible::outline-none">
+					<DropdownMenuItem key={lang.code} onSelect={() => changeLanguage(lang.code)} className="outline-none focus:outline-none">
 						<span className="mr-2">{lang.flag}</span>
 						<span>{lang.name}</span>
 						<span className="ml-2 text-xs text-gray-500">({lang.code.toUpperCase()})</span>
