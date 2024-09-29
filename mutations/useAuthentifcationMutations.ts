@@ -13,10 +13,12 @@ import { register } from "@/actions/auth/regiter";
 import { newVerification } from "@/actions/auth/new-verification";
 import { useToast } from "@/hooks/use-toast";
 import { AuthError } from "@/lib/exceptions";
+import { useRouter } from "next/navigation"; // Add this import
 
 const useAuthentificationMutations = () => {
   const queryClient = useQueryClient();
   const { toast } = useToast();
+  const router = useRouter(); // Add this line
 
   const loginMutation = useMutation({
     mutationKey: ["login"],
@@ -53,6 +55,34 @@ const useAuthentificationMutations = () => {
   const registerMutation = useMutation({
     mutationKey: ["register"],
     mutationFn: (values: z.infer<typeof RegisterSchema>) => register(values),
+    onSuccess: (data) => {
+      // Invalidate and refetch relevant queries if needed
+      // queryClient.invalidateQueries(["user"]);
+
+      // Show success toast
+      toast({
+        title: "Registration Successful",
+        description:
+          "Your account has been created. Please check your email for verification.",
+      });
+
+      // Redirect to login page or dashboard
+      router.push("/login"); // Adjust the route as needed
+    },
+    onError: (error) => {
+      // Show error toast
+      toast({
+        title: "Registration Failed",
+        description:
+          error instanceof AuthError
+            ? error.message
+            : "An error occurred during registration. Please try again.",
+        variant: "destructive",
+      });
+
+      // Log the error for debugging
+      console.error("Registration error:", error);
+    },
   });
 
   const verificationEmailMutation = useMutation({

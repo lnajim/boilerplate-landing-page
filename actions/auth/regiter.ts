@@ -17,7 +17,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     };
   }
 
-  const { email, password, firstname, lastname, phone } = validatedFields.data;
+  const { email, password, name } = validatedFields.data;
 
   const hashedPassword = await bcryptjs.hash(password, 12);
   if (email) {
@@ -35,8 +35,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
   await prisma.user.create({
     data: {
       email,
-      firstname,
-      lastname,
+      name,
       password: hashedPassword,
 
       freeTrialExpiry: freeTrialExpiry,

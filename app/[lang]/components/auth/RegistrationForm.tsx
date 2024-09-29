@@ -11,28 +11,20 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Icons } from '@/components/ui/icons'
 import useTranslationStore from '@/stores/TranslationStore'
 import { useAuthModals } from '@/app/[lang]/components/AuthModalsProvider'
+import useAuthentificationMutations from '@/mutations/useAuthentifcationMutations'
+import { RegisterSchema } from '@/schemas'
 
-const registrationSchema = z.object({
-	name: z.string().min(2, { message: "Name must be at least 2 characters" }),
-	email: z.string().email({ message: "Invalid email address" }),
-	password: z.string().min(6, { message: "Password must be at least 6 characters" }),
-	confirmPassword: z.string()
-}).refine((data) => data.password === data.confirmPassword, {
-	message: "Passwords don't match",
-	path: ["confirmPassword"],
-})
-
-type RegistrationFormData = z.infer<typeof registrationSchema>
+type RegistrationFormData = z.infer<typeof RegisterSchema>
 
 interface RegistrationFormProps { }
 
 export const RegistrationForm: React.FC<RegistrationFormProps> = () => {
 	const { dictionary } = useTranslationStore()
+	const { registerMutation } = useAuthentificationMutations();
 	const { openLoginDialog } = useAuthModals()
 
-	const [isLoading, setIsLoading] = useState(false)
 	const form = useForm<RegistrationFormData>({
-		resolver: zodResolver(registrationSchema),
+		resolver: zodResolver(RegisterSchema),
 		defaultValues: {
 			name: "",
 			email: "",
@@ -42,11 +34,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = () => {
 	})
 
 	async function onSubmit(data: RegistrationFormData) {
-		setIsLoading(true)
-		// Simulate API call
-		await new Promise(resolve => setTimeout(resolve, 2000))
-		setIsLoading(false)
-		console.log(data)
+		await registerMutation.mutateAsync(data);
 	}
 
 	return (
@@ -93,7 +81,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = () => {
 								<FormItem>
 									<FormLabel>{dictionary?.RegistrationForm.passwordLabel || 'Password'}</FormLabel>
 									<FormControl>
-										<Input type="password" {...field} />
+										<Input type="password"  {...field} />
 									</FormControl>
 									<FormMessage />
 								</FormItem>
@@ -112,8 +100,12 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = () => {
 								</FormItem>
 							)}
 						/>
-						<Button className="w-full" type="submit" disabled={isLoading}>
-							{isLoading && (
+						<Button
+							className="w-full"
+							type="submit"
+							disabled={registerMutation.isPending}
+						>
+							{registerMutation.isPending && (
 								<Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
 							)}
 							{dictionary?.RegistrationForm.signUpButton || 'Sign Up'}
