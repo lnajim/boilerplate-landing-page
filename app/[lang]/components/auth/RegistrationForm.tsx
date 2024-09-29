@@ -11,7 +11,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Icons } from '@/components/ui/icons'
 import useTranslationStore from '@/stores/TranslationStore'
 import { useAuthModals } from '@/app/[lang]/components/AuthModalsProvider'
-import useAuthentificationMutations from '@/mutations/useAuthentifcationMutations'
+import useAuthentificationMutations from '@/app/[lang]/mutations/useAuthentifcationMutations'
 import { RegisterSchema } from '@/schemas'
 
 type RegistrationFormData = z.infer<typeof RegisterSchema>

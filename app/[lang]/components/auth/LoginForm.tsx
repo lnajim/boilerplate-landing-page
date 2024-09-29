@@ -12,7 +12,7 @@ import { Icons } from '@/components/ui/icons'
 import useTranslationStore from '@/stores/TranslationStore'
 import { useAuthModals } from '@/app/[lang]/components/AuthModalsProvider'
 import { LoginSchema } from '@/schemas'
-import useAuthentificationMutations from '@/mutations/useAuthentifcationMutations'
+import useAuthentificationMutations from '@/app/[lang]/mutations/useAuthentifcationMutations'
 import { useRouter } from 'next/navigation';
 
 type LoginFormData = z.infer<typeof LoginSchema>

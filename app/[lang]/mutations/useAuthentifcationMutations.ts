@@ -13,41 +13,34 @@ import { register } from "@/actions/auth/regiter";
 import { newVerification } from "@/actions/auth/new-verification";
 import { useToast } from "@/hooks/use-toast";
 import { AuthError } from "@/lib/exceptions";
-import { useRouter } from "next/navigation"; // Add this import
+import { useRouter } from "next/navigation";
+import useTranslationStore from "@/stores/TranslationStore";
 
 const useAuthentificationMutations = () => {
   const queryClient = useQueryClient();
   const { toast } = useToast();
-  const router = useRouter(); // Add this line
+  const router = useRouter();
+  const { dictionary } = useTranslationStore();
 
   const loginMutation = useMutation({
     mutationKey: ["login"],
     mutationFn: (values: z.infer<typeof LoginSchema>) => login(values),
     onSuccess: (data) => {
-      // Invalidate and refetch relevant queries
       console.log("success: ", data);
-      // Show success toast
       toast({
-        title: "Login Successful",
-        description: "You have been successfully logged in.",
+        title: dictionary.useMutation.login.successTitle,
+        description: dictionary.useMutation.login.successDescription,
       });
-
-      // Redirect to dashboard or home page
-      // You might want to use a router here, e.g., Next.js router
-      // router.push("/dashboard");
     },
     onError: (error) => {
-      // Show error toast
       toast({
-        title: "Login Failed",
+        title: dictionary.useMutation.login.errorTitle,
         description:
           error instanceof AuthError
             ? error.message
-            : "An error occurred during login. Please try again.",
+            : dictionary.useMutation.login.errorDescription,
         variant: "destructive",
       });
-
-      // You can also log the error for debugging
       console.error("Login error:", error);
     },
   });
@@ -56,31 +49,21 @@ const useAuthentificationMutations = () => {
     mutationKey: ["register"],
     mutationFn: (values: z.infer<typeof RegisterSchema>) => register(values),
     onSuccess: (data) => {
-      // Invalidate and refetch relevant queries if needed
-      // queryClient.invalidateQueries(["user"]);
-
-      // Show success toast
       toast({
-        title: "Registration Successful",
-        description:
-          "Your account has been created. Please check your email for verification.",
+        title: dictionary.useMutation.register.successTitle,
+        description: dictionary.useMutation.register.successDescription,
       });
-
-      // Redirect to login page or dashboard
-      router.push("/login"); // Adjust the route as needed
+      router.push("/login");
     },
     onError: (error) => {
-      // Show error toast
       toast({
-        title: "Registration Failed",
+        title: dictionary.useMutation.register.errorTitle,
         description:
           error instanceof AuthError
             ? error.message
-            : "An error occurred during registration. Please try again.",
+            : dictionary.useMutation.register.errorDescription,
         variant: "destructive",
       });
-
-      // Log the error for debugging
       console.error("Registration error:", error);
     },
   });
@@ -98,9 +81,7 @@ const useAuthentificationMutations = () => {
   const newPasswordMutation = useMutation({
     mutationKey: ["newPassworMutation"],
     mutationFn: (values: z.infer<typeof NewPasswordSchema>) => {
-      const password = values.password;
-      const confirmPassword = values.confirmPassword;
-      const token = values.token;
+      const { password, confirmPassword, token } = values;
       return newPassword({ password, confirmPassword }, token);
     },
   });

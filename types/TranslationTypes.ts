@@ -75,6 +75,21 @@ export interface TranslationState {
     Footer: {
       copyright: string;
     };
+    useMutation: {
+      login: {
+        successTitle: string;
+        successDescription: string;
+        errorTitle: string;
+        errorDescription: string;
+      };
+      register: {
+        successTitle: string;
+        successDescription: string;
+        errorTitle: string;
+        errorDescription: string;
+      };
+      // You can add more mutation types here in the future
+    };
   };
   language: string;
   setLanguage: (lang: string) => void;
