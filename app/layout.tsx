@@ -3,6 +3,7 @@ import './globals.css'
 import { i18n } from '../i18n-config'
 import { AuthModalsProvider } from '@/app/[lang]/components/AuthModalsProvider'
 import TanstackProvider from '@/providers/tanstack-provider';
+import { Toaster } from '@/components/ui/toaster';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,6 +24,8 @@ export default function RootLayout({
         <TanstackProvider>
           <AuthModalsProvider>
             {children}
+            <Toaster />
+
           </AuthModalsProvider>
         </TanstackProvider>
       </body>

@@ -13,6 +13,7 @@ import useTranslationStore from '@/stores/TranslationStore'
 import { useAuthModals } from '@/app/[lang]/components/AuthModalsProvider'
 import { LoginSchema } from '@/schemas'
 import useAuthentificationMutations from '@/mutations/useAuthentifcationMutations'
+import { useRouter } from 'next/navigation'; // If using Next.js
 
 type LoginFormData = z.infer<typeof LoginSchema>
 
@@ -22,6 +23,7 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 	const { dictionary } = useTranslationStore()
 	const { openRegisterDialog } = useAuthModals()
 	const { loginMutation } = useAuthentificationMutations();
+	const router = useRouter(); // If using Next.js
 
 	const [isLoading, setIsLoading] = useState(false)
 	const form = useForm<LoginFormData>({
@@ -33,12 +35,14 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 	})
 
 	async function onSubmit(data: LoginFormData) {
-		setIsLoading(true)
-		// Simulate API call
-		await loginMutation.mutateAsync(data);
-		await new Promise(resolve => setTimeout(resolve, 2000))
-		setIsLoading(false)
-		console.log(data)
+		try {
+			await loginMutation.mutateAsync(data);
+			// The success handling is now in the mutation's onSuccess callback
+			// You can add any additional local state updates here if needed
+		} catch (error) {
+			// Error handling is now in the mutation's onError callback
+			// You can add any additional local error handling here if needed
+		}
 	}
 
 	return (
