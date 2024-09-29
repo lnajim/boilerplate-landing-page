@@ -13,7 +13,7 @@ import useTranslationStore from '@/stores/TranslationStore'
 import { useAuthModals } from '@/app/[lang]/components/AuthModalsProvider'
 import { LoginSchema } from '@/schemas'
 import useAuthentificationMutations from '@/mutations/useAuthentifcationMutations'
-import { useRouter } from 'next/navigation'; // If using Next.js
+import { useRouter } from 'next/navigation';
 
 type LoginFormData = z.infer<typeof LoginSchema>
 
@@ -63,7 +63,7 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 								<FormItem>
 									<FormLabel>{dictionary?.LoginForm.emailLabel}</FormLabel>
 									<FormControl>
-										<Input placeholder="m@example.com" {...field} />
+										<Input placeholder="mail@example.com" {...field} />
 									</FormControl>
 									<FormMessage />
 								</FormItem>
@@ -76,7 +76,7 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 								<FormItem>
 									<FormLabel>{dictionary?.LoginForm.passwordLabel}</FormLabel>
 									<FormControl>
-										<Input type="password" {...field} />
+										<Input type="password" placeholder='********' {...field} />
 									</FormControl>
 									<FormMessage />
 								</FormItem>

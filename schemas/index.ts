@@ -12,9 +12,7 @@ export const RegisterSchema = z
     confirmPassword: z
       .string()
       .min(5, { message: "Confirm Password required" }),
-    firstname: z.string().min(1, { message: "First name is required" }),
-    lastname: z.string().min(1, { message: "Last name is required" }),
-    phone: z.string().min(1, { message: "Phone is required" }),
+    name: z.string().min(1, { message: "First name is required" }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
