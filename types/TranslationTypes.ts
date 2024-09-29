@@ -1,6 +1,7 @@
 export interface TranslationState {
   dictionary: {
     Header: {
+      register: string;
       salonName: string;
       home: string;
       services: string;

@@ -1,6 +1,6 @@
 export const appConfig = {
   header: {
-    applicationName: "App name",
+    applicationName: "Resto toto",
     authentifcation: true,
     i18n: true,
   },
