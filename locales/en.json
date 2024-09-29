@@ -45,7 +45,7 @@
     "submitButton": "Send Message"
   },
   "LoginForm": {
-    "title": "Login",
+    "title": "Login 2",
     "description": "Enter your email and password to login",
     "emailLabel": "Email",
     "passwordLabel": "Password",

@@ -26,5 +26,4 @@ model User {
   updatedAt       DateTime  @updatedAt
   password        String?
   freeTrialExpiry DateTime?
-
 }
