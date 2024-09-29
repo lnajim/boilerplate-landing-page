@@ -7,8 +7,12 @@ import { AuthError } from "next-auth";
 import * as z from "zod";
 import { getUserByEmail } from "@/actions/user";
 import bcrypt from "bcryptjs";
+import { i18n, defaultLocale } from "@/i18n-config";
 
-export const login = async (values: z.infer<typeof LoginSchema>) => {
+export const login = async (
+  values: z.infer<typeof LoginSchema>,
+  locale?: string
+) => {
   const validatedFields = LoginSchema.safeParse(values);
 
   if (!validatedFields.success) {
@@ -29,6 +33,29 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
     throw new AuthError("Invalid credentials");
   }
 
-  // If we reach here, login is successful
-  return { success: true };
+  try {
+    const redirectLocale =
+      locale && i18n.locales.includes(locale) ? locale : defaultLocale;
+    const redirectTo = process.env.NEXT_PUBLIC_DOMAINE_URL
+      ? `${process.env.NEXT_PUBLIC_DOMAINE_URL}/${redirectLocale}/admin/dashboard`
+      : `/${redirectLocale}/admin/dashboard`;
+
+    const response = await signIn("credentials", {
+      email,
+      password,
+      redirect: true,
+      redirectTo,
+    });
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return { error: "Invalid credentials" };
+        default:
+          return { error: "Something went wrong!!!!!" };
+      }
+    }
+
+    throw error;
+  }
 };

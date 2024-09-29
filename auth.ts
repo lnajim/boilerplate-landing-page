@@ -12,11 +12,14 @@ export const {
 } = NextAuth({
   callbacks: {
     async signIn({ user, account }) {
+      console.log(user);
+      console.log(account);
       if (account?.provider !== "credentials") return true;
 
       // Prevent sign in without email verification
       const existingUser = await getUserById(user.id as string);
-      if (!existingUser?.emailVerified) return false;
+      if (!existingUser) return false;
+      // if (!existingUser?.emailVerified) return false;
       return true;
     },
     async session({ token, session }) {

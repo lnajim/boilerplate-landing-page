@@ -1,9 +1,16 @@
-// middleware.ts
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { i18n } from "./i18n-config";
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
+import NextAuth from "next-auth";
+import authConfig from "./auth.config";
+import {
+  DEFAULT_LOGIN_REDIRECT,
+  apiAuthPrefix,
+  publicRoutes,
+  authRoutes,
+} from "@/routes";
 
 function getLocale(request: NextRequest): string | undefined {
   const negotiatorHeaders: Record<string, string> = {};
@@ -16,22 +23,53 @@ function getLocale(request: NextRequest): string | undefined {
   return locale;
 }
 
-export function middleware(request: NextRequest) {
-  const pathname = request.nextUrl.pathname;
+const { auth } = NextAuth(authConfig);
+//@ts-ignore
+export default auth((req) => {
+  const { nextUrl } = req;
+  const pathname = nextUrl.pathname;
+
+  // Locale handling
   const pathnameIsMissingLocale = i18n.locales.every(
     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
   );
 
   if (pathnameIsMissingLocale) {
-    const locale = getLocale(request);
+    const locale = getLocale(req);
     return NextResponse.redirect(
       new URL(
         `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
-        request.url
+        req.url
       )
     );
   }
-}
+
+  // Authentication handling
+  const isLoggedIn = !!req.auth;
+  const isApiAuthRoute = pathname.startsWith(apiAuthPrefix);
+  const isPublicRoute =
+    publicRoutes.includes(pathname) ||
+    pathname.startsWith("/widget/panel") ||
+    pathname.startsWith("/widget/integrated");
+  const isAuthRoute = authRoutes.includes(pathname);
+
+  if (isApiAuthRoute) {
+    return null;
+  }
+
+  if (isAuthRoute) {
+    if (isLoggedIn) {
+      return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
+    }
+    return null;
+  }
+
+  if (!isLoggedIn && !isPublicRoute) {
+    return Response.redirect(new URL("/", nextUrl));
+  }
+
+  return null;
+});
 
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
