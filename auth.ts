@@ -25,8 +25,8 @@ export const {
       }
 
       if (token.role && session.user) {
-        session.user.firstname = token.firstname as string;
-        session.user.lastname = token.lastname as string;
+        session.user.name = token.name as string;
+
         session.user.phone = token.phone as string;
         session.user.configured = token.configured as boolean;
       }
@@ -38,8 +38,8 @@ export const {
 
       const existingUser = await getUserById(token.sub);
       if (!existingUser) return token;
-      token.firstname = existingUser.firstname;
-      token.lastname = existingUser.lastname;
+      token.name = existingUser.name;
+
       return token;
     },
   },
