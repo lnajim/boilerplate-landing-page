@@ -1,5 +1,7 @@
 {
   "Header": {
+    "register": "Register",
+    "salonName": "Lumina",
     "home": "Home",
     "services": "Services",
     "about": "About",
@@ -8,8 +10,7 @@
     "login": "Login",
     "loginDescription": "Enter your email and password to login",
     "close": "Close",
-    "gallery": "Gallery",
-    "register": "Register"
+    "gallery": "Gallery"
   },
   "HeroSection": {
     "title": "Radiant Beauty Awaits You",
@@ -45,7 +46,7 @@
     "submitButton": "Send Message"
   },
   "LoginForm": {
-    "title": "Login 2",
+    "title": "Login",
     "description": "Enter your email and password to login",
     "emailLabel": "Email",
     "passwordLabel": "Password",
@@ -55,9 +56,6 @@
     "googleButton": "Google",
     "noAccountText": "Don't have an account?",
     "signUpLink": "Sign up"
-  },
-  "Footer": {
-    "copyright": "© {year} Lumina Beauty Studio. All rights reserved."
   },
   "RegistrationForm": {
     "title": "Create an account",
@@ -72,5 +70,22 @@
     "googleButton": "Google",
     "alreadyHaveAccountText": "Already have an account?",
     "signInLink": "Sign in"
+  },
+  "Footer": {
+    "copyright": "© {year} Lumina Beauty Studio. All rights reserved."
+  },
+  "useMutation": {
+    "login": {
+      "successTitle": "Login Successful",
+      "successDescription": "You have been successfully logged in.",
+      "errorTitle": "Login Failed",
+      "errorDescription": "An error occurred during login. Please try again."
+    },
+    "register": {
+      "successTitle": "Registration Successful",
+      "successDescription": "Your account has been created. Please check your email for verification.",
+      "errorTitle": "Registration Failed",
+      "errorDescription": "An error occurred during registration. Please try again."
+    }
   }
 }
