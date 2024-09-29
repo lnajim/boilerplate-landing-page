@@ -11,23 +11,21 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Icons } from '@/components/ui/icons'
 import useTranslationStore from '@/stores/TranslationStore'
 import { useAuthModals } from '@/app/[lang]/components/AuthModalsProvider'
+import { LoginSchema } from '@/schemas'
+import useAuthentificationMutations from '@/mutations/useAuthentifcationMutations'
 
-const loginSchema = z.object({
-	email: z.string().email({ message: "Invalid email address" }),
-	password: z.string().min(6, { message: "Password must be at least 6 characters" }),
-})
-
-type LoginFormData = z.infer<typeof loginSchema>
+type LoginFormData = z.infer<typeof LoginSchema>
 
 interface LoginFormProps { }
 
 export const LoginForm: React.FC<LoginFormProps> = () => {
 	const { dictionary } = useTranslationStore()
 	const { openRegisterDialog } = useAuthModals()
+	const { loginMutation } = useAuthentificationMutations();
 
 	const [isLoading, setIsLoading] = useState(false)
 	const form = useForm<LoginFormData>({
-		resolver: zodResolver(loginSchema),
+		resolver: zodResolver(LoginSchema),
 		defaultValues: {
 			email: "",
 			password: "",
@@ -37,6 +35,7 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 	async function onSubmit(data: LoginFormData) {
 		setIsLoading(true)
 		// Simulate API call
+		await loginMutation.mutateAsync(data);
 		await new Promise(resolve => setTimeout(resolve, 2000))
 		setIsLoading(false)
 		console.log(data)
@@ -121,3 +120,4 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 }
 
 export default LoginForm
+

@@ -1,14 +1,9 @@
 import bcryptjs from "bcryptjs";
 import type { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-
 import * as z from "zod";
 import { getUserByEmail } from "@/actions/user";
-
-export const LoginSchema = z.object({
-  email: z.string().email({ message: "Invalid email address" }),
-  password: z.string().min(5),
-});
+import { LoginSchema } from "./schemas";
 
 export default {
   providers: [
