@@ -97,7 +97,12 @@ export interface TranslationState {
         errorTitle: string;
         errorDescription: string;
       };
-      // You can add more mutation types here in the future
+      resetPassword: {
+        successTitle: string;
+        successDescription: string;
+        errorTitle: string;
+        errorDescription: string;
+      };
     };
   };
   language: string;
