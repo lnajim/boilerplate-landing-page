@@ -23,6 +23,8 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = () => {
 	const { openLoginDialog, setShowRegisterDialog } = useAuthModalsStore()
 	const { registerMutation } = useAuthentificationMutations();
 
+	const [error, setError] = useState<string | null>(null);
+
 	const form = useForm<RegistrationFormData>({
 		resolver: zodResolver(RegisterSchema),
 		defaultValues: {
@@ -34,7 +36,16 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = () => {
 	})
 
 	async function onSubmit(data: RegistrationFormData) {
-		await registerMutation.mutateAsync(data);
+		try {
+			await registerMutation.mutateAsync(data);
+			// Registration successful, handled by onSuccess in the mutation
+		} catch (error) {
+			if (error instanceof Error) {
+				setError(error.message);
+			} else {
+				setError("An unexpected error occurred");
+			}
+		}
 	}
 
 	return (
