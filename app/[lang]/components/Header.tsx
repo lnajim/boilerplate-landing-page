@@ -1,88 +1,56 @@
 'use client'
 
 import Link from 'next/link'
-import { useRouter, usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import useTranslationStore from '@/stores/TranslationStore'
+import { headerConfig } from '@/app/config/headerConfig'
+import { appConfig } from '@/app.config'
+import MobileMenu from './MobileMenu'
+import { Menu, X } from 'lucide-react'
 import { Button } from "@/components/ui/button"
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { ChevronDown } from 'lucide-react'
-import { useLanguageStore } from '@/stores/LanguageStore'
-import { useEffect } from 'react'
+import DesktopMenu from './DesktopMenu'
 
-interface HeaderProps {
-	dictionary: {
-		salonName: string;
-		home: string;
-		services: string;
-		about: string;
-		contact: string;
-		languageSelector: string;
-	}
-	lang: string;
-}
-
-const languages = [
-	{ code: 'en', name: 'English', flag: '🇬🇧' },
-	{ code: 'fr', name: 'Français', flag: '🇫🇷' },
-]
-
-const Header: React.FC<HeaderProps> = ({ dictionary, lang }) => {
-	const router = useRouter()
-	const pathname = usePathname()
-	const { language, setLanguage } = useLanguageStore()
-
-	const navItems = ['home', 'services', 'about', 'contact'] as const;
+const Header: React.FC = () => {
+	const { language, dictionary, setLanguage } = useTranslationStore()
+	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
 	useEffect(() => {
-		setLanguage(lang)
-	}, [lang, setLanguage])
+		const loadTranslations = async () => {
+			setLanguage(language)
+		}
+		loadTranslations()
+	}, [setLanguage, language])
 
-	const changeLanguage = (langCode: string) => {
-		setLanguage(langCode)
-		const newPathname = pathname.replace(`/${language}`, `/${langCode}`)
-		router.push(newPathname)
+	const navItems = headerConfig.map((item) => item.key) as Array<keyof typeof dictionary.Header>
+
+	const toggleMobileMenu = () => {
+		setIsMobileMenuOpen(!isMobileMenuOpen)
 	}
 
 	return (
-		<header className="bg-gradient-to-r from-purple-500 to-pink-500 p-4">
+		<header className="bg-gradient-to-r from-purple-500 to-pink-500 p-4" data-header-id="main-header">
 			<div className="container mx-auto flex justify-between items-center">
 				<Link href="/" className="text-white text-2xl font-cursive">
-					{dictionary.salonName}
+					{appConfig.header.applicationName}
 				</Link>
-				<nav className="flex items-center">
-					<ul className="flex space-x-4 mr-4">
-						{navItems.map((item) => (
-							<li key={item}>
-								<Link href={`#`} className="text-white hover:text-purple-200">
-									{dictionary[item]}
-								</Link>
-							</li>
-						))}
-					</ul>
-					<DropdownMenu>
-						<DropdownMenuTrigger asChild>
-							<Button variant="ghost" className="text-white hover:text-purple-200 hover:bg-transparent">
-								<span className="mr-2">{languages.find(l => l.code === language)?.flag}</span>
-								<span>{language?.toUpperCase()}</span>
-								<ChevronDown className="ml-2 h-4 w-4" />
-							</Button>
-						</DropdownMenuTrigger>
-						<DropdownMenuContent>
-							{languages.map((lang) => (
-								<DropdownMenuItem key={lang.code} onSelect={() => changeLanguage(lang.code)}>
-									<span className="mr-2">{lang.flag}</span>
-									<span>{lang.name}</span>
-									<span className="ml-2 text-xs text-gray-500">({lang.code.toUpperCase()})</span>
-								</DropdownMenuItem>
-							))}
-						</DropdownMenuContent>
-					</DropdownMenu>
-				</nav>
+				<DesktopMenu
+					navItems={navItems}
+					dictionary={dictionary}
+					headerConfig={headerConfig}
+					showAuthentication={appConfig.header.authentifcation}
+				/>
+				<Button variant="ghost" className="lg:hidden text-white" onClick={toggleMobileMenu}>
+					{isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+				</Button>
 			</div>
+			<MobileMenu
+				isOpen={isMobileMenuOpen}
+				closeMenu={() => setIsMobileMenuOpen(false)}
+				navItems={navItems}
+				dictionary={dictionary}
+				headerConfig={headerConfig}
+				showAuthentication={appConfig.header.authentifcation}
+			/>
 		</header>
 	)
 }

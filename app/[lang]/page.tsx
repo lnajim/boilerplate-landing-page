@@ -1,23 +1,22 @@
-// app/[lang]/page.tsx
-import { Locale } from "../../i18n-type";
-import { getDictionary } from "../../utils";
-import { Header, Hero, Service, ContactForm, Footer } from "@/app/[lang]/components/index";
-import { useLanguageStore } from '@/stores/LanguageStore'
+'use client'
 
-export default async function Home({ params: { lang } }: { params: { lang: Locale } }) {
-  const dictionary = await getDictionary(lang);
-  const { setLanguage } = useLanguageStore.getState()
-  setLanguage(lang)
+import Header from "@/app/[lang]/components/Header"
+import HeroSection from "@/app/[lang]/components/HeroSection"
+import ServiceSection from "@/app/[lang]/components/ServiceSection"
+import ContactForm from "@/app/[lang]/components/ContactForm"
+import Footer from "@/app/[lang]/components/Footer"
+import useTranslationStore from "@/stores/TranslationStore"
+
+export default function Home() {
+  const { dictionary, language, setLanguage } = useTranslationStore()
 
   return (
-    <>
-      <Header dictionary={dictionary.Header} lang={lang} />
-      <main>
-        <Hero dictionary={dictionary.HeroSection} />
-        <Service dictionary={dictionary.ServicesSection} />
-        <ContactForm dictionary={dictionary.ContactForm} />
-      </main>
-      <Footer dictionary={dictionary.Footer} />
-    </>
-  );
+    <div>
+      <Header />
+      <HeroSection />
+      <ServiceSection />
+      <ContactForm />
+      <Footer />
+    </div>
+  )
 }

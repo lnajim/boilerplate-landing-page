@@ -1,11 +1,16 @@
 {
   "Header": {
+    "register": "S'inscrire",
     "salonName": "Lumina",
     "home": "Accueil",
     "services": "Services",
     "about": "À propos",
     "contact": "Contact",
-    "languageSelector": "Langue"
+    "languageSelector": "Langue",
+    "login": "Connexion",
+    "loginDescription": "Entrez votre email et mot de passe pour vous connecter",
+    "close": "Fermer",
+    "gallery": "Galerie"
   },
   "HeroSection": {
     "title": "Une Beauté Radieuse Vous Attend",
@@ -40,7 +45,72 @@
     "messagePlaceholder": "Votre Message",
     "submitButton": "Envoyer le Message"
   },
+  "LoginForm": {
+    "title": "Connexion",
+    "description": "Entrez votre email et mot de passe pour vous connecter",
+    "emailLabel": "Email",
+    "passwordLabel": "Mot de passe",
+    "signInButton": "Se connecter",
+    "orContinueWith": "Ou continuer avec",
+    "githubButton": "Github",
+    "googleButton": "Google",
+    "noAccountText": "Vous n'avez pas de compte?",
+    "signUpLink": "S'inscrire",
+    "forgotPasswordLink": "Mot de passe oublié ?"
+  },
+  "ResetPasswordForm": {
+    "title": "Réinitialiser le mot de passe",
+    "description": "Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.",
+    "emailLabel": "Email",
+    "submitButton": "Envoyer le lien de réinitialisation",
+    "rememberPasswordText": "Vous vous souvenez de votre mot de passe ?",
+    "loginLink": "Retour à la connexion",
+    "errorTitle": "Erreur",
+    "successTitle": "Succès",
+    "successDescription": "L'e-mail de réinitialisation du mot de passe a été envoyé avec succès. Veuillez vérifier votre boîte de réception.",
+    "unexpectedError": "Une erreur inattendue s'est produite. Veuillez réessayer plus tard."
+  },
+  "RegistrationForm": {
+    "title": "Créer un compte",
+    "description": "Entrez vos informations pour créer un compte",
+    "nameLabel": "Nom",
+    "emailLabel": "Email",
+    "passwordLabel": "Mot de passe",
+    "confirmPasswordLabel": "Confirmez le mot de passe",
+    "signUpButton": "S'inscrire",
+    "orContinueWith": "Ou continuer avec",
+    "githubButton": "GitHub",
+    "googleButton": "Google",
+    "alreadyHaveAccountText": "Vous avez déjà un compte?",
+    "signInLink": "Se connecter"
+  },
   "Footer": {
     "copyright": "© {year} Lumina Beauty Studio. Tous droits réservés."
+  },
+  "useMutation": {
+    "login": {
+      "successTitle": "Connexion réussie",
+      "successDescription": "Vous êtes maintenant connecté.",
+      "errorTitle": "Échec de la connexion",
+      "errorDescription": "Une erreur s'est produite lors de la connexion. Veuillez réessayer."
+    },
+    "register": {
+      "successTitle": "Inscription réussie",
+      "successDescription": "Votre compte a été créé. Veuillez vérifier votre email pour la confirmation.",
+      "errorTitle": "Échec de l'inscription",
+      "errorDescription": "Une erreur s'est produite lors de l'inscription. Veuillez réessayer."
+    },
+    "newPassword": {
+      "title": "Définir un nouveau mot de passe",
+      "description": "Veuillez entrer votre nouveau mot de passe.",
+      "passwordLabel": "Nouveau mot de passe",
+      "confirmPasswordLabel": "Confirmer le nouveau mot de passe",
+      "submitButton": "Mettre à jour le mot de passe",
+      "errorTitle": "Erreur",
+      "successTitle": "Succès",
+      "successDescription": "Votre mot de passe a été mis à jour avec succès.",
+      "unexpectedError": "Une erreur inattendue s'est produite. Veuillez réessayer plus tard.",
+      "backToLogin": "Retour à la connexion"
+    }
   }
 }

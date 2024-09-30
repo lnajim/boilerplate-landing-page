@@ -1,11 +1,16 @@
 {
   "Header": {
+    "register": "Register",
     "salonName": "Lumina",
     "home": "Home",
     "services": "Services",
     "about": "About",
     "contact": "Contact",
-    "languageSelector": "Language"
+    "languageSelector": "Language",
+    "login": "Login",
+    "loginDescription": "Enter your email and password to login",
+    "close": "Close",
+    "gallery": "Gallery"
   },
   "HeroSection": {
     "title": "Radiant Beauty Awaits You",
@@ -40,7 +45,72 @@
     "messagePlaceholder": "Your Message",
     "submitButton": "Send Message"
   },
+  "LoginForm": {
+    "title": "Login",
+    "description": "Enter your email and password to login",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "signInButton": "Sign In",
+    "orContinueWith": "Or continue with",
+    "githubButton": "Github",
+    "googleButton": "Google",
+    "noAccountText": "Don't have an account?",
+    "signUpLink": "Sign up",
+    "forgotPasswordLink": "Forgot password?"
+  },
+  "ResetPasswordForm": {
+    "title": "Reset Password",
+    "description": "Enter your email address and we'll send you a link to reset your password.",
+    "emailLabel": "Email",
+    "submitButton": "Send Reset Link",
+    "rememberPasswordText": "Remember your password?",
+    "loginLink": "Back to login",
+    "errorTitle": "Error",
+    "successTitle": "Success",
+    "successDescription": "Password reset email sent successfully. Please check your inbox.",
+    "unexpectedError": "An unexpected error occurred. Please try again later."
+  },
+  "RegistrationForm": {
+    "title": "Create an account",
+    "description": "Enter your information to create an account",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "confirmPasswordLabel": "Confirm Password",
+    "signUpButton": "Sign Up",
+    "orContinueWith": "Or continue with",
+    "githubButton": "GitHub",
+    "googleButton": "Google",
+    "alreadyHaveAccountText": "Already have an account?",
+    "signInLink": "Sign in"
+  },
   "Footer": {
     "copyright": "© {year} Lumina Beauty Studio. All rights reserved."
+  },
+  "useMutation": {
+    "login": {
+      "successTitle": "Login Successful",
+      "successDescription": "You have been successfully logged in.",
+      "errorTitle": "Login Failed",
+      "errorDescription": "An error occurred during login. Please try again."
+    },
+    "register": {
+      "successTitle": "Registration Successful",
+      "successDescription": "Your account has been created. Please check your email for verification.",
+      "errorTitle": "Registration Failed",
+      "errorDescription": "An error occurred during registration. Please try again."
+    },
+    "newPassword": {
+      "title": "Set New Password",
+      "description": "Please enter your new password.",
+      "passwordLabel": "New Password",
+      "confirmPasswordLabel": "Confirm New Password",
+      "submitButton": "Update Password",
+      "errorTitle": "Error",
+      "successTitle": "Success",
+      "successDescription": "Your password has been successfully updated.",
+      "unexpectedError": "An unexpected error occurred. Please try again later.",
+      "backToLogin": "Back to login"
+    }
   }
 }
