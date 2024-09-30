@@ -99,6 +99,18 @@
       "successDescription": "Your account has been created. Please check your email for verification.",
       "errorTitle": "Registration Failed",
       "errorDescription": "An error occurred during registration. Please try again."
+    },
+    "newPassword": {
+      "title": "Set New Password",
+      "description": "Please enter your new password.",
+      "passwordLabel": "New Password",
+      "confirmPasswordLabel": "Confirm New Password",
+      "submitButton": "Update Password",
+      "errorTitle": "Error",
+      "successTitle": "Success",
+      "successDescription": "Your password has been successfully updated.",
+      "unexpectedError": "An unexpected error occurred. Please try again later.",
+      "backToLogin": "Back to login"
     }
   }
 }

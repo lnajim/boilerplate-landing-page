@@ -20,6 +20,7 @@ const useAuthentificationMutations = () => {
   const { toast } = useToast();
   const router = useRouter();
   const { dictionary, language } = useTranslationStore();
+
   const loginMutation = useMutation({
     mutationKey: ["login"],
     mutationFn: async (values: z.infer<typeof LoginSchema>) => {
@@ -130,6 +131,7 @@ const useAuthentificationMutations = () => {
     mutationFn: async (values: z.infer<typeof NewPasswordSchema>) => {
       try {
         const { password, confirmPassword, token } = values;
+        console.log(values);
         const result = await newPassword({ password, confirmPassword }, token);
         if (result.error) {
           throw new AuthError(result.error);

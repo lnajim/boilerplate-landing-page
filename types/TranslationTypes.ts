@@ -107,6 +107,18 @@ export interface TranslationState {
         errorTitle: string;
         errorDescription: string;
       };
+      newPassword: {
+        title: string; // Add this line
+        description: string;
+        passwordLabel: string;
+        confirmPasswordLabel: string;
+        submitButton: string;
+        errorTitle: string;
+        successTitle: string;
+        successDescription: string;
+        unexpectedError: string;
+        backToLogin: string;
+      };
     };
   };
   language: string;
