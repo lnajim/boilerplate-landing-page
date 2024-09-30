@@ -17,11 +17,9 @@ import { useRouter } from "next/navigation";
 import useTranslationStore from "@/stores/TranslationStore";
 
 const useAuthentificationMutations = () => {
-  const queryClient = useQueryClient();
   const { toast } = useToast();
   const router = useRouter();
   const { dictionary, language } = useTranslationStore();
-  console.log(language);
   const loginMutation = useMutation({
     mutationKey: ["login"],
     mutationFn: async (values: z.infer<typeof LoginSchema>) => {
@@ -40,7 +38,6 @@ const useAuthentificationMutations = () => {
       }
     },
     onSuccess: (data) => {
-      console.log("success: ", data);
       toast({
         title: dictionary.useMutation.login.successTitle,
         description: dictionary.useMutation.login.successDescription,
@@ -121,7 +118,7 @@ const useAuthentificationMutations = () => {
           throw error;
         } else {
           throw new AuthError(
-            "An unexpected error occurred during password reset"
+            dictionary.useMutation.resetPassword.errorDescription
           );
         }
       }
