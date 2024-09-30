@@ -12,6 +12,7 @@ import { Icons } from '@/components/ui/icons'
 import useTranslationStore from '@/stores/TranslationStore'
 import useAuthModalsStore from '@/stores/authModalsStore'
 import useAuthentificationMutations from '@/app/[lang]/mutations/useAuthentifcationMutations'
+import { useToast } from "@/hooks/use-toast";
 
 // Define the schema for the reset password form
 const ResetPasswordSchema = z.object({
@@ -24,6 +25,7 @@ export const ResetPasswordForm: React.FC = () => {
 	const { dictionary } = useTranslationStore()
 	const { setShowResetPasswordDialog, openLoginDialog } = useAuthModalsStore()
 	const { resetPasswordMutation } = useAuthentificationMutations();
+	const { toast } = useToast()
 
 	const [isLoading, setIsLoading] = useState(false)
 
@@ -37,18 +39,27 @@ export const ResetPasswordForm: React.FC = () => {
 	async function onSubmit(data: ResetPasswordFormData) {
 		setIsLoading(true)
 		try {
-			// TODO: Implement the API call to send reset password email
-			console.log('Reset password for:', data.email)
-
-			await resetPasswordMutation.mutateAsync(data);
-
-			// Simulating API call
-			await new Promise(resolve => setTimeout(resolve, 1000))
-			setShowResetPasswordDialog(false)
-			// Show success message or redirect
+			const result = await resetPasswordMutation.mutateAsync(data);
+			if (result.error) {
+				toast({
+					variant: "destructive",
+					title: dictionary.ResetPasswordForm.errorTitle,
+					description: result.error,
+				})
+			} else {
+				toast({
+					title: dictionary.ResetPasswordForm.successTitle,
+					description: dictionary.ResetPasswordForm.successDescription,
+				})
+				setShowResetPasswordDialog(false)
+			}
 		} catch (error) {
 			console.error('Error sending reset password email:', error)
-			// Handle error (e.g., show error message)
+			toast({
+				variant: "destructive",
+				title: dictionary.ResetPasswordForm.errorTitle,
+				description: dictionary.ResetPasswordForm.unexpectedError,
+			})
 		} finally {
 			setIsLoading(false)
 		}

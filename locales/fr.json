@@ -64,7 +64,11 @@
     "emailLabel": "Email",
     "submitButton": "Envoyer le lien de réinitialisation",
     "rememberPasswordText": "Vous vous souvenez de votre mot de passe ?",
-    "loginLink": "Retour à la connexion"
+    "loginLink": "Retour à la connexion",
+    "errorTitle": "Erreur",
+    "successTitle": "Succès",
+    "successDescription": "L'e-mail de réinitialisation du mot de passe a été envoyé avec succès. Veuillez vérifier votre boîte de réception.",
+    "unexpectedError": "Une erreur inattendue s'est produite. Veuillez réessayer plus tard."
   },
   "RegistrationForm": {
     "title": "Créer un compte",

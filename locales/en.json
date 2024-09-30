@@ -64,7 +64,11 @@
     "emailLabel": "Email",
     "submitButton": "Send Reset Link",
     "rememberPasswordText": "Remember your password?",
-    "loginLink": "Back to login"
+    "loginLink": "Back to login",
+    "errorTitle": "Error",
+    "successTitle": "Success",
+    "successDescription": "Password reset email sent successfully. Please check your inbox.",
+    "unexpectedError": "An unexpected error occurred. Please try again later."
   },
   "RegistrationForm": {
     "title": "Create an account",
