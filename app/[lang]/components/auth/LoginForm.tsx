@@ -98,7 +98,7 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 								</FormItem>
 							)}
 						/>
-						<Button variant="link" onClick={openResetPasswordDialog} className="px-0 text-sm text-blue-600 hover:underline cursor-pointer">
+						<Button type='button' variant="link" onClick={openResetPasswordDialog} className="px-0 text-sm text-blue-600 hover:underline cursor-pointer">
 							{dictionary?.LoginForm.forgotPasswordLink}
 						</Button>
 						<Button className="w-full" type="submit" disabled={isLoading}>
