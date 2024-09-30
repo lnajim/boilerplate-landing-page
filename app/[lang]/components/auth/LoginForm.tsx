@@ -13,6 +13,7 @@ import useTranslationStore from '@/stores/TranslationStore'
 import { LoginSchema } from '@/schemas'
 import useAuthentificationMutations from '@/app/[lang]/mutations/useAuthentifcationMutations'
 import useAuthModalsStore from '@/stores/authModalsStore'
+import { useRouter } from 'next/navigation'
 
 type LoginFormData = z.infer<typeof LoginSchema>
 
@@ -22,6 +23,8 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 	const { dictionary } = useTranslationStore()
 	const { openRegisterDialog, setShowLoginDialog, openResetPasswordDialog } = useAuthModalsStore()
 	const { loginMutation } = useAuthentificationMutations();
+	const [error, setError] = useState<string | null>(null);
+	const router = useRouter()
 
 	const [isLoading, setIsLoading] = useState(false)
 	const form = useForm<LoginFormData>({
@@ -33,14 +36,23 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 	})
 
 	async function onSubmit(data: LoginFormData) {
+		setIsLoading(true);
+		setError(null);
 		try {
-			await loginMutation.mutateAsync(data);
-			setShowLoginDialog(false)
-			// The success handling is now in the mutation's onSuccess callback
-			// You can add any additional local state updates here if needed
+			const result = await loginMutation.mutateAsync(data);
+			console.log("Login result:", result);
+			if (result.success && result.redirectTo) {
+				setShowLoginDialog(false);
+				router.push(result.redirectTo);
+			}
 		} catch (error) {
-			// Error handling is now in the mutation's onError callback
-			// You can add any additional local error handling here if needed
+			if (error instanceof Error) {
+				setError(error.message);
+			} else {
+				setError("An unexpected error occurred. Please try again.");
+			}
+		} finally {
+			setIsLoading(false);
 		}
 	}
 
@@ -53,6 +65,11 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 				</CardDescription>
 			</CardHeader>
 			<CardContent className="grid gap-4">
+				{error && (
+					<div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+						<span className="block sm:inline">{error}</span>
+					</div>
+				)}
 				<Form {...form}>
 					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
 						<FormField
