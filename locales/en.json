@@ -55,7 +55,16 @@
     "githubButton": "Github",
     "googleButton": "Google",
     "noAccountText": "Don't have an account?",
-    "signUpLink": "Sign up"
+    "signUpLink": "Sign up",
+    "forgotPasswordLink": "Forgot password?"
+  },
+  "ResetPasswordForm": {
+    "title": "Reset Password",
+    "description": "Enter your email address and we'll send you a link to reset your password.",
+    "emailLabel": "Email",
+    "submitButton": "Send Reset Link",
+    "rememberPasswordText": "Remember your password?",
+    "loginLink": "Back to login"
   },
   "RegistrationForm": {
     "title": "Create an account",

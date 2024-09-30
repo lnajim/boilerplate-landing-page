@@ -10,10 +10,9 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Icons } from '@/components/ui/icons'
 import useTranslationStore from '@/stores/TranslationStore'
-import { useAuthModals } from '@/app/[lang]/components/AuthModalsProvider'
 import { LoginSchema } from '@/schemas'
 import useAuthentificationMutations from '@/app/[lang]/mutations/useAuthentifcationMutations'
-import { useRouter } from 'next/navigation';
+import useAuthModalsStore from '@/stores/authModalsStore'
 
 type LoginFormData = z.infer<typeof LoginSchema>
 
@@ -21,9 +20,8 @@ interface LoginFormProps { }
 
 export const LoginForm: React.FC<LoginFormProps> = () => {
 	const { dictionary } = useTranslationStore()
-	const { openRegisterDialog } = useAuthModals()
+	const { openRegisterDialog, setShowLoginDialog, openResetPasswordDialog } = useAuthModalsStore()
 	const { loginMutation } = useAuthentificationMutations();
-	const router = useRouter(); // If using Next.js
 
 	const [isLoading, setIsLoading] = useState(false)
 	const form = useForm<LoginFormData>({
@@ -37,6 +35,7 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 	async function onSubmit(data: LoginFormData) {
 		try {
 			await loginMutation.mutateAsync(data);
+			setShowLoginDialog(false)
 			// The success handling is now in the mutation's onSuccess callback
 			// You can add any additional local state updates here if needed
 		} catch (error) {
@@ -111,8 +110,11 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 					</Button>
 				</div>
 			</CardContent>
-			<CardFooter>
-				<p className="text-xs text-center text-gray-700 mt-4">
+			<CardFooter className="flex flex-col space-y-2">
+				<Button variant="link" onClick={openResetPasswordDialog} className="px-0 font-normal">
+					{dictionary?.LoginForm.forgotPasswordLink}
+				</Button>
+				<p className="text-xs text-center text-gray-700">
 					{dictionary?.LoginForm.noAccountText}{" "}
 					<span onClick={openRegisterDialog} className="text-blue-600 hover:underline cursor-pointer">
 						{dictionary?.LoginForm.signUpLink}

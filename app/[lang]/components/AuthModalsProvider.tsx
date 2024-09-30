@@ -1,86 +1,78 @@
 'use client'
 
-import { useState, createContext, useContext, ReactNode } from 'react'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import LoginForm from '@/app/[lang]/components/auth/LoginForm'
 import RegistrationForm from '@/app/[lang]/components/auth/RegistrationForm'
+import ResetPasswordForm from '@/app/[lang]/components/auth/ResetPasswordForm'
 import { Button } from "@/components/ui/button"
 import useTranslationStore from '@/stores/TranslationStore'
+import useAuthModalsStore from '@/stores/authModalsStore'
 
-interface AuthModalsContextProps {
-	showLoginDialog: boolean
-	showRegisterDialog: boolean
-	openLoginDialog: () => void
-	openRegisterDialog: () => void
-	closeDialogs: () => void
-	setShowLoginDialog: (isOpen: boolean) => void // Added setter for showLoginDialog
-}
-
-const AuthModalsContext = createContext<AuthModalsContextProps | undefined>(undefined)
-
-export const useAuthModals = () => {
-	const context = useContext(AuthModalsContext)
-	if (!context) {
-		throw new Error('useAuthModals must be used within an AuthModalsProvider')
-	}
-	return context
-}
-
-export const AuthModalsProvider = ({ children }: { children: ReactNode }) => {
-	const [showLoginDialog, setShowLoginDialog] = useState(false)
-	const [showRegisterDialog, setShowRegisterDialog] = useState(false)
+export const AuthModalsProvider = ({ children }: { children: React.ReactNode }) => {
 	const { dictionary } = useTranslationStore()
-
-	const openLoginDialog = () => {
-		setShowRegisterDialog(false)
-		setShowLoginDialog(true)
-	}
-
-	const openRegisterDialog = () => {
-		setShowLoginDialog(false)
-		setShowRegisterDialog(true)
-	}
-
-	const closeDialogs = () => {
-		setShowLoginDialog(false)
-		setShowRegisterDialog(false)
-	}
+	const {
+		showLoginDialog,
+		showRegisterDialog,
+		showResetPasswordDialog,
+		setShowLoginDialog,
+		setShowRegisterDialog,
+		setShowResetPasswordDialog,
+		closeDialogs
+	} = useAuthModalsStore()
 
 	return (
-		<AuthModalsContext.Provider value={{ showLoginDialog, showRegisterDialog, openLoginDialog, openRegisterDialog, closeDialogs, setShowLoginDialog }}>
+		<>
 			{children}
-			<Dialog open={showLoginDialog} onOpenChange={(isOpen) => { setShowLoginDialog(isOpen); if (isOpen) setShowRegisterDialog(false); }}>
+			<Dialog open={showLoginDialog} onOpenChange={setShowLoginDialog}>
 				<DialogContent className='flex flex-col'>
 					<DialogHeader>
-						<DialogTitle>{dictionary.LoginForm.title}</DialogTitle>
+						<DialogTitle>{dictionary?.LoginForm?.title || 'Login'}</DialogTitle>
 						<DialogDescription>
-							{dictionary.LoginForm.description}
+							{dictionary?.LoginForm?.description || 'Enter your credentials to login'}
 						</DialogDescription>
 					</DialogHeader>
 					<LoginForm />
 					<DialogFooter>
 						<Button variant="outline" onClick={closeDialogs}>
-							{dictionary.Header.close}
+							{dictionary?.Header?.close || 'Close'}
 						</Button>
 					</DialogFooter>
 				</DialogContent>
 			</Dialog>
-			<Dialog open={showRegisterDialog} onOpenChange={(isOpen) => { setShowRegisterDialog(isOpen); if (isOpen) setShowLoginDialog(false); }}>
+			<Dialog open={showRegisterDialog} onOpenChange={setShowRegisterDialog}>
 				<DialogContent className='flex flex-col'>
 					<DialogHeader>
-						<DialogTitle>{dictionary.RegistrationForm.title}</DialogTitle>
+						<DialogTitle>{dictionary?.RegistrationForm?.title || 'Register'}</DialogTitle>
 						<DialogDescription>
-							{dictionary.RegistrationForm.description}
+							{dictionary?.RegistrationForm?.description || 'Create a new account'}
 						</DialogDescription>
 					</DialogHeader>
 					<RegistrationForm />
 					<DialogFooter>
 						<Button variant="outline" onClick={closeDialogs}>
-							{dictionary.Header.close}
+							{dictionary?.Header?.close || 'Close'}
 						</Button>
 					</DialogFooter>
 				</DialogContent>
 			</Dialog>
-		</AuthModalsContext.Provider>
+			<Dialog open={showResetPasswordDialog} onOpenChange={setShowResetPasswordDialog}>
+				<DialogContent className='flex flex-col'>
+					<DialogHeader>
+						<DialogTitle>{dictionary?.ResetPasswordForm?.title || 'Reset Password'}</DialogTitle>
+						<DialogDescription>
+							{dictionary?.ResetPasswordForm?.description || 'Enter your email to reset your password'}
+						</DialogDescription>
+					</DialogHeader>
+					<ResetPasswordForm />
+					<DialogFooter>
+						<Button variant="outline" onClick={closeDialogs}>
+							{dictionary?.Header?.close || 'Close'}
+						</Button>
+					</DialogFooter>
+				</DialogContent>
+			</Dialog>
+		</>
 	)
 }
+
+export default AuthModalsProvider
