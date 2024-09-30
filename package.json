@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "email": "email dev --dir react-email-starter"
+    "email": "email dev --dir emails"
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.5.4",
