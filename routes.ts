@@ -4,9 +4,10 @@
  * @type {string[]}
  */
 
+import { locales } from "./i18n-config";
+
 export const publicRoutes: string[] = [
-  "/en",
-  "/fr",
+  ...locales,
   "/register",
   "/auth/new-verification",
   "/widget/panel/trigger",
