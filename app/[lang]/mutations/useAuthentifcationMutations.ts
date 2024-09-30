@@ -20,8 +20,8 @@ const useAuthentificationMutations = () => {
   const queryClient = useQueryClient();
   const { toast } = useToast();
   const router = useRouter();
-  const { dictionary } = useTranslationStore();
-
+  const { dictionary, language } = useTranslationStore();
+  console.log(language);
   const loginMutation = useMutation({
     mutationKey: ["login"],
     mutationFn: async (values: z.infer<typeof LoginSchema>) => {
@@ -111,7 +111,7 @@ const useAuthentificationMutations = () => {
     mutationKey: ["resetPasswordMutation"],
     mutationFn: async (email: z.infer<typeof ResetSchema>) => {
       try {
-        const result = await reset(email);
+        const result = await reset(email, language);
         if (result.error) {
           throw new AuthError(result.error);
         }
