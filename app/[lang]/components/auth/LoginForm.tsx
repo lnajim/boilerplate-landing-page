@@ -81,6 +81,9 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 								</FormItem>
 							)}
 						/>
+						<Button variant="link" onClick={openResetPasswordDialog} className="px-0 text-sm text-blue-600 hover:underline cursor-pointer">
+							{dictionary?.LoginForm.forgotPasswordLink}
+						</Button>
 						<Button className="w-full" type="submit" disabled={isLoading}>
 							{isLoading && (
 								<Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
@@ -111,9 +114,7 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 				</div>
 			</CardContent>
 			<CardFooter className="flex flex-col space-y-2">
-				<Button variant="link" onClick={openResetPasswordDialog} className="px-0 font-normal">
-					{dictionary?.LoginForm.forgotPasswordLink}
-				</Button>
+
 				<p className="text-xs text-center text-gray-700">
 					{dictionary?.LoginForm.noAccountText}{" "}
 					<span onClick={openRegisterDialog} className="text-blue-600 hover:underline cursor-pointer">
