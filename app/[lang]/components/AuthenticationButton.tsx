@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import LoginForm from '@/app/[lang]/components/auth/LoginForm'
 import useTranslationStore from '@/stores/TranslationStore'
-import { useAuthModals } from '@/app/[lang]/components/AuthModalsProvider'
+import useAuthModalsStore from "@/stores/authModalsStore"
 
 const AuthenticationButton = () => {
-	const { showLoginDialog, setShowLoginDialog } = useAuthModals()
+	const { showLoginDialog, setShowLoginDialog } = useAuthModalsStore()
 	const { dictionary } = useTranslationStore()
 
 	return (
@@ -36,3 +36,4 @@ const AuthenticationButton = () => {
 }
 
 export default AuthenticationButton
+

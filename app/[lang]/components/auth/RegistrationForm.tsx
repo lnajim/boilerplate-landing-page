@@ -10,9 +10,9 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Icons } from '@/components/ui/icons'
 import useTranslationStore from '@/stores/TranslationStore'
-import { useAuthModals } from '@/app/[lang]/components/AuthModalsProvider'
 import useAuthentificationMutations from '@/app/[lang]/mutations/useAuthentifcationMutations'
 import { RegisterSchema } from '@/schemas'
+import useAuthModalsStore from '@/stores/authModalsStore'
 
 type RegistrationFormData = z.infer<typeof RegisterSchema>
 
@@ -20,8 +20,8 @@ interface RegistrationFormProps { }
 
 export const RegistrationForm: React.FC<RegistrationFormProps> = () => {
 	const { dictionary } = useTranslationStore()
+	const { openLoginDialog, setShowRegisterDialog } = useAuthModalsStore()
 	const { registerMutation } = useAuthentificationMutations();
-	const { openLoginDialog } = useAuthModals()
 
 	const form = useForm<RegistrationFormData>({
 		resolver: zodResolver(RegisterSchema),
@@ -131,7 +131,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = () => {
 						<Icons.google className="mr-2 h-4 w-4" />
 						{dictionary?.RegistrationForm.googleButton || 'Google'}
 					</Button>
-				</div> {/* Added missing closing div tag */}
+				</div>
 			</CardContent>
 			<CardFooter>
 				<p className="text-xs text-center text-gray-700 mt-4">

@@ -57,6 +57,15 @@ export interface TranslationState {
       googleButton: string;
       noAccountText: string;
       signUpLink: string;
+      forgotPasswordLink: string;
+    };
+    ResetPasswordForm: {
+      title: string;
+      description: string;
+      emailLabel: string;
+      submitButton: string;
+      rememberPasswordText: string;
+      loginLink: string;
     };
     RegistrationForm: {
       title: string;

@@ -55,7 +55,16 @@
     "githubButton": "Github",
     "googleButton": "Google",
     "noAccountText": "Vous n'avez pas de compte?",
-    "signUpLink": "S'inscrire"
+    "signUpLink": "S'inscrire",
+    "forgotPasswordLink": "Mot de passe oublié ?"
+  },
+  "ResetPasswordForm": {
+    "title": "Réinitialiser le mot de passe",
+    "description": "Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.",
+    "emailLabel": "Email",
+    "submitButton": "Envoyer le lien de réinitialisation",
+    "rememberPasswordText": "Vous vous souvenez de votre mot de passe ?",
+    "loginLink": "Retour à la connexion"
   },
   "RegistrationForm": {
     "title": "Créer un compte",
