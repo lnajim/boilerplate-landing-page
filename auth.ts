@@ -12,8 +12,6 @@ export const {
 } = NextAuth({
   callbacks: {
     async signIn({ user, account }) {
-      console.log(user);
-      console.log(account);
       if (account?.provider !== "credentials") return true;
 
       // Prevent sign in without email verification
