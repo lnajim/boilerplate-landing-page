@@ -66,6 +66,10 @@ export interface TranslationState {
       submitButton: string;
       rememberPasswordText: string;
       loginLink: string;
+      errorTitle: string;
+      successTitle: string;
+      successDescription: string;
+      unexpectedError: string;
     };
     RegistrationForm: {
       title: string;
