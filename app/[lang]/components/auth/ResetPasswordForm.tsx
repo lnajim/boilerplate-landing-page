@@ -11,6 +11,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Icons } from '@/components/ui/icons'
 import useTranslationStore from '@/stores/TranslationStore'
 import useAuthModalsStore from '@/stores/authModalsStore'
+import useAuthentificationMutations from '@/app/[lang]/mutations/useAuthentifcationMutations'
 
 // Define the schema for the reset password form
 const ResetPasswordSchema = z.object({
@@ -22,6 +23,8 @@ type ResetPasswordFormData = z.infer<typeof ResetPasswordSchema>
 export const ResetPasswordForm: React.FC = () => {
 	const { dictionary } = useTranslationStore()
 	const { setShowResetPasswordDialog, openLoginDialog } = useAuthModalsStore()
+	const { resetPasswordMutation } = useAuthentificationMutations();
+
 	const [isLoading, setIsLoading] = useState(false)
 
 	const form = useForm<ResetPasswordFormData>({
@@ -36,6 +39,9 @@ export const ResetPasswordForm: React.FC = () => {
 		try {
 			// TODO: Implement the API call to send reset password email
 			console.log('Reset password for:', data.email)
+
+			await resetPasswordMutation.mutateAsync(data);
+
 			// Simulating API call
 			await new Promise(resolve => setTimeout(resolve, 1000))
 			setShowResetPasswordDialog(false)

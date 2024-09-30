@@ -37,11 +37,9 @@ export const login = async (
       return { error: "Invalid credentials" };
     }
 
-    const redirectLocale =
-      locale && i18n.locales.includes(locale) ? locale : defaultLocale;
     const redirectTo = process.env.NEXT_PUBLIC_DOMAINE_URL
-      ? `${process.env.NEXT_PUBLIC_DOMAINE_URL}/${redirectLocale}/admin/dashboard`
-      : `/${redirectLocale}/admin/dashboard`;
+      ? `${process.env.NEXT_PUBLIC_DOMAINE_URL}/admin/dashboard`
+      : `/admin/dashboard`;
 
     await signIn("credentials", {
       email,
