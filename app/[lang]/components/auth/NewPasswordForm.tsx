@@ -30,7 +30,7 @@ export const NewPasswordForm = () => {
 
 	const { dictionary } = useTranslationStore();
 	const { newPasswordMutation } = useAuthentificationMutations();
-	const token = searchParams?.get('token');
+	const token = searchParams?.get('token') || undefined;
 
 	const { toast } = useToast();
 	const router = useRouter();
