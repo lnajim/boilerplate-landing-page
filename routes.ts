@@ -1,13 +1,12 @@
+import { i18n } from "@/i18n-config";
+
 /**
  * An array of routes that are accessible to the public
  * These routes do not require authentication
  * @type {string[]}
  */
-
-import { locales } from "./i18n-config";
-
 export const publicRoutes: string[] = [
-  ...locales,
+  ...i18n.locales.map((locale) => `/${locale}`),
   "/register",
   "/auth/new-verification",
   "/widget/panel/trigger",
@@ -21,10 +20,10 @@ export const publicRoutes: string[] = [
  * @type {string[]}
  */
 export const authRoutes: string[] = [
-  "/auth/login",
-  "/auth/register",
-  "/auth/reset",
-  "/auth/new-password",
+  ...i18n.locales.map((locale) => `/${locale}/auth/login`),
+  ...i18n.locales.map((locale) => `/${locale}/auth/register`),
+  ...i18n.locales.map((locale) => `/${locale}/auth/reset`),
+  ...i18n.locales.map((locale) => `/${locale}/auth/new-password`),
 ];
 
 /**
