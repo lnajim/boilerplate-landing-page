@@ -1,12 +1,12 @@
 'use client'
 
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import LoginForm from '@/app/[lang]/components/auth/LoginForm'
-import RegistrationForm from '@/app/[lang]/components/auth/RegistrationForm'
-import ResetPasswordForm from '@/app/[lang]/components/auth/ResetPasswordForm'
 import { Button } from "@/components/ui/button"
 import useTranslationStore from '@/stores/TranslationStore'
 import useAuthModalsStore from '@/stores/authModalsStore'
+import LoginForm from './auth/LoginForm'
+import RegistrationForm from './auth/RegistrationForm'
+import ResetPasswordForm from './auth/ResetPasswordForm'
 
 export const AuthModalsProvider = ({ children }: { children: React.ReactNode }) => {
 	const { dictionary } = useTranslationStore()

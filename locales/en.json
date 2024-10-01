@@ -92,7 +92,8 @@
       "successTitle": "Login Successful",
       "successDescription": "You have been successfully logged in.",
       "errorTitle": "Login Failed",
-      "errorDescription": "An error occurred during login. Please try again."
+      "errorDescription": "An error occurred during login. Please try again.",
+      "verificationNeededTitle": "Email Verification Required"
     },
     "register": {
       "successTitle": "Registration Successful",

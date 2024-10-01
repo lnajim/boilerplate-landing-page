@@ -1,10 +1,8 @@
 'use client'
 
-import Header from "@/app/[lang]/components/Header"
-import HeroSection from "@/app/[lang]/components/HeroSection"
-import ServiceSection from "@/app/[lang]/components/ServiceSection"
-import ContactForm from "@/app/[lang]/components/ContactForm"
-import Footer from "@/app/[lang]/components/Footer"
+import { Header, ContactForm, Footer } from "@/components/components-customs"
+import HeroSection from "@/components/components-customs/HeroSection"
+import ServiceSection from "@/components/components-customs/ServiceSection"
 import useTranslationStore from "@/stores/TranslationStore"
 
 export default function Home() {

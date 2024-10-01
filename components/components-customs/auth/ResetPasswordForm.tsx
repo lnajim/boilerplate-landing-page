@@ -11,7 +11,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Icons } from '@/components/ui/icons'
 import useTranslationStore from '@/stores/TranslationStore'
 import useAuthModalsStore from '@/stores/authModalsStore'
-import useAuthentificationMutations from '@/app/[lang]/mutations/useAuthentifcationMutations'
+import useAuthentificationMutations from '@/mutations/useAuthentifcationMutations'
 import { useToast } from "@/hooks/use-toast";
 
 // Define the schema for the reset password form
