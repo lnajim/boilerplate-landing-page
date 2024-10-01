@@ -11,7 +11,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Icons } from '@/components/ui/icons'
 import useTranslationStore from '@/stores/TranslationStore'
 import { LoginSchema } from '@/schemas'
-import useAuthentificationMutations from '@/app/[lang]/mutations/useAuthentifcationMutations'
+import useAuthentificationMutations from '@/mutations/useAuthentifcationMutations'
 import useAuthModalsStore from '@/stores/authModalsStore'
 import { useRouter } from 'next/navigation'
 

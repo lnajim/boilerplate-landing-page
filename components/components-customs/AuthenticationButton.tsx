@@ -2,9 +2,9 @@
 
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import LoginForm from '@/app/[lang]/components/auth/LoginForm'
 import useTranslationStore from '@/stores/TranslationStore'
 import useAuthModalsStore from "@/stores/authModalsStore"
+import LoginForm from "./auth/LoginForm"
 
 const AuthenticationButton = () => {
 	const { showLoginDialog, setShowLoginDialog } = useAuthModalsStore()
