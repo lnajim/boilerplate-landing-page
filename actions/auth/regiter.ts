@@ -6,9 +6,12 @@ import { RegisterSchema } from "@/schemas";
 import * as z from "zod";
 import { generateVerificationToken } from "@/lib/token";
 import { getUserByEmail } from "../user";
-//import { sendVerificationEmail } from '@/emails/send-verification-email';
+import { sendVerificationEmail } from "../emails/send-verification-email";
 
-export const register = async (values: z.infer<typeof RegisterSchema>) => {
+export const register = async (
+  values: z.infer<typeof RegisterSchema>,
+  language: string
+) => {
   const validatedFields = RegisterSchema.safeParse(values);
 
   if (!validatedFields.success) {
@@ -44,7 +47,11 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
 
   //TODO: Send Verification token email
   const verificationToken = await generateVerificationToken(email);
-  //  await sendVerificationEmail(verificationToken.email, verificationToken.token);
+  await sendVerificationEmail(
+    verificationToken.email,
+    verificationToken.token,
+    language
+  );
   return {
     success: "Confirmation email send",
   };

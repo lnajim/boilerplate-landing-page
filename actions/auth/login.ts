@@ -8,10 +8,11 @@ import * as z from "zod";
 import { getUserByEmail } from "@/actions/user";
 import bcrypt from "bcryptjs";
 import { i18n, defaultLocale } from "@/i18n-config";
+import { sendVerificationEmail } from "../emails/send-verification-email";
 
 export const login = async (
   values: z.infer<typeof LoginSchema>,
-  locale?: string
+  language: string
 ) => {
   try {
     const validatedFields = LoginSchema.safeParse(values);
@@ -24,8 +25,25 @@ export const login = async (
 
     const existingUser = await getUserByEmail(email);
 
-    if (!existingUser || !existingUser.password) {
-      return { error: "Invalid credentials" };
+    if (!existingUser || !existingUser.email || !existingUser.password) {
+      return { error: "Email does not exist!" };
+    }
+
+    if (!existingUser.emailVerified) {
+      const verificationToken = await generateVerificationToken(
+        existingUser.email
+      );
+
+      await sendVerificationEmail(
+        verificationToken.email,
+        verificationToken.token,
+        language
+      );
+
+      return {
+        success:
+          "Your account is currently inactive. Please activate your account. A confirmation email has been sent!",
+      };
     }
 
     const passwordsMatch = await bcrypt.compare(

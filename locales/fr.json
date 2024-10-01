@@ -92,7 +92,8 @@
       "successTitle": "Connexion réussie",
       "successDescription": "Vous êtes maintenant connecté.",
       "errorTitle": "Échec de la connexion",
-      "errorDescription": "Une erreur s'est produite lors de la connexion. Veuillez réessayer."
+      "errorDescription": "Une erreur s'est produite lors de la connexion. Veuillez réessayer.",
+      "verificationNeededTitle": "Vérification de l'email requise"
     },
     "register": {
       "successTitle": "Inscription réussie",

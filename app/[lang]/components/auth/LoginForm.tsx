@@ -41,9 +41,12 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 		try {
 			const result = await loginMutation.mutateAsync(data);
 			console.log("Login result:", result);
-			if (result.success && result.redirectTo) {
+			if (result.success === true && result.redirectTo) {
 				setShowLoginDialog(false);
 				router.push(result.redirectTo);
+			} else if (typeof result.success === 'string') {
+				// Handle the case for unverified email
+				setError(result.success);
 			}
 		} catch (error) {
 			if (error instanceof Error) {

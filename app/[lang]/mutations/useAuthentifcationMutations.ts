@@ -25,7 +25,7 @@ const useAuthentificationMutations = () => {
     mutationKey: ["login"],
     mutationFn: async (values: z.infer<typeof LoginSchema>) => {
       try {
-        const result = await login(values);
+        const result = await login(values, language);
         if (result.error) {
           throw new AuthError(result.error);
         }
@@ -39,10 +39,18 @@ const useAuthentificationMutations = () => {
       }
     },
     onSuccess: (data) => {
-      toast({
-        title: dictionary.useMutation.login.successTitle,
-        description: dictionary.useMutation.login.successDescription,
-      });
+      if (data.success === true) {
+        toast({
+          title: dictionary.useMutation.login.successTitle,
+          description: dictionary.useMutation.login.successDescription,
+        });
+      } else if (typeof data.success === "string") {
+        // This is the case for unverified email
+        toast({
+          title: dictionary.useMutation.login.verificationNeededTitle,
+          description: data.success,
+        });
+      }
     },
     onError: (error) => {
       toast({
@@ -61,7 +69,7 @@ const useAuthentificationMutations = () => {
     mutationKey: ["register"],
     mutationFn: async (values: z.infer<typeof RegisterSchema>) => {
       try {
-        const result = await register(values);
+        const result = await register(values, language);
         if (result.error) {
           throw new AuthError(result.error);
         }
