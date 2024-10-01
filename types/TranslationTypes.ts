@@ -94,6 +94,7 @@ export interface TranslationState {
         successDescription: string;
         errorTitle: string;
         errorDescription: string;
+        verificationNeededTitle: string; // Add this line
       };
       register: {
         successTitle: string;
