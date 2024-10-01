@@ -10,7 +10,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Icons } from '@/components/ui/icons';
 import useTranslationStore from '@/stores/TranslationStore';
-import useAuthentificationMutations from '@/app/[lang]/mutations/useAuthentifcationMutations';
+import useAuthentificationMutations from '@/mutations/useAuthentifcationMutations';
 import { useToast } from '@/hooks/use-toast';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';

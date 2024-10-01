@@ -1,9 +1,9 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { i18n } from '../i18n-config'
-import { AuthModalsProvider } from '@/app/[lang]/components/AuthModalsProvider'
 import TanstackProvider from '@/providers/tanstack-provider';
 import { Toaster } from '@/components/ui/toaster';
+import AuthModalsProvider from '@/components/components-customs/AuthModalsProvider';
 
 const inter = Inter({ subsets: ['latin'] })
 

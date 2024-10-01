@@ -1,4 +1,4 @@
-import VerificationRegistration from "@/app/[lang]/components/auth/VerificationResgistration";
+import VerificationRegistration from "@/components/components-customs/auth/VerificationResgistration";
 
 const NewVerificationPage = async () => {
   return <VerificationRegistration />;

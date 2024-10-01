@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import { BeatLoader } from 'react-spinners';
-import useAuthentificationMutations from '@/app/[lang]/mutations/useAuthentifcationMutations';
+import useAuthentificationMutations from '@/mutations/useAuthentifcationMutations';
 import { FormSuccess } from '@/components/ui/form-success/form-sucess';
 import { FormError } from '@/components/ui/form-error/form-error';
 
