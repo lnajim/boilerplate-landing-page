@@ -21,18 +21,15 @@ const DesktopMenu: React.FC<DesktopMenuProps> = ({ navItems, dictionary, headerC
 			<ul className="flex items-center space-x-4">
 				{navItems.map((item) => (
 					<li key={item}>
-						<Link href={headerConfig.find((config: HeaderConfigItem) => config.key === item)?.path || '#'} className="text-white hover:text-purple-200">
+						<Link href={headerConfig.find((config: HeaderConfigItem) => config.key === item)?.path || '#'} className="text-primary-foreground hover:text-secondary">
 							{dictionary.Header[item]}
 						</Link>
 					</li>
 				))}
-				{showAuthentication && (
-					<li>
-						<AuthenticationButton />
-					</li>
-				)}
+
 			</ul>
 			<LanguageSelector />
+			{showAuthentication && <AuthenticationButton />}
 		</nav>
 	)
 }

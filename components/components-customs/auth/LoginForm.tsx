@@ -14,6 +14,8 @@ import { LoginSchema } from '@/schemas'
 import useAuthentificationMutations from '@/mutations/useAuthentifcationMutations'
 import useAuthModalsStore from '@/stores/authModalsStore'
 import { useRouter } from 'next/navigation'
+import { signIn } from "next-auth/react"
+import SocialLoginAuthentication from './SocialLoginAuthentication'
 
 type LoginFormData = z.infer<typeof LoginSchema>
 
@@ -40,7 +42,6 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 		setError(null);
 		try {
 			const result = await loginMutation.mutateAsync(data);
-			console.log("Login result:", result);
 			if (result.success === true && result.redirectTo) {
 				setShowLoginDialog(false);
 				router.push(result.redirectTo);
@@ -112,26 +113,7 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 						</Button>
 					</form>
 				</Form>
-				<div className="relative">
-					<div className="absolute inset-0 flex items-center">
-						<span className="w-full border-t" />
-					</div>
-					<div className="relative flex justify-center text-xs uppercase">
-						<span className="bg-background px-2 text-muted-foreground">
-							{dictionary?.LoginForm.orContinueWith}
-						</span>
-					</div>
-				</div>
-				<div className="grid grid-cols-2 gap-6">
-					<Button variant="outline">
-						<Icons.gitHub className="mr-2 h-4 w-4" />
-						{dictionary?.LoginForm.githubButton}
-					</Button>
-					<Button variant="outline">
-						<Icons.google className="mr-2 h-4 w-4" />
-						{dictionary?.LoginForm.googleButton}
-					</Button>
-				</div>
+				<SocialLoginAuthentication isLoading={isLoading} />
 			</CardContent>
 			<CardFooter className="flex flex-col space-y-2">
 

@@ -10,7 +10,10 @@
     "login": "Connexion",
     "loginDescription": "Entrez votre email et mot de passe pour vous connecter",
     "close": "Fermer",
-    "gallery": "Galerie"
+    "gallery": "Galerie",
+    "profile": "Profil",
+    "settings": "Paramètres",
+    "logout": "Déconnexion"
   },
   "HeroSection": {
     "title": "Une Beauté Radieuse Vous Attend",

@@ -38,18 +38,21 @@ const LanguageSelector: React.FC = () => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button variant="ghost" className="text-white hover:text-purple-200 hover:bg-transparent outline-none active:outline-none focus:outline-none focus-visible:outline-none">
+				<Button variant="ghost" className="text-primary-foreground hover:text-secondary hover:bg-transparent outline-none active:outline-none focus:outline-none focus-visible:outline-none">
 					<span className="mr-2">{languages.find(l => l.code === language)?.flag}</span>
 					<span>{language?.toUpperCase()}</span>
-					<ChevronDown className="ml-2 h-4 w-4" />
+					<ChevronDown className="ml-2 h-4 w-4 text-primary-foreground" />
 				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent className='outline-none'>
+			<DropdownMenuContent className="bg-primary border-none shadow-none">
 				{languages.map((lang) => (
-					<DropdownMenuItem key={lang.code} onSelect={() => changeLanguage(lang.code)} className="outline-none focus:outline-none">
+					<DropdownMenuItem
+						key={lang.code}
+						onSelect={() => changeLanguage(lang.code)}
+						className="hover:bg-secondary hover:text-primary-foreground focus:bg-secondary focus:text-primary-foreground outline-none border-none"
+					>
 						<span className="mr-2">{lang.flag}</span>
 						<span>{lang.name}</span>
-						<span className="ml-2 text-xs text-gray-500">({lang.code.toUpperCase()})</span>
 					</DropdownMenuItem>
 				))}
 			</DropdownMenuContent>
