@@ -22,13 +22,10 @@ const SocialLoginAuthentication: React.FC<SocialLoginAuthenticationProps> = ({ i
 					</span>
 				</div>
 			</div>
-			<div className="grid grid-cols-2 gap-6">
-				<Button variant="outline">
-					<Icons.gitHub className="mr-2 h-4 w-4" />
-					{dictionary?.LoginForm.githubButton}
-				</Button>
-				<Button variant="outline" onClick={() => signIn("google")} disabled={isLoading}>
-					<Icons.google className="mr-2 h-4 w-4" />
+			<div className="grid grid-cols-1 gap-6">
+
+				<Button className="bg-red-600 hover:bg-red-400 text-white" onClick={() => signIn("google")} disabled={isLoading}>
+					<Icons.google className="mr-2 h-4 w-4  fill-white text-white" />
 					{dictionary?.LoginForm.googleButton}
 				</Button>
 			</div>

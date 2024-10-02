@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Button } from "@/components/ui/button"
 import useTranslationStore from '@/stores/TranslationStore'
@@ -7,6 +8,7 @@ import useAuthModalsStore from '@/stores/authModalsStore'
 import LoginForm from './auth/LoginForm'
 import RegistrationForm from './auth/RegistrationForm'
 import ResetPasswordForm from './auth/ResetPasswordForm'
+import { appConfig } from '@/app.config'
 
 export const AuthModalsProvider = ({ children }: { children: React.ReactNode }) => {
 	const { dictionary } = useTranslationStore()
@@ -67,13 +69,21 @@ export const AuthModalsProvider = ({ children }: { children: React.ReactNode }) 
 			{children}
 			<Dialog open={isOpen} onOpenChange={handleOpenChange}>
 				{dialogContent && (
-					<DialogContent className='flex flex-col '>
-						<DialogHeader>
-							<DialogTitle>{dialogContent.title}</DialogTitle>
-							<DialogDescription>
-								{dialogContent.description}
-							</DialogDescription>
+					<DialogContent className='flex flex-col'>
+						<DialogHeader className="flex flex-row items-center gap-2">
+							{appConfig.header.logo ? (
+								<Image
+									src={appConfig.header.logo}
+									alt="Logo"
+									width={100}
+									height={45}
+								/>
+							) : <DialogTitle className='text-2xl font-bold'>{appConfig.header.applicationName}</DialogTitle>}
+
 						</DialogHeader>
+						<DialogDescription>
+							{dialogContent.description}
+						</DialogDescription>
 						{dialogContent.form}
 						<DialogFooter>
 							<Button variant="outline" onClick={closeDialogs}>

@@ -14,7 +14,7 @@ const AuthenticationButton = () => {
 	const { setShowLoginDialog, setShowRegisterDialog } = useAuthModalsStore()
 	const { data: session, status } = useSession()
 	const menuRef = useRef<HTMLDivElement | null>(null)
-
+	console.log(session)
 	const [isOpen, setIsOpen] = useState(false)
 
 	const toggleOpen = useCallback(() => {
@@ -65,10 +65,13 @@ const AuthenticationButton = () => {
 
 					</div>
 					<Avatar className="h-8 w-8">
-						<AvatarImage src={session?.user?.image || ''} alt="User avatar" />
-						<AvatarFallback>
-							<User className="h-4 w-4" />
-						</AvatarFallback>
+						{session?.user?.image ? (
+							<AvatarImage src={session.user.image} alt="User avatar" />
+						) : (
+							<AvatarFallback>
+								<User className="h-4 w-4" />
+							</AvatarFallback>
+						)}
 					</Avatar>
 				</div>
 			</div>

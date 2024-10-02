@@ -34,8 +34,9 @@ const Header: React.FC = () => {
 			<header className="text-primary-foreground p-4 transition-colors duration-300 bg-primary">
 				<div className="container mx-auto flex justify-between items-center">
 					<Link href="/" className="flex items-center text-primary-foreground text-2xl font-cursive">
-						<Image src={appConfig.header.logo} alt="Logo" width={240} height={61} className='mr-2' />
-						{appConfig.header.applicationName}
+						{appConfig.header.logo ? (
+							<Image src={appConfig.header.logo} alt="Logo" width={240} height={61} className='mr-2' />
+						) : appConfig.header.applicationName}
 					</Link>
 					<DesktopMenu
 						navItems={navItems}
