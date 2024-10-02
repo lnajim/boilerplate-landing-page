@@ -61,8 +61,8 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
 	}
 
 	return (
-		<Card>
-			<CardHeader className="space-y-1">
+		<Card className="">
+			<CardHeader className="space-y-1 ">
 				<CardTitle className="text-2xl">{dictionary?.LoginForm.title}</CardTitle>
 				<CardDescription>
 					{dictionary?.LoginForm.description}
