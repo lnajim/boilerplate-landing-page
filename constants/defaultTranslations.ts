@@ -95,6 +95,7 @@ export const defaultDictionary: TranslationState["dictionary"] = {
       successDescription: "",
       errorTitle: "",
       errorDescription: "",
+      verificationNeededTitle: "",
     },
     register: {
       successTitle: "",

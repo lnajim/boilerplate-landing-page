@@ -20,56 +20,68 @@ export const AuthModalsProvider = ({ children }: { children: React.ReactNode }) 
 		closeDialogs
 	} = useAuthModalsStore()
 
+	const isOpen = showLoginDialog || showRegisterDialog || showResetPasswordDialog
+
+	const getActiveDialog = () => {
+		if (showLoginDialog) return 'login'
+		if (showRegisterDialog) return 'register'
+		if (showResetPasswordDialog) return 'resetPassword'
+		return null
+	}
+
+	const activeDialog = getActiveDialog()
+
+	const handleOpenChange = (open: boolean) => {
+		if (!open) closeDialogs()
+	}
+
+	const getDialogContent = () => {
+		switch (activeDialog) {
+			case 'login':
+				return {
+					title: dictionary?.LoginForm?.title || 'Login',
+					description: dictionary?.LoginForm?.description || 'Enter your credentials to login',
+					form: <LoginForm />
+				}
+			case 'register':
+				return {
+					title: dictionary?.RegistrationForm?.title || 'Register',
+					description: dictionary?.RegistrationForm?.description || 'Create a new account',
+					form: <RegistrationForm />
+				}
+			case 'resetPassword':
+				return {
+					title: dictionary?.ResetPasswordForm?.title || 'Reset Password',
+					description: dictionary?.ResetPasswordForm?.description || 'Enter your email to reset your password',
+					form: <ResetPasswordForm />
+				}
+			default:
+				return null
+		}
+	}
+
+	const dialogContent = getDialogContent()
+
 	return (
 		<>
 			{children}
-			<Dialog open={showLoginDialog} onOpenChange={setShowLoginDialog}>
-				<DialogContent className='flex flex-col'>
-					<DialogHeader>
-						<DialogTitle>{dictionary?.LoginForm?.title || 'Login'}</DialogTitle>
-						<DialogDescription>
-							{dictionary?.LoginForm?.description || 'Enter your credentials to login'}
-						</DialogDescription>
-					</DialogHeader>
-					<LoginForm />
-					<DialogFooter>
-						<Button variant="outline" onClick={closeDialogs}>
-							{dictionary?.Header?.close || 'Close'}
-						</Button>
-					</DialogFooter>
-				</DialogContent>
-			</Dialog>
-			<Dialog open={showRegisterDialog} onOpenChange={setShowRegisterDialog}>
-				<DialogContent className='flex flex-col'>
-					<DialogHeader>
-						<DialogTitle>{dictionary?.RegistrationForm?.title || 'Register'}</DialogTitle>
-						<DialogDescription>
-							{dictionary?.RegistrationForm?.description || 'Create a new account'}
-						</DialogDescription>
-					</DialogHeader>
-					<RegistrationForm />
-					<DialogFooter>
-						<Button variant="outline" onClick={closeDialogs}>
-							{dictionary?.Header?.close || 'Close'}
-						</Button>
-					</DialogFooter>
-				</DialogContent>
-			</Dialog>
-			<Dialog open={showResetPasswordDialog} onOpenChange={setShowResetPasswordDialog}>
-				<DialogContent className='flex flex-col'>
-					<DialogHeader>
-						<DialogTitle>{dictionary?.ResetPasswordForm?.title || 'Reset Password'}</DialogTitle>
-						<DialogDescription>
-							{dictionary?.ResetPasswordForm?.description || 'Enter your email to reset your password'}
-						</DialogDescription>
-					</DialogHeader>
-					<ResetPasswordForm />
-					<DialogFooter>
-						<Button variant="outline" onClick={closeDialogs}>
-							{dictionary?.Header?.close || 'Close'}
-						</Button>
-					</DialogFooter>
-				</DialogContent>
+			<Dialog open={isOpen} onOpenChange={handleOpenChange}>
+				{dialogContent && (
+					<DialogContent className='flex flex-col '>
+						<DialogHeader>
+							<DialogTitle>{dialogContent.title}</DialogTitle>
+							<DialogDescription>
+								{dialogContent.description}
+							</DialogDescription>
+						</DialogHeader>
+						{dialogContent.form}
+						<DialogFooter>
+							<Button variant="outline" onClick={closeDialogs}>
+								{dictionary?.Header?.close || 'Close'}
+							</Button>
+						</DialogFooter>
+					</DialogContent>
+				)}
 			</Dialog>
 		</>
 	)
