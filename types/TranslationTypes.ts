@@ -12,6 +12,9 @@ export interface TranslationState {
       loginDescription: string;
       close: string;
       gallery: string;
+      profile?: string; // Add this line
+      settings?: string; // Add this line
+      logout?: string; // Add this line
     };
     HeroSection: {
       title: string;

@@ -1,4 +1,5 @@
 'use client'
+import { SessionProvider } from "next-auth/react"
 
 import Link from 'next/link'
 import Image from 'next/image'
@@ -29,31 +30,36 @@ const Header: React.FC = () => {
 	}
 
 	return (
-		<header className="bg-gradient-to-r from-purple-500 to-pink-500 p-4" data-header-id="main-header">
-			<div className="container mx-auto flex justify-between items-center">
-				<Link href="/" className="flex items-center text-white text-2xl font-cursive">
-					<Image src={appConfig.header.logo} alt="Logo" width={240} height={61} className='mr-2' />
-					{appConfig.header.applicationName}
-				</Link>
-				<DesktopMenu
-					navItems={navItems}
-					dictionary={dictionary}
-					headerConfig={headerConfig}
-					showAuthentication={appConfig.header.authentifcation}
-				/>
-				<Button variant="ghost" className="lg:hidden text-white" onClick={toggleMobileMenu}>
-					{isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-				</Button>
-			</div>
+		<SessionProvider>
+			<header className="text-primary-foreground p-4 transition-colors duration-300 bg-primary">
+				<div className="container mx-auto flex justify-between items-center">
+					<Link href="/" className="flex items-center text-primary-foreground text-2xl font-cursive">
+						<Image src={appConfig.header.logo} alt="Logo" width={240} height={61} className='mr-2' />
+						{appConfig.header.applicationName}
+					</Link>
+					<DesktopMenu
+						navItems={navItems}
+						dictionary={dictionary}
+						headerConfig={headerConfig}
+						showAuthentication={true}
+					/>
+					<Button className="lg:hidden relative w-10 h-10 flex items-center justify-center overflow-hidden text-primary-foreground" onClick={toggleMobileMenu}>
+						<div className={`transition-transform duration-300 ${isMobileMenuOpen ? 'rotate-180' : 'rotate-0'}`}>
+							<Menu className={`transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-0' : 'opacity-100'}`} />
+							<X className={`absolute top-0 left-0 transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0'}`} />
+						</div>
+					</Button>
+				</div>
+			</header>
 			<MobileMenu
 				isOpen={isMobileMenuOpen}
 				closeMenu={() => setIsMobileMenuOpen(false)}
 				navItems={navItems}
 				dictionary={dictionary}
 				headerConfig={headerConfig}
-				showAuthentication={appConfig.header.authentifcation}
+				showAuthentication={true}
 			/>
-		</header>
+		</SessionProvider>
 	)
 }
 

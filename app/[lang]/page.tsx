@@ -11,10 +11,10 @@ export default function Home() {
   return (
     <div>
       <Header />
-      <HeroSection />
+      {/* <HeroSection />
       <ServiceSection />
       <ContactForm />
-      <Footer />
+      <Footer /> */}
     </div>
   )
 }

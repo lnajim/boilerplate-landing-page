@@ -4,6 +4,7 @@ import { i18n } from '../i18n-config'
 import TanstackProvider from '@/providers/tanstack-provider';
 import { Toaster } from '@/components/ui/toaster';
 import AuthModalsProvider from '@/components/components-customs/AuthModalsProvider';
+import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,13 +22,15 @@ export default function RootLayout({
   return (
     <html lang={params.lang}>
       <body className={inter.className}>
-        <TanstackProvider>
-          <AuthModalsProvider>
-            {children}
-            <Toaster />
+        <SessionProvider>
+          <TanstackProvider>
+            <AuthModalsProvider>
+              {children}
+              <Toaster />
 
-          </AuthModalsProvider>
-        </TanstackProvider>
+            </AuthModalsProvider>
+          </TanstackProvider>
+        </SessionProvider>
       </body>
     </html>
   )

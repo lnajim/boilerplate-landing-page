@@ -10,7 +10,10 @@
     "login": "Login",
     "loginDescription": "Enter your email and password to login",
     "close": "Close",
-    "gallery": "Gallery"
+    "gallery": "Gallery",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Logout"
   },
   "HeroSection": {
     "title": "Radiant Beauty Awaits You",

@@ -13,6 +13,7 @@ import useTranslationStore from '@/stores/TranslationStore'
 import useAuthentificationMutations from '@/mutations/useAuthentifcationMutations'
 import { RegisterSchema } from '@/schemas'
 import useAuthModalsStore from '@/stores/authModalsStore'
+import SocialLoginAuthentication from './SocialLoginAuthentication'
 
 type RegistrationFormData = z.infer<typeof RegisterSchema>
 
@@ -123,26 +124,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = () => {
 						</Button>
 					</form>
 				</Form>
-				<div className="relative">
-					<div className="absolute inset-0 flex items-center">
-						<span className="w-full border-t" />
-					</div>
-					<div className="relative flex justify-center text-xs uppercase">
-						<span className="bg-background px-2 text-muted-foreground">
-							{dictionary?.RegistrationForm.orContinueWith || 'Or continue with'}
-						</span>
-					</div>
-				</div>
-				<div className="grid grid-cols-2 gap-6">
-					<Button variant="outline">
-						<Icons.gitHub className="mr-2 h-4 w-4" />
-						{dictionary?.RegistrationForm.githubButton || 'GitHub'}
-					</Button>
-					<Button variant="outline">
-						<Icons.google className="mr-2 h-4 w-4" />
-						{dictionary?.RegistrationForm.googleButton || 'Google'}
-					</Button>
-				</div>
+				<SocialLoginAuthentication isLoading={registerMutation.isPending} />
 			</CardContent>
 			<CardFooter>
 				<p className="text-xs text-center text-gray-700 mt-4">
