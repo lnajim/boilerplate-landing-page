@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 import LanguageSelector from './LanguageSelector'
 import { Button } from "@/components/ui/button"
+import useAuthModalsStore from "@/stores/authModalsStore"
 
 // Define an interface for the header config item
 interface HeaderConfigItem {
@@ -21,6 +22,18 @@ interface MobileMenuProps {
 }
 
 const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, closeMenu, navItems, dictionary, headerConfig, showAuthentication }) => {
+	const { setShowLoginDialog, setShowRegisterDialog } = useAuthModalsStore()
+
+	const handleLoginClick = () => {
+		setShowLoginDialog(true)
+		closeMenu()
+	}
+
+	const handleRegisterClick = () => {
+		setShowRegisterDialog(true)
+		closeMenu()
+	}
+
 	return (
 		<div className={`lg:hidden fixed inset-x-0 top-[72px] z-40 mt-5 bg-primary bg-opacity-95 transition-all duration-300 ${isOpen ? 'max-h-screen opacity-100 ' : 'max-h-0 opacity-0 overflow-hidden'}`}>
 			<div className="flex flex-col items-center py-4">
@@ -35,17 +48,13 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, closeMenu, navItems, di
 					{showAuthentication && (
 						<>
 							<li>
-								<Button variant="link" className="w-full text-primary-foreground hover:text-secondary">
-									<Link href="/login" onClick={closeMenu}>
-										{dictionary.Header.login}
-									</Link>
+								<Button variant="link" className="w-full text-primary-foreground hover:text-secondary" onClick={handleLoginClick}>
+									{dictionary.Header.login}
 								</Button>
 							</li>
 							<li>
-								<Button variant="link" className="w-full text-primary-foreground hover:text-secondary">
-									<Link href="/register" onClick={closeMenu}>
-										{dictionary.Header.register}
-									</Link>
+								<Button variant="link" className="w-full text-primary-foreground hover:text-secondary" onClick={handleRegisterClick}>
+									{dictionary.Header.register}
 								</Button>
 							</li>
 						</>
