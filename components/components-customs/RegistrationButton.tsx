@@ -3,8 +3,8 @@
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import RegistrationForm from '@/app/[lang]/components/auth/RegistrationForm'
 import useTranslationStore from '@/stores/TranslationStore'
+import RegistrationForm from './auth/RegistrationForm'
 
 const RegistrationButton = () => {
 	const [showRegisterDialog, setShowRegisterDialog] = useState(false)
