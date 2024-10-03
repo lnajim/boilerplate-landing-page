@@ -1,35 +1,26 @@
 'use client'
-import { SessionProvider } from "next-auth/react"
 
+import { SessionProvider } from "next-auth/react"
 import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import useTranslationStore from '@/stores/TranslationStore'
 import { appConfig } from '@/app.config'
-import MobileMenu from './MobileMenu'
 import { Menu, X } from 'lucide-react'
 import { Button } from "@/components/ui/button"
-import DesktopMenu from './DesktopMenu'
 import { headerConfig } from '@/app/config/headerConfig'
+import DesktopMenu from "../DesktopMenu"
+import MobileMenu from "../MobileMenu"
 
 const Header: React.FC = () => {
 	const { language, dictionary, setLanguage } = useTranslationStore()
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-	const [scrolled, setScrolled] = useState(false)
-	const [hovered, setHovered] = useState(false)
 
 	useEffect(() => {
 		const loadTranslations = async () => {
 			setLanguage(language)
 		}
 		loadTranslations()
-
-		const handleScroll = () => {
-			setScrolled(window.scrollY > 0)
-		}
-
-		window.addEventListener('scroll', handleScroll)
-		return () => window.removeEventListener('scroll', handleScroll)
 	}, [setLanguage, language])
 
 	const navItems = headerConfig.map((item) => item.key) as Array<keyof typeof dictionary.Header>
@@ -40,12 +31,7 @@ const Header: React.FC = () => {
 
 	return (
 		<SessionProvider>
-			<header
-				className={`fixed top-0 left-0 w-full text-primary-foreground p-4 transition-colors duration-300 z-50 ${scrolled || hovered ? 'bg-primary' : 'bg-transparent'
-					}`}
-				onMouseEnter={() => setHovered(true)}
-				onMouseLeave={() => setHovered(false)}
-			>
+			<header className="fixed top-0 left-0 w-full text-primary-foreground p-4 bg-primary z-50">
 				<div className="container mx-auto flex justify-between items-center">
 					<Link href="/" className="flex items-center text-primary-foreground text-2xl font-cursive">
 						{appConfig.header.logo ? (

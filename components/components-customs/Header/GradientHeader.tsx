@@ -1,18 +1,18 @@
 'use client'
-import { SessionProvider } from "next-auth/react"
 
+import { SessionProvider } from "next-auth/react"
 import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import useTranslationStore from '@/stores/TranslationStore'
 import { appConfig } from '@/app.config'
-import MobileMenu from './MobileMenu'
+import MobileMenu from '../MobileMenu'
 import { Menu, X } from 'lucide-react'
 import { Button } from "@/components/ui/button"
-import DesktopMenu from './DesktopMenu'
+import DesktopMenu from '../DesktopMenu'
 import { headerConfig } from '@/app/config/headerConfig'
 
-const Header: React.FC = () => {
+const GradientHeader: React.FC = () => {
 	const { language, dictionary, setLanguage } = useTranslationStore()
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 	const [scrolled, setScrolled] = useState(false)
@@ -78,4 +78,4 @@ const Header: React.FC = () => {
 	)
 }
 
-export default Header
+export default GradientHeader
