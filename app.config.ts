@@ -1,6 +1,10 @@
+import { StaticImageData } from "next/image";
+import { AppConfig } from "./types/AppConfigTypes";
 import logo from "./public/logo.png";
 import backgroundImage from "./public/images/hero-background.jpeg";
-export const appConfig = {
+
+export const appConfig: AppConfig = {
+  companyName: "Resto Genius",
   menu: [
     { key: "home", path: "/", isPage: false },
     { key: "services", path: "/services", isPage: false },
@@ -15,6 +19,6 @@ export const appConfig = {
     logo: logo,
   },
   heroSection: {
-    backgroundImage: backgroundImage.src, // Add .src here
+    backgroundImage: backgroundImage.src,
   },
 };

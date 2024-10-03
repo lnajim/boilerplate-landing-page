@@ -1,21 +1,21 @@
 'use client'
 
-import React, { useState } from 'react';
-import GradientHeader from "@/components/components-customs/Header/GradientHeader"
-import Header from "@/components/components-customs/Header/Header"
-import ParallaxScrollHero from "@/components/hero-sections/ParallaxScrollHero"
-import AnimatedSvgHero from "@/components/hero-sections/AnimatedSvgHero"
-import TypingAnimationHero from "@/components/hero-sections/TypingAnimationHero"
-import InteractiveParticlesHero from "@/components/hero-sections/InteractiveParticlesHero"
-import GridServiceSection from "@/components/service-sections/GridServiceSection"
-import CarouselServiceSection from "@/components/service-sections/CarouselServiceSection"
-import SimpleContactForm from "@/components/contact-forms/SimpleContactForm"
-import TwoColumnContactForm from "@/components/contact-forms/TwoColumnContactForm"
-import SimpleFooter from "@/components/footers/SimpleFooter"
-import MultiColumnFooter from "@/components/footers/MultiColumnFooter"
-import useTranslationStore from "@/stores/TranslationStore"
-import { Button } from "@/components/ui/button"
+import { appConfig } from "@/app.config";
+import GradientHeader from "@/components/components-customs/Header/GradientHeader";
+import Header from "@/components/components-customs/Header/Header";
+import SimpleContactForm from "@/components/contact-forms/SimpleContactForm";
+import TwoColumnContactForm from "@/components/contact-forms/TwoColumnContactForm";
+import MultiColumnFooter from "@/components/footers/MultiColumnFooter";
+import SimpleFooter from "@/components/footers/SimpleFooter";
+import AnimatedSvgHero from "@/components/hero-sections/AnimatedSvgHero";
 import GradientFloatingHero from '@/components/hero-sections/GradientFloatingHero';
+import InteractiveParticlesHero from "@/components/hero-sections/InteractiveParticlesHero";
+import ParallaxScrollHero from "@/components/hero-sections/ParallaxScrollHero";
+import TypingAnimationHero from "@/components/hero-sections/TypingAnimationHero";
+import CarouselServiceSection from "@/components/service-sections/CarouselServiceSection";
+import GridServiceSection from "@/components/service-sections/GridServiceSection";
+import useTranslationStore from "@/stores/TranslationStore";
+import React, { useState } from 'react';
 
 export default function Home() {
   const { dictionary, language, setLanguage } = useTranslationStore()
@@ -47,10 +47,6 @@ export default function Home() {
     MultiColumnFooter
   ]
 
-  const HeroComponent = heroComponents[currentHero]
-  const ServiceComponent = serviceComponents[currentService]
-  const ContactComponent = contactComponents[currentContact]
-  const FooterComponent = footerComponents[currentFooter]
 
   const nextComponent = (setter: React.Dispatch<React.SetStateAction<number>>, length: number) => {
     setter((prev) => (prev + 1) % length)
@@ -65,13 +61,34 @@ export default function Home() {
     <div>
       {/* Choose which header to use */}
       <GradientHeader />
-      {/* or */}
       <ParallaxScrollHero
         title={dictionary.HeroSection.title}
         description={dictionary.HeroSection.description}
         callToActionButton={dictionary.HeroSection.buttonText}
       />
-      <GridServiceSection title={dictionary.ServicesSection.sectionTitle} services={servicesData} />
+      <SimpleContactForm
+        title={dictionary.ContactForm.title}
+        namePlaceholder={dictionary.ContactForm.namePlaceholder}
+        emailPlaceholder={dictionary.ContactForm.emailPlaceholder}
+        messagePlaceholder={dictionary.ContactForm.messagePlaceholder}
+        submitButtonText={dictionary.ContactForm.submitButton}
+      />
+      <TwoColumnContactForm
+        title={dictionary.ContactForm.title}
+        namePlaceholder={dictionary.ContactForm.namePlaceholder}
+        emailPlaceholder={dictionary.ContactForm.emailPlaceholder}
+        messagePlaceholder={dictionary.ContactForm.messagePlaceholder}
+        submitButtonText={dictionary.ContactForm.submitButton}
+      />
+      <MultiColumnFooter
+        companyName={""}
+        links={[
+          { category: "category", items: appConfig.menu },
+          { category: "category", items: [] },
+          { category: "category", items: [] },
+          { category: "category", items: [] },
+        ]}
+      />
     </div>
   )
 }

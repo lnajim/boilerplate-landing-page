@@ -1,5 +1,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
+import { Input } from '../ui/input';
+import { Textarea } from '../ui/textarea';
 
 interface ContactFormProps {
 	title: string;
@@ -21,21 +23,21 @@ const SimpleContactForm: React.FC<ContactFormProps> = ({
 			<div className="container mx-auto max-w-md">
 				<h2 className="text-3xl font-bold text-center mb-8 text-foreground">{title}</h2>
 				<form className="space-y-4">
-					<input
+					<Input
 						type="text"
 						placeholder={namePlaceholder}
 						className="w-full p-2 border border-input rounded bg-background text-foreground"
 					/>
-					<input
+					<Input
 						type="email"
 						placeholder={emailPlaceholder}
 						className="w-full p-2 border border-input rounded bg-background text-foreground"
 					/>
-					<textarea
+					<Textarea
 						placeholder={messagePlaceholder}
 						rows={4}
 						className="w-full p-2 border border-input rounded bg-background text-foreground"
-					></textarea>
+					/>
 					<Button type="submit" className="w-full bg-primary text-primary-foreground">
 						{submitButtonText}
 					</Button>

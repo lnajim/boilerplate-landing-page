@@ -41,7 +41,7 @@ export interface TranslationState {
       };
     };
     ContactForm: {
-      sectionTitle: string;
+      title: string;
       callButton: string;
       namePlaceholder: string;
       emailPlaceholder: string;
@@ -89,6 +89,7 @@ export interface TranslationState {
       signInLink: string;
     };
     Footer: {
+      categories: any;
       copyright: string;
     };
     useMutation: {
@@ -128,4 +129,16 @@ export interface TranslationState {
   language: string;
   setLanguage: (lang: string) => void;
   setDictionary: (dictionary: TranslationState["dictionary"]) => void;
+}
+
+export interface TranslationTypes {
+  Footer: {
+    categories: {
+      company: string;
+      products: string;
+      resources: string;
+      legal: string;
+    };
+    copyright: string;
+  };
 }

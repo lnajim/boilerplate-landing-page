@@ -88,7 +88,7 @@
     "signInLink": "Sign in"
   },
   "Footer": {
-    "copyright": "© {year} Lumina Beauty Studio. All rights reserved."
+    "copyright": "All rights reserved."
   },
   "useMutation": {
     "login": {
