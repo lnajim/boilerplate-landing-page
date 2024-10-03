@@ -1,13 +1,13 @@
+import { appConfig } from '@/app.config';
 import useTranslationStore from '@/stores/TranslationStore';
 import { MenuItem } from '@/types/AppConfigTypes';
 import React from 'react';
 
 interface FooterProps {
-	companyName: string;
 	links: { category: string; items: MenuItem[] }[];
 }
 
-const MultiColumnFooter: React.FC<FooterProps> = ({ companyName, links }) => {
+const MultiColumnFooter: React.FC<FooterProps> = ({ links }) => {
 	const { dictionary } = useTranslationStore();
 	return (
 		<footer className="bg-primary text-secondary-foreground py-12">
@@ -29,7 +29,7 @@ const MultiColumnFooter: React.FC<FooterProps> = ({ companyName, links }) => {
 					))}
 				</div>
 				<div className="mt-8 pt-8 border-t border-muted text-center">
-					<p>&copy; {new Date().getFullYear()} {companyName}. {dictionary.Footer.copyright}</p>
+					<p>&copy; {new Date().getFullYear()} {appConfig.companyName}. {dictionary.Footer.copyright}</p>
 				</div>
 			</div>
 		</footer>

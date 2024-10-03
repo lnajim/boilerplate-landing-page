@@ -19,6 +19,9 @@ export interface HeroSectionConfig {
 
 export interface AppConfig {
   companyName: string;
+  email: string;
+  phone: string;
+  address: string;
   menu: MenuItem[];
   header: HeaderConfig;
   heroSection: HeroSectionConfig;

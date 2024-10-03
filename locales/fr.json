@@ -40,7 +40,7 @@
     }
   },
   "ContactForm": {
-    "sectionTitle": "Contactez-Nous",
+    "title": "Contactez-Nous",
     "callButton": "Appelez-Nous Maintenant",
     "namePlaceholder": "Votre Nom",
     "emailPlaceholder": "Votre Email",

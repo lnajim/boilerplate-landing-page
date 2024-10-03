@@ -1,16 +1,13 @@
+"use client"
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { appConfig } from '@/app.config';
+import useTranslationStore from "@/stores/TranslationStore";
 
-interface HeroProps {
-	title: string;
-	description: string;
-	callToActionButton: string;
-}
-
-const ParallaxScrollHero: React.FC<HeroProps> = ({ title, description, callToActionButton }) => {
+const ParallaxScrollHero: React.FC = () => {
 	const [offset, setOffset] = useState(0);
+	const { dictionary } = useTranslationStore();
 
 	useEffect(() => {
 		const handleScroll = () => setOffset(window.pageYOffset);
@@ -38,13 +35,13 @@ const ParallaxScrollHero: React.FC<HeroProps> = ({ title, description, callToAct
 			/>
 			<div className="relative z-10 text-center text-white">
 				<h1 className="text-6xl font-bold mb-4" style={{ transform: `translateY(${offset * 0.2}px)` }}>
-					{title}
+					{dictionary.HeroSection.title}
 				</h1>
 				<p className="mb-8 max-w-2xl mx-auto text-xl" style={{ transform: `translateY(${offset * 0.1}px)` }}>
-					{description}
+					{dictionary.HeroSection.description}
 				</p>
 				<Button variant="default" size="lg" className="bg-white text-purple-600 hover:bg-purple-100">
-					{callToActionButton}
+					{dictionary.HeroSection.buttonText}
 				</Button>
 			</div>
 		</section>

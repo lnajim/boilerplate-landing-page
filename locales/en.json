@@ -40,7 +40,7 @@
     }
   },
   "ContactForm": {
-    "sectionTitle": "Get in Touch",
+    "title": "Get in Touch",
     "callButton": "Call Us Now",
     "namePlaceholder": "Your Name",
     "emailPlaceholder": "Your Email",

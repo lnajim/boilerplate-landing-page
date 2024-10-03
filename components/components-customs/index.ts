@@ -1,4 +1,4 @@
-import Header from "./Header";
+import Header from "./headers";
 import Footer from "./Footer";
 import Hero from "./HeroSection";
 import ContactForm from "./ContactForm";
