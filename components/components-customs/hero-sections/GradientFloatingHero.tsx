@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import useTranslationStore from "@/stores/TranslationStore";
+import CallToActionButton from '@/components/components-customs/CallToActionButton';
 
 const GradientFloatingHero: React.FC = () => {
 	const { dictionary } = useTranslationStore();
@@ -30,9 +31,7 @@ const GradientFloatingHero: React.FC = () => {
 					animate={{ opacity: 1, scale: 1 }}
 					transition={{ duration: 0.5, delay: 0.4 }}
 				>
-					<Button variant="default" size="lg" className="bg-white text-purple-600 hover:bg-purple-100">
-						{dictionary.HeroSection.buttonText}
-					</Button>
+					<CallToActionButton />
 				</motion.div>
 			</div>
 			{[...Array(20)].map((_, i) => (

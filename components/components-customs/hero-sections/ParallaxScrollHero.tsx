@@ -1,9 +1,9 @@
 "use client"
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { Button } from '@/components/ui/button';
 import { appConfig } from '@/app.config';
+import CallToActionButton from '@/components/components-customs/CallToActionButton';
 import useTranslationStore from "@/stores/TranslationStore";
+import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
 
 const ParallaxScrollHero: React.FC = () => {
 	const [offset, setOffset] = useState(0);
@@ -40,9 +40,7 @@ const ParallaxScrollHero: React.FC = () => {
 				<p className="mb-8 max-w-2xl mx-auto text-xl" style={{ transform: `translateY(${offset * 0.1}px)` }}>
 					{dictionary.HeroSection.description}
 				</p>
-				<Button variant="default" size="lg" className="bg-white text-purple-600 hover:bg-purple-100">
-					{dictionary.HeroSection.buttonText}
-				</Button>
+				<CallToActionButton />
 			</div>
 		</section>
 	);

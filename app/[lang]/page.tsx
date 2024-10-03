@@ -6,15 +6,16 @@ import TwoColumnContactForm from "@/components/components-customs/contact-form/T
 import MultiColumnFooter from "@/components/components-customs/footers/MultiColumnFooter";
 import SimpleFooter from "@/components/components-customs/footers/SimpleFooter";
 import GradientHeader from "@/components/components-customs/headers/GradientHeader";
-import ParallaxScrollHero from "@/components/components-customs/hero-sections/ParallaxScrollHero";
-
+import TypingAnimationHero from "@/components/components-customs/hero-sections/TypingAnimationHero";
+import CarouselServiceSection from "@/components/components-customs/service-sections/CarouselServiceSection";
 export default function Home() {
 
 
   return (
     <div>
       <GradientHeader />
-      <ParallaxScrollHero />
+      <TypingAnimationHero />
+      <CarouselServiceSection />
       <SimpleContactForm />
       <TwoColumnContactForm />
       <SimpleFooter />

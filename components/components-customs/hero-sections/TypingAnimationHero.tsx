@@ -1,24 +1,40 @@
-import React from 'react';
+import useTranslationStore from '@/stores/TranslationStore';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
+import { useEffect, useState } from 'react';
 import { TypeAnimation } from 'react-type-animation';
+import CallToActionButton from '../CallToActionButton';
 
-interface HeroProps {
-	title: string;
-	description: string;
-	callToActionButton: string;
-}
+const TypingAnimationHero = () => {
+	const { dictionary } = useTranslationStore();
+	const [title, setTitle] = useState('');
+	const [description, setDescription] = useState('');
 
-const TypingAnimationHero: React.FC<HeroProps> = ({ title, description, callToActionButton }) => {
+	useEffect(() => {
+		if (dictionary.HeroSection) {
+			setTitle(dictionary.HeroSection.title || '');
+			setDescription(dictionary.HeroSection.description || '');
+		}
+	}, [dictionary.HeroSection]);
+
+	if (!title || !description) {
+		return <div>Loading...</div>; // Or any loading indicator
+	}
+
 	return (
 		<section className="h-screen flex items-center justify-center bg-gradient-to-br from-indigo-500 to-purple-600">
 			<div className="text-center text-white">
 				<h1 className="text-5xl font-bold mb-4">
 					<TypeAnimation
-						sequence={[title, 1000]}
+						sequence={[
+							title,
+							1000,
+							'', // Add an empty string to clear the text
+							500, // Add a delay before restarting
+						]}
 						wrapper="span"
 						cursor={true}
 						repeat={Infinity}
+						style={{ display: 'inline-block' }}
 					/>
 				</h1>
 				<motion.p
@@ -34,9 +50,7 @@ const TypingAnimationHero: React.FC<HeroProps> = ({ title, description, callToAc
 					animate={{ opacity: 1, scale: 1 }}
 					transition={{ duration: 0.5, delay: 1 }}
 				>
-					<Button variant="default" size="lg" className="bg-white text-purple-600 hover:bg-purple-100">
-						{callToActionButton}
-					</Button>
+					<CallToActionButton />
 				</motion.div>
 			</div>
 		</section>

@@ -1,5 +1,6 @@
-import React, { useCallback } from 'react';
-import { Button } from '@/components/ui/button';
+import CallToActionButton from '@/components/components-customs/CallToActionButton';
+import useTranslationStore from '@/stores/TranslationStore';
+import { useCallback } from 'react';
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 import type { Engine } from "tsparticles-engine";
@@ -10,8 +11,11 @@ interface HeroProps {
 	callToActionButton: string;
 }
 
-const InteractiveParticlesHero: React.FC<HeroProps> = ({ title, description, callToActionButton }) => {
+const InteractiveParticlesHero = () => {
+	const { dictionary } = useTranslationStore();
+
 	const particlesInit = useCallback(async (engine: Engine) => {
+		//@ts-ignore
 		await loadFull(engine);
 	}, []);
 
@@ -92,11 +96,9 @@ const InteractiveParticlesHero: React.FC<HeroProps> = ({ title, description, cal
 				}}
 			/>
 			<div className="relative z-10 text-center text-white">
-				<h1 className="text-5xl font-bold mb-4">{title}</h1>
-				<p className="mb-8 max-w-2xl mx-auto">{description}</p>
-				<Button variant="default" size="lg" className="bg-white text-purple-600 hover:bg-purple-100">
-					{callToActionButton}
-				</Button>
+				<h1 className="text-5xl font-bold mb-4">{dictionary.HeroSection.title}</h1>
+				<p className="mb-8 max-w-2xl mx-auto">{dictionary.HeroSection.description}</p>
+				<CallToActionButton />
 			</div>
 		</section>
 	);

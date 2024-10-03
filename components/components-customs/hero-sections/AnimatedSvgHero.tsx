@@ -1,14 +1,10 @@
-import React from 'react';
+import CallToActionButton from '@/components/components-customs/CallToActionButton';
+import useTranslationStore from '@/stores/TranslationStore';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
 
-interface HeroProps {
-	title: string;
-	description: string;
-	callToActionButton: string;
-}
+const AnimatedSvgHero = () => {
+	const { dictionary } = useTranslationStore();
 
-const AnimatedSvgHero: React.FC<HeroProps> = ({ title, description, callToActionButton }) => {
 	return (
 		<section className="relative h-screen flex items-center justify-center overflow-hidden bg-gray-900">
 			<svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -44,7 +40,7 @@ const AnimatedSvgHero: React.FC<HeroProps> = ({ title, description, callToAction
 					transition={{ duration: 0.8 }}
 					className="text-5xl font-bold mb-4"
 				>
-					{title}
+					{dictionary.HeroSection.title}
 				</motion.h1>
 				<motion.p
 					initial={{ opacity: 0, y: 50 }}
@@ -52,16 +48,14 @@ const AnimatedSvgHero: React.FC<HeroProps> = ({ title, description, callToAction
 					transition={{ duration: 0.8, delay: 0.2 }}
 					className="mb-8 max-w-2xl mx-auto"
 				>
-					{description}
+					{dictionary.HeroSection.description}
 				</motion.p>
 				<motion.div
 					initial={{ opacity: 0, scale: 0.5 }}
 					animate={{ opacity: 1, scale: 1 }}
 					transition={{ duration: 0.5, delay: 0.4 }}
 				>
-					<Button variant="default" size="lg" className="bg-white text-purple-600 hover:bg-purple-100">
-						{callToActionButton}
-					</Button>
+					<CallToActionButton />
 				</motion.div>
 			</div>
 		</section>
