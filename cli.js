@@ -39,27 +39,7 @@ async function generatePages() {
 
   for (const item of pageItems) {
     const pagePath = item.path.startsWith("/") ? item.path.slice(1) : item.path;
-    let fullPath;
-
-    if (item.isClientPage) {
-      fullPath = path.join(
-        __dirname,
-        "app",
-        "[lang]",
-        "(administration)",
-        "admin",
-        pagePath
-      );
-    } else {
-      fullPath = path.join(
-        __dirname,
-        "app",
-        "[lang]",
-        "(administration)",
-        "admin",
-        pagePath
-      );
-    }
+    let fullPath = path.join(__dirname, "app", "[lang]", pagePath);
 
     // Check if the directory already exists
     try {
