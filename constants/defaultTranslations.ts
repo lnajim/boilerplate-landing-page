@@ -39,7 +39,7 @@ export const defaultDictionary: TranslationState["dictionary"] = {
     },
   },
   ContactForm: {
-    sectionTitle: "",
+    title: "",
     callButton: "",
     namePlaceholder: "",
     emailPlaceholder: "",
@@ -88,6 +88,7 @@ export const defaultDictionary: TranslationState["dictionary"] = {
   },
   Footer: {
     copyright: "",
+    categories: undefined,
   },
   useMutation: {
     login: {

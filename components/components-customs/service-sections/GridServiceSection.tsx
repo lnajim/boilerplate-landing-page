@@ -20,7 +20,7 @@ const GridServiceSection: React.FC<ServiceProps> = ({ title, services }) => {
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.5, delay: index * 0.1 }}
 						>
-							<h3 className="text-xl font-semibold mb-3 text-card-foreground">{service.name}</h3>
+							<h3 className="text-xl font-semibold mb-3 text-card-foreground">{service.title}</h3>
 							<p className="text-muted-foreground">{service.description}</p>
 						</motion.div>
 					))}

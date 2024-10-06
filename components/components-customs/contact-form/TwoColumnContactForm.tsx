@@ -20,7 +20,7 @@ const TwoColumnContactForm: React.FC = () => {
 					>
 						<h3 className="text-xl font-semibold mb-4 text-foreground">{dictionary.ContactForm.title}</h3>
 						<p className="mb-4 text-muted-foreground">
-							We'd love to hear from you. Please fill out this form and we will get in touch with you shortly.
+							We&apos;d love to hear from you. Please fill out this form and we will get in touch with you shortly.
 						</p>
 						<div className="space-y-2 text-muted-foreground">
 							<p>Email: {appConfig.email}</p>
