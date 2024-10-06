@@ -19,6 +19,7 @@ export const appConfig: AppConfig = {
       path: "(administration)/admin/dashboard",
       isPage: true,
       isClientPage: true,
+      isUserMenu: true,
     },
     {
       key: "clients",
@@ -37,13 +38,6 @@ export const appConfig: AppConfig = {
       path: "(administration)/admin/settings",
       isPage: true,
       isClientPage: true,
-    },
-
-    {
-      key: "dashboard",
-      path: "(marketing)/dashboard",
-      isPage: true,
-      isClientPage: false,
     },
   ],
   header: {

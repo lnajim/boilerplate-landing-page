@@ -8,13 +8,14 @@ import useAuthModalsStore from "@/stores/authModalsStore"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { AlignJustify, User } from 'lucide-react'
 import MenuItem from './MenuItem'
+import { appConfig } from '@/app.config'
+
 const AuthenticationButton = () => {
 	const router = useRouter()
 	const { dictionary } = useTranslationStore()
 	const { setShowLoginDialog, setShowRegisterDialog } = useAuthModalsStore()
 	const { data: session, status } = useSession()
 	const menuRef = useRef<HTMLDivElement | null>(null)
-	console.log(session)
 	const [isOpen, setIsOpen] = useState(false)
 
 	const toggleOpen = useCallback(() => {
@@ -35,9 +36,14 @@ const AuthenticationButton = () => {
 	}, [handleClickOutside])
 
 	const handleRouting = (route: string) => {
-		router.push(route)
+		// Remove group names from the route
+		const cleanedRoute = route.replace(/\([^)]*\)\//g, '')
+		router.push(cleanedRoute)
 		setIsOpen(false)
 	}
+
+	// Filter user menu items
+	const userMenuItems = appConfig.menu.filter(item => item.isUserMenu)
 
 	return (
 		<div className="relative" ref={menuRef}>
@@ -83,7 +89,7 @@ const AuthenticationButton = () => {
 							shadow-md
 							min-w-[160px]
 							border-[1px] 
-						border-neutral-200 
+							border-neutral-200 
 							md:w-3/4 
 							text-primary-foreground
 							bg-primary
@@ -96,14 +102,13 @@ const AuthenticationButton = () => {
 					<div className="flex flex-col cursor-pointer">
 						{status === 'authenticated' ? (
 							<>
-								<MenuItem
-									label={dictionary.Header.profile!}
-									onClick={() => handleRouting('/profile')}
-								/>
-								<MenuItem
-									label={dictionary.Header.settings!}
-									onClick={() => handleRouting('/settings')}
-								/>
+								{userMenuItems.map((item) => (
+									<MenuItem
+										key={item.key}
+										label={dictionary.Header[item.key as keyof typeof dictionary.Header] || item.key}
+										onClick={() => handleRouting(item.path)}
+									/>
+								))}
 								<hr />
 								<MenuItem
 									label={dictionary.Header.logout!}
@@ -133,7 +138,6 @@ const AuthenticationButton = () => {
 			)}
 		</div>
 	)
-
 }
 
 export default AuthenticationButton

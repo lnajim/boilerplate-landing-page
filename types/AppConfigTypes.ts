@@ -5,6 +5,7 @@ export interface MenuItem {
   path: string;
   isPage: boolean;
   isClientPage: boolean;
+  isUserMenu?: boolean;
 }
 
 export interface HeaderConfig {
