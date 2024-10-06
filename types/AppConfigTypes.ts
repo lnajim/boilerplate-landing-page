@@ -4,6 +4,7 @@ export interface MenuItem {
   key: string;
   path: string;
   isPage: boolean;
+  isClientPage: boolean;
 }
 
 export interface HeaderConfig {
