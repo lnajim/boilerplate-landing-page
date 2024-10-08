@@ -1,4 +1,5 @@
 import { StaticImageData } from "next/image";
+import { Icon } from "../components/ui/icons";
 
 export interface MenuItem {
   key: string;
@@ -6,6 +7,7 @@ export interface MenuItem {
   isPage: boolean;
   isClientPage: boolean;
   isUserMenu?: boolean;
+  icon?: Icon;
 }
 
 export interface HeaderConfig {

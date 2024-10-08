@@ -4,17 +4,9 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
-import { Menu, X, Home, Users, BarChart2, Settings, FileText } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { appConfig } from '@/app.config'
 import { cn } from '@/lib/utils'
-
-const icons = {
-	dashboard: Home,
-	clients: Users,
-	analytics: BarChart2,
-	settings: Settings,
-	contact: Settings,
-}
 
 export default function AdminSidebar() {
 	const [isExpanded, setIsExpanded] = useState(false)
@@ -23,7 +15,6 @@ export default function AdminSidebar() {
 	const toggleSidebar = () => setIsExpanded(!isExpanded)
 
 	const adminMenuItems = appConfig.menu.filter(item => item.path.startsWith('(administration)'))
-	console.log(adminMenuItems)
 	return (
 		<aside className={cn(
 			"fixed left-0 top-0 z-40 h-screen transition-width duration-300 ease-in-out bg-white border-r",
@@ -41,7 +32,7 @@ export default function AdminSidebar() {
 			</div>
 			<nav className="mt-5 px-2">
 				{adminMenuItems.map((item) => {
-					const Icon = icons[item.key as keyof typeof icons] || FileText
+					const Icon = item.icon || (() => null)
 					return (
 						<Link
 							key={item.key}
