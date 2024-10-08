@@ -105,6 +105,16 @@ async function createNewPage() {
   let basePath = path.join(__dirname, "app", "[lang]");
   let isClientPage = false;
   let newFolderName = "";
+  let routePath = "";
+
+  const { routeName } = await inquirer.prompt([
+    {
+      type: "input",
+      name: "routeName",
+      message: "Enter the name of the new page:",
+      validate: (input) => input.trim() !== "" || "Page name cannot be empty",
+    },
+  ]);
 
   if (pageType === "(administration)") {
     const { adminChoice } = await inquirer.prompt([
@@ -119,12 +129,15 @@ async function createNewPage() {
     if (adminChoice === "Under admin folder") {
       basePath = path.join(basePath, "(administration)", "admin");
       isClientPage = true;
+      routePath = `(administration)/admin/${routeName}`;
     } else {
       basePath = path.join(basePath, "(administration)");
+      routePath = `(administration)/${routeName}`;
     }
   } else if (pageType === "(client)") {
     basePath = path.join(basePath, "(client)");
     isClientPage = true;
+    routePath = `(client)/${routeName}`;
   } else if (pageType === "(other)") {
     const { folderName } = await inquirer.prompt([
       {
@@ -137,6 +150,7 @@ async function createNewPage() {
     ]);
     newFolderName = folderName.trim();
     basePath = path.join(basePath, `(${newFolderName})`);
+    routePath = `(${newFolderName})/${routeName}`;
 
     // Create layout.tsx in the new folder
     const layoutPath = path.join(basePath, "layout.tsx");
@@ -165,15 +179,6 @@ export default function ${
     console.log(`Created layout.tsx in ${basePath}`);
   }
 
-  const { routeName } = await inquirer.prompt([
-    {
-      type: "input",
-      name: "routeName",
-      message: "Enter the name of the new page:",
-      validate: (input) => input.trim() !== "" || "Page name cannot be empty",
-    },
-  ]);
-
   const fullPath = path.join(basePath, routeName);
 
   try {
@@ -195,9 +200,6 @@ export default function ${
     console.log(`Created new page: ${path.join(fullPath, "page.tsx")}`);
 
     // Add the new route to app.config.ts
-    const routePath = newFolderName
-      ? `/${newFolderName}/${routeName}`
-      : `/${routeName}`;
     await addRouteToConfig(routeName, routePath, isClientPage);
   } catch (error) {
     console.error("Error creating new page:", error);

@@ -58,15 +58,34 @@ export const appConfig: AppConfig = {
       key: "analytics",
       path: "(administration)/admin/analytics",
       isPage: true,
-      isClientPage: true,
+      isClientPage: false,
     },
     {
       key: "settings",
       path: "(administration)/admin/settings",
       isPage: true,
+      isClientPage: false,
+    },
+    {
+      key: "contact",
+      path: "(administration)/admin/contact",
+      isPage: true,
+      isClientPage: false,
+    },
+
+    {
+      key: "test",
+      path: "(administration)/admin/test",
+      isPage: true,
       isClientPage: true,
     },
-  ],
+  
+    {
+      key: "test@",
+      path: "(administration)/admin/test@",
+      isPage: true,
+      isClientPage: true,
+    },],
   header: {
     applicationName: "Resto Genius",
     authentifcation: true,
