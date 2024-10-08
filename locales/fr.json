@@ -116,5 +116,16 @@
       "unexpectedError": "Une erreur inattendue s'est produite. Veuillez réessayer plus tard.",
       "backToLogin": "Retour à la connexion"
     }
+  },
+  "Menu": {
+    "home": "Accueil",
+    "services": "Services",
+    "about": "À propos",
+    "contact": "Contact",
+    "gallery": "Galerie",
+    "dashboard": "Tableau de bord",
+    "clients": "Clients",
+    "analytics": "Analyses",
+    "settings": "Paramètres"
   }
 }

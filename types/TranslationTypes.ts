@@ -125,6 +125,17 @@ export interface TranslationState {
         backToLogin: string;
       };
     };
+    Menu: {
+      home: string;
+      services: string;
+      about: string;
+      contact: string;
+      gallery: string;
+      dashboard: string;
+      clients: string;
+      analytics: string;
+      settings: string;
+    };
   };
   language: string;
   setLanguage: (lang: string) => void;

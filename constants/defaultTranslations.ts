@@ -123,6 +123,17 @@ export const defaultDictionary: TranslationState["dictionary"] = {
       backToLogin: "",
     },
   },
+  Menu: {
+    home: "",
+    services: "",
+    about: "",
+    contact: "",
+    gallery: "",
+    dashboard: "",
+    clients: "",
+    analytics: "",
+    settings: "",
+  },
 };
 
 export const defaultLanguage: TranslationState["language"] = "en";

@@ -116,5 +116,16 @@
       "unexpectedError": "An unexpected error occurred. Please try again later.",
       "backToLogin": "Back to login"
     }
+  },
+  "Menu": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact",
+    "gallery": "Gallery",
+    "dashboard": "Dashboard",
+    "clients": "Clients",
+    "analytics": "Analytics",
+    "settings": "Settings"
   }
 }
