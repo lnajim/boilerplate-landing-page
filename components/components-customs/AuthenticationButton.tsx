@@ -17,7 +17,7 @@ const AuthenticationButton = () => {
 	const { data: session, status } = useSession()
 	const menuRef = useRef<HTMLDivElement | null>(null)
 	const [isOpen, setIsOpen] = useState(false)
-
+	console.log(session)
 	const toggleOpen = useCallback(() => {
 		setIsOpen((value) => !value)
 	}, [])
@@ -44,7 +44,7 @@ const AuthenticationButton = () => {
 
 	// Filter user menu items
 	const userMenuItems = appConfig.menu.filter(item => item.isUserMenu)
-
+	console.log(userMenuItems)
 	return (
 		<div className="relative" ref={menuRef}>
 			<div className="flex flex-row items-center gap-3">
@@ -71,7 +71,12 @@ const AuthenticationButton = () => {
 
 					</div>
 					<Avatar className="h-8 w-8">
-						{session?.user?.image ? (
+						{status === 'loading' ? (
+							<AvatarFallback>
+								{/* You can add a loading spinner here if desired */}
+								<User className="h-4 w-4" />
+							</AvatarFallback>
+						) : status === 'authenticated' && session?.user?.image ? (
 							<AvatarImage src={session.user.image} alt="User avatar" />
 						) : (
 							<AvatarFallback>
@@ -100,7 +105,9 @@ const AuthenticationButton = () => {
 						"
 				>
 					<div className="flex flex-col cursor-pointer">
-						{status === 'authenticated' ? (
+						{status === 'loading' ? (
+							<MenuItem label="Loading..." onClick={() => { }} />
+						) : status === 'authenticated' ? (
 							<>
 								{userMenuItems.map((item) => (
 									<MenuItem
