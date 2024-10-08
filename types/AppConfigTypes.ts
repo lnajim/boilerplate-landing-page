@@ -7,6 +7,7 @@ export interface MenuItem {
   isPage: boolean;
   isClientPage: boolean;
   isUserMenu?: boolean;
+  showInAdminArea?: boolean;
   icon?: Icon;
 }
 

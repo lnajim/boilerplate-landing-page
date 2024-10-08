@@ -77,6 +77,7 @@ export const appConfig: AppConfig = {
       isPage: true,
       isClientPage: false,
       isUserMenu: true,
+      showInAdminArea: false,
       icon: Icons.dashboard,
     },
     {
@@ -106,26 +107,6 @@ export const appConfig: AppConfig = {
       isPage: true,
       isClientPage: false,
       icon: Icons.mail,
-    },
-    {
-      key: "test",
-      path: "(administration)/admin/test",
-      isPage: true,
-      isClientPage: false,
-    },
-    {
-      key: "test2",
-      path: "(administration)/admin/test2",
-      isPage: true,
-      isClientPage: false,
-    },
-    // ... (other menu items remain unchanged)
-
-    {
-      key: "toto",
-      path: "(administration)/admin/toto",
-      isPage: true,
-      isClientPage: true,
     },
   ],
   header: {
