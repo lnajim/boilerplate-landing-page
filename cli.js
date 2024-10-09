@@ -34,10 +34,21 @@ async function generatePages() {
   }
 
   const menuString = menuMatch[1];
-  const menuItems = eval(`[${menuString}]`);
-  const pageItems = menuItems.filter((item) => item.isPage);
+  const menuItems = menuString
+    .split("},")
+    .map((item) => {
+      const keyMatch = item.match(/key:\s*["'](.+?)["']/);
+      const pathMatch = item.match(/path:\s*["'](.+?)["']/);
+      const isPageMatch = item.match(/isPage:\s*(true|false)/);
+      return {
+        key: keyMatch ? keyMatch[1] : null,
+        path: pathMatch ? pathMatch[1] : null,
+        isPage: isPageMatch ? isPageMatch[1] === "true" : false,
+      };
+    })
+    .filter((item) => item.key && item.path && item.isPage);
 
-  for (const item of pageItems) {
+  for (const item of menuItems) {
     const pagePath = item.path.startsWith("/") ? item.path.slice(1) : item.path;
     let fullPath = path.join(__dirname, "app", "[lang]", pagePath);
 
