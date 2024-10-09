@@ -19,12 +19,15 @@ import { Icons } from "./components/ui/icons";
  *   @property {string} path - URL path for the menu item
  *   @property {boolean} isPage - Indicates if the menu item is a page
  *   @property {boolean} isClientPage - Indicates if the page is a client-side rendered page
- *   @property {boolean} [isUserMenu] - Optional. Indicates if the item should appear in the user menu -  (AuthenticationButton.tsx)
- *   @property {Object} header - Configuration for the application header
- *     @property {string} applicationName - Name displayed in the header
- *     @property {boolean} authentifcation - Whether authentication features should be enabled
- *     @property {boolean} i18n - Whether internationalization features should be enabled
- *     @property {StaticImageData} logo - Logo image to be displayed in the header
+ *   @property {boolean} [isUserMenu] - Optional. Indicates if the item should appear in the user menu
+ *   @property {boolean} [showInAdminArea] - Optional. Indicates if the item should be shown in the admin area
+ *   @property {React.ComponentType<IconProps>} icon - Icon component for the menu item
+ *
+ * @property {Object} header - Configuration for the application header
+ *   @property {string} applicationName - Name displayed in the header
+ *   @property {boolean} authentifcation - Whether authentication features should be enabled
+ *   @property {boolean} i18n - Whether internationalization features should be enabled
+ *   @property {StaticImageData} logo - Logo image to be displayed in the header
  *
  * @property {Object} heroSection - Configuration for the hero section
  *   @property {string} backgroundImage - Source path for the hero section background image
