@@ -1,7 +1,11 @@
 'use client'
 
-import { Header, ContactForm, Footer } from "@/components/components-customs"
+import { ContactForm, Footer } from "@/components/components-customs"
+import TwoColumnContactForm from "@/components/components-customs/contact-form/TwoColumnContactForm"
+import Header from "@/components/components-customs/headers/Header"
+import TypingAnimationHero from "@/components/components-customs/hero-sections/TypingAnimationHero"
 import HeroSection from "@/components/components-customs/HeroSection"
+import CarouselServiceSection from "@/components/components-customs/service-sections/CarouselServiceSection"
 import ServiceSection from "@/components/components-customs/ServiceSection"
 import useTranslationStore from "@/stores/TranslationStore"
 
@@ -11,10 +15,10 @@ export default function Home() {
   return (
     <div>
       <Header />
-      {/* <HeroSection />
-      <ServiceSection />
-      <ContactForm />
-      <Footer /> */}
+      <TypingAnimationHero />
+      <CarouselServiceSection />
+      <TwoColumnContactForm />
+      <Footer />
     </div>
   )
 }

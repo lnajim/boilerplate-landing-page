@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { ChevronDown } from 'lucide-react'
 import useTranslationStore from '@/stores/TranslationStore'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const languages = [
 	{ code: 'en', name: 'English', flag: '🇬🇧' },
@@ -21,18 +21,24 @@ const LanguageSelector: React.FC = () => {
 	const router = useRouter()
 	const pathname = usePathname()
 	const { language, setLanguage } = useTranslationStore()
+	const [mounted, setMounted] = useState(false)
 
 	useEffect(() => {
+		setMounted(true)
 		const urlLang = pathname.split('/')[1]
 		if (urlLang && urlLang !== language) {
 			setLanguage(urlLang)
 		}
-	}, [pathname, setLanguage])
+	}, [pathname, setLanguage, language])
 
 	const changeLanguage = (langCode: string) => {
 		setLanguage(langCode)
 		const newPathname = pathname.replace(`/${language}`, `/${langCode}`)
 		router.push(newPathname)
+	}
+
+	if (!mounted) {
+		return null // or a loading placeholder
 	}
 
 	return (

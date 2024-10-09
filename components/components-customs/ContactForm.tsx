@@ -15,7 +15,7 @@ const ContactForm: React.FC<ContactFormProps> = () => {
 	return (
 		<section className="py-20 bg-purple-100">
 			<div className="container mx-auto">
-				<h2 className="text-3xl font-bold text-center mb-12">{dictionary.ContactForm.sectionTitle}</h2>
+				<h2 className="text-3xl font-bold text-center mb-12">{dictionary.ContactForm.title}</h2>
 				<div className="flex flex-col md:flex-row gap-8">
 					<div className="flex-1 flex items-center justify-center">
 						<Button variant="outline" size="lg" className="text-xl">

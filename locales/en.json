@@ -40,7 +40,7 @@
     }
   },
   "ContactForm": {
-    "sectionTitle": "Get in Touch",
+    "title": "Get in Touch",
     "callButton": "Call Us Now",
     "namePlaceholder": "Your Name",
     "emailPlaceholder": "Your Email",
@@ -88,7 +88,7 @@
     "signInLink": "Sign in"
   },
   "Footer": {
-    "copyright": "© {year} Lumina Beauty Studio. All rights reserved."
+    "copyright": "All rights reserved."
   },
   "useMutation": {
     "login": {
@@ -116,5 +116,16 @@
       "unexpectedError": "An unexpected error occurred. Please try again later.",
       "backToLogin": "Back to login"
     }
+  },
+  "Menu": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact",
+    "gallery": "Gallery",
+    "dashboard": "Dashboard",
+    "clients": "Clients",
+    "analytics": "Analytics",
+    "settings": "Settings"
   }
 }

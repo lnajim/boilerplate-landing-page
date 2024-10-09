@@ -1,6 +1,7 @@
 import {
 	AlertTriangle,
 	ArrowRight,
+	BarChart,
 	CalendarCheck,
 	Check,
 	ChevronLeft,
@@ -11,13 +12,16 @@ import {
 	File,
 	FileText,
 	HelpCircle,
+	Home,
 	Image,
 	Laptop,
-	LayoutDashboardIcon,
+	LayoutDashboard,
 	Loader2,
 	LogIn,
 	LucideIcon,
 	LucideProps,
+	Mail,
+	Users2,
 	Moon,
 	MoreVertical,
 	Pizza,
@@ -43,10 +47,12 @@ import SvgMenu from '@/components/icon-components/Menu';
 import SvgNotes from '@/components/icon-components/Notes';
 import SvgSupplier from '@/components/icon-components/Supplier';
 import SvgTeam from '@/components/icon-components/Team';
+
 export type Icon = LucideIcon;
 
 export const Icons = {
-	dashboard: LayoutDashboardIcon,
+	home: Home,
+	dashboard: LayoutDashboard,
 	logo: Command,
 	login: LogIn,
 	close: X,
@@ -73,7 +79,7 @@ export const Icons = {
 	sun: SunMedium,
 	moon: Moon,
 	laptop: Laptop,
-	client: SvgClients,
+	client: Users2,
 	svgDashboard: SvgDashboard,
 	hours: SvgHours,
 	SvgMarketingIcon: SvgMarketingIcon,
@@ -84,6 +90,9 @@ export const Icons = {
 	svgAddCircle: SvgAddCircle,
 	svgJobMarket: SvgJobMarket,
 	booking: BookingIconMenu,
+	mail: Mail,
+	image: Image,
+	barChart: BarChart,
 
 	gitHub: ({ ...props }: LucideProps) => (
 		<svg

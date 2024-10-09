@@ -27,7 +27,6 @@ export default function RootLayout({
             <AuthModalsProvider>
               {children}
               <Toaster />
-
             </AuthModalsProvider>
           </TanstackProvider>
         </SessionProvider>

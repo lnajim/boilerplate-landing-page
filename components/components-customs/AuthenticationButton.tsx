@@ -8,15 +8,19 @@ import useAuthModalsStore from "@/stores/authModalsStore"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { AlignJustify, User } from 'lucide-react'
 import MenuItem from './MenuItem'
-const AuthenticationButton = () => {
+import { appConfig } from '@/app.config'
+
+interface AuthenticationButtonProps {
+	isAdminArea?: boolean;
+}
+
+const AuthenticationButton = ({ isAdminArea = false }: AuthenticationButtonProps) => {
 	const router = useRouter()
 	const { dictionary } = useTranslationStore()
 	const { setShowLoginDialog, setShowRegisterDialog } = useAuthModalsStore()
 	const { data: session, status } = useSession()
 	const menuRef = useRef<HTMLDivElement | null>(null)
-
 	const [isOpen, setIsOpen] = useState(false)
-
 	const toggleOpen = useCallback(() => {
 		setIsOpen((value) => !value)
 	}, [])
@@ -35,9 +39,14 @@ const AuthenticationButton = () => {
 	}, [handleClickOutside])
 
 	const handleRouting = (route: string) => {
-		router.push(route)
+		const cleanedRoute = route.replace(/\([^)]*\)\//g, '')
+		router.push(cleanedRoute)
 		setIsOpen(false)
 	}
+
+	const userMenuItems = appConfig.menu.filter(item =>
+		item.isUserMenu && (!isAdminArea || item.showInAdminArea)
+	)
 
 	return (
 		<div className="relative" ref={menuRef}>
@@ -45,30 +54,38 @@ const AuthenticationButton = () => {
 				<div
 					onClick={toggleOpen}
 					className="
-						p-4
-						md:py-1
-						md:px-2
+						p-2
+						sm:p-4
+						sm:py-1
+						sm:px-2
 						border-[1px] 
 						border-neutral-200 
 						flex 
 						flex-row 
 						items-center 
-						gap-3 
+						gap-1
+						sm:gap-3 
 						rounded-full 
 						cursor-pointer 
 						hover:shadow-md 
 						transition
 					"
 				>
-					<div>
-						<AlignJustify />
-
+					<div className="hidden sm:block">
+						<AlignJustify size={20} />
 					</div>
-					<Avatar className="h-8 w-8">
-						<AvatarImage src={session?.user?.image || ''} alt="User avatar" />
-						<AvatarFallback>
-							<User className="h-4 w-4" />
-						</AvatarFallback>
+					<Avatar className="h-6 w-6 sm:h-8 sm:w-8">
+						{status === 'loading' ? (
+							<AvatarFallback>
+								<User className="h-3 w-3 sm:h-4 sm:w-4" />
+							</AvatarFallback>
+						) : status === 'authenticated' && session?.user?.image ? (
+							<AvatarImage src={session.user.image} alt="User avatar" />
+						) : (
+							<AvatarFallback>
+								<User className="h-3 w-3 sm:h-4 sm:w-4" />
+							</AvatarFallback>
+						)}
 					</Avatar>
 				</div>
 			</div>
@@ -80,8 +97,9 @@ const AuthenticationButton = () => {
 							shadow-md
 							min-w-[160px]
 							border-[1px] 
-						border-neutral-200 
-							md:w-3/4 
+							border-neutral-200 
+							w-full
+							sm:w-3/4 
 							text-primary-foreground
 							bg-primary
 							overflow-hidden 
@@ -91,16 +109,17 @@ const AuthenticationButton = () => {
 						"
 				>
 					<div className="flex flex-col cursor-pointer">
-						{status === 'authenticated' ? (
+						{status === 'loading' ? (
+							<MenuItem label="Loading..." onClick={() => { }} />
+						) : status === 'authenticated' ? (
 							<>
-								<MenuItem
-									label={dictionary.Header.profile!}
-									onClick={() => handleRouting('/profile')}
-								/>
-								<MenuItem
-									label={dictionary.Header.settings!}
-									onClick={() => handleRouting('/settings')}
-								/>
+								{userMenuItems.map((item) => (
+									<MenuItem
+										key={item.key}
+										label={dictionary.Header[item.key as keyof typeof dictionary.Header] || item.key}
+										onClick={() => handleRouting(item.path)}
+									/>
+								))}
 								<hr />
 								<MenuItem
 									label={dictionary.Header.logout!}
@@ -130,7 +149,6 @@ const AuthenticationButton = () => {
 			)}
 		</div>
 	)
-
 }
 
 export default AuthenticationButton
