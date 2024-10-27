@@ -50,7 +50,12 @@ async function generatePages() {
 
   for (const item of menuItems) {
     const pagePath = item.path.startsWith("/") ? item.path.slice(1) : item.path;
-    let fullPath = path.join(__dirname, "app", "[lang]", pagePath);
+    const fullPath = path.join(
+      __dirname,
+      "app",
+      "[lang]",
+      ...pagePath.split("/")
+    );
 
     // Check if the directory already exists
     try {

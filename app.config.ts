@@ -41,33 +41,33 @@ export const appConfig: AppConfig = {
   menu: [
     {
       key: "home",
-      path: "/",
-      isPage: false,
-      isClientPage: false,
+      path: "(client)/",
+      isPage: true, // Set to true to generate a page
+      isClientPage: true,
     },
     {
       key: "services",
-      path: "/services",
-      isPage: false,
-      isClientPage: false,
+      path: "(client)/services",
+      isPage: true, // Set to true to generate a page
+      isClientPage: true,
     },
     {
       key: "about",
-      path: "/about",
-      isPage: false,
-      isClientPage: false,
+      path: "(client)/about",
+      isPage: true, // Set to true to generate a page
+      isClientPage: true,
     },
     {
       key: "contact",
-      path: "/contact",
-      isPage: false,
-      isClientPage: false,
+      path: "(client)/contact",
+      isPage: true, // Set to true to generate a page
+      isClientPage: true,
     },
     {
       key: "gallery",
-      path: "/gallery",
-      isPage: false,
-      isClientPage: false,
+      path: "(client)/gallery",
+      isPage: true, // Set to true to generate a page
+      isClientPage: true,
     },
     {
       key: "dashboard",
