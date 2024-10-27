@@ -9,7 +9,7 @@ const Footer: React.FC<FooterProps> = () => {
 	const { dictionary } = useTranslationStore()
 
 	return (
-		<footer className="bg-purple-600 text-white py-8">
+		<footer className="bg-purple-600 text-white py-8 fixed bottom-0 w-full">
 			<div className="container mx-auto text-center">
 				<p>{dictionary.Footer.copyright.replace('{year}', new Date().getFullYear().toString())}</p>
 			</div>

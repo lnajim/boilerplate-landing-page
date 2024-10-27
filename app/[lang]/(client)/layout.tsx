@@ -1,14 +1,14 @@
-import { Inter } from 'next/font/google'
-import '@/app/globals.css'
-import TanstackProvider from '@/providers/tanstack-provider';
-import { Toaster } from '@/components/ui/toaster';
-import AuthModalsProvider from '@/components/components-customs/AuthModalsProvider';
-import { SessionProvider } from "next-auth/react";
-import { i18n } from '@/i18n-config';
 import { appConfig } from '@/app.config';
+import '@/app/globals.css';
+import AuthModalsProvider from '@/components/components-customs/AuthModalsProvider';
+import { Toaster } from '@/components/ui/toaster';
+import { i18n } from '@/i18n-config';
+import TanstackProvider from '@/providers/tanstack-provider';
+import { SessionProvider } from "next-auth/react";
+import { Inter } from 'next/font/google';
 
-import { Footer } from "@/components/components-customs"
-import Header from "@/components/components-customs/headers/Header"
+import { Footer } from "@/components/components-customs";
+import Header from "@/components/components-customs/headers/Header";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -35,12 +35,14 @@ export default function RootLayout({
 					<TanstackProvider>
 						<AuthModalsProvider>
 							<Header navItems={clientNavItems} />
-							{children}
+							<div className=" min-h-screen ">
+								{children}
+							</div>
 							<Toaster />
-							<Footer />
 						</AuthModalsProvider>
 					</TanstackProvider>
 				</SessionProvider>
+				<Footer />
 			</body>
 		</html>
 	)

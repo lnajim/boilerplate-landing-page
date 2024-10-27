@@ -27,12 +27,10 @@ const DesktopMenu: React.FC<DesktopMenuProps> = ({ navItems, dictionary, headerC
 				{navItems?.map((item) => (
 					<li key={item}>
 						<Link href={`/${language}/${item}`} className="text-primary-foreground hover:text-secondary">
-
 							{dictionary.Header[item]}
 						</Link>
 					</li>
 				))}
-
 			</ul>
 			<LanguageSelector />
 			{showAuthentication && <AuthenticationButton />}

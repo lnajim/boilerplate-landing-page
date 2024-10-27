@@ -5,7 +5,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ navItems }) => (
-	<BaseHeader isGradient={false} navItems={navItems} />
+	<BaseHeader isGradient={true} navItems={navItems} />
 )
 
 export default Header
