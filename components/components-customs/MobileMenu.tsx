@@ -8,21 +8,17 @@ import useAuthModalsStore from "@/stores/authModalsStore"
 import useTranslationStore from '@/stores/TranslationStore'
 
 // Define an interface for the header config item
-interface HeaderConfigItem {
-	key: string;
-	path: string;
-}
+
 
 interface MobileMenuProps {
 	isOpen: boolean
 	closeMenu: () => void
 	navItems: Array<string>
 	dictionary: any
-	headerConfig: HeaderConfigItem[]
 	showAuthentication: boolean
 }
 
-const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, closeMenu, navItems, dictionary, headerConfig, showAuthentication }) => {
+const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, closeMenu, navItems, dictionary, showAuthentication }) => {
 	const { setShowLoginDialog, setShowRegisterDialog } = useAuthModalsStore()
 	const { language } = useTranslationStore()
 

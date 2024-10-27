@@ -43,7 +43,7 @@ const BaseHeader: React.FC<BaseHeaderProps> = ({ isGradient = false, navItems })
 	}
 
 	const headerClass = isGradient
-		? `fixed top-0 left-0 w-full text-primary-foreground p-4 transition-colors duration-300 z-50 ${scrolled || hovered ? 'bg-primary' : 'bg-transparent'
+		? `fixed top-0 left-0 w-full text-primary-foreground p-1  transition-colors duration-300 z-50 ${scrolled || hovered ? 'bg-primary' : 'bg-transparent'
 		}`
 		: "fixed top-0 left-0 w-full text-primary-foreground p-4 bg-primary z-50"
 
@@ -57,7 +57,7 @@ const BaseHeader: React.FC<BaseHeaderProps> = ({ isGradient = false, navItems })
 	return (
 		<SessionProvider>
 			<header className={headerClass} {...headerProps}>
-				<div className="container mx-auto flex justify-between items-center">
+				<div className=" md:container md:mx-auto flex justify-between items-center">
 					<Link href="/" className="flex items-center text-primary-foreground text-2xl font-cursive">
 						{appConfig.header.logo ? (
 							<Image src={appConfig.header.logo} alt="Logo" width={240} height={61} className='mr-2' />
@@ -66,7 +66,6 @@ const BaseHeader: React.FC<BaseHeaderProps> = ({ isGradient = false, navItems })
 					<DesktopMenu
 						navItems={navItems}
 						dictionary={dictionary}
-						headerConfig={appConfig.menu}
 						showAuthentication={true}
 					/>
 					<Button className="lg:hidden relative w-10 h-10 flex items-center justify-center overflow-hidden text-primary-foreground" onClick={toggleMobileMenu}>
@@ -82,7 +81,6 @@ const BaseHeader: React.FC<BaseHeaderProps> = ({ isGradient = false, navItems })
 				closeMenu={() => setIsMobileMenuOpen(false)}
 				navItems={navItems}
 				dictionary={dictionary}
-				headerConfig={appConfig.menu}
 				showAuthentication={true}
 			/>
 		</SessionProvider>

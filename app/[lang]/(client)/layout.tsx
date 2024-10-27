@@ -9,6 +9,7 @@ import { Inter } from 'next/font/google';
 
 import { Footer } from "@/components/components-customs";
 import Header from "@/components/components-customs/headers/Header";
+import Container from '@/components/components-customs/Container';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,15 +29,19 @@ export default function RootLayout({
 		.filter(item => item.path.startsWith('(client)'))
 		.map(item => item.key);
 
+
 	return (
 		<html lang={params.lang}>
 			<body className={inter.className}>
 				<SessionProvider>
 					<TanstackProvider>
 						<AuthModalsProvider>
+
 							<Header navItems={clientNavItems} />
-							<div className=" min-h-screen ">
-								{children}
+							<div className="pt-[90px] bg-red-300 min-h-screen ">
+								<Container>
+									{children}
+								</Container>
 							</div>
 							<Toaster />
 						</AuthModalsProvider>

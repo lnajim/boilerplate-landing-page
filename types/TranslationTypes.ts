@@ -135,6 +135,8 @@ export interface TranslationState {
       clients: string;
       analytics: string;
       settings: string;
+      info: string;
+      test: string;
     };
   };
   language: string;

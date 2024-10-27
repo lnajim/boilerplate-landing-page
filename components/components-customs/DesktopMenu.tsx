@@ -14,12 +14,20 @@ interface HeaderConfigItem {
 interface DesktopMenuProps {
 	navItems: Array<string>
 	dictionary: any
-	headerConfig: HeaderConfigItem[]
 	showAuthentication: boolean
 }
 
-const DesktopMenu: React.FC<DesktopMenuProps> = ({ navItems, dictionary, headerConfig, showAuthentication }) => {
+const DesktopMenu: React.FC<DesktopMenuProps> = ({ navItems, dictionary, showAuthentication }) => {
 	const { language } = useTranslationStore()
+
+	// Function to get translation with fallback
+	const getTranslation = (key: string) => {
+		if (!dictionary || !dictionary.Header) {
+			return `[Loading Translation: ${key}]`
+		}
+		const translation = dictionary.Header[key as keyof typeof dictionary.Header]
+		return translation || `[Missing Translation: ${key}]`
+	}
 
 	return (
 		<nav className="hidden lg:flex items-center space-x-4">
@@ -27,7 +35,7 @@ const DesktopMenu: React.FC<DesktopMenuProps> = ({ navItems, dictionary, headerC
 				{navItems?.map((item) => (
 					<li key={item}>
 						<Link href={`/${language}/${item}`} className="text-primary-foreground hover:text-secondary">
-							{dictionary.Header[item]}
+							{getTranslation(item)}
 						</Link>
 					</li>
 				))}

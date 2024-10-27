@@ -133,6 +133,8 @@ export const defaultDictionary: TranslationState["dictionary"] = {
     clients: "",
     analytics: "",
     settings: "",
+    info: "",
+    test: "",
   },
 };
 

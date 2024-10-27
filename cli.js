@@ -109,105 +109,72 @@ export default function ${
 }
 
 async function createNewPage() {
-  const { pageType } = await inquirer.prompt([
-    {
-      type: "list",
-      name: "pageType",
-      message: "Where do you want to create the new page?",
-      choices: ["(administration)", "(client)", "(other)"],
-    },
-  ]);
-
-  let basePath = path.join(__dirname, "app", "[lang]");
-  let isClientPage = false;
-  let newFolderName = "";
-  let routePath = "";
-
   const { routeName } = await inquirer.prompt([
     {
       type: "input",
       name: "routeName",
-      message: "Enter the name of the new page:",
-      validate: (input) => input.trim() !== "" || "Page name cannot be empty",
+      message:
+        "Enter the full route path (e.g., (marketing)/marketing/dashboard):",
+      validate: (input) => input.trim() !== "" || "Route path cannot be empty",
     },
   ]);
 
-  if (pageType === "(administration)") {
-    const { adminChoice } = await inquirer.prompt([
-      {
-        type: "list",
-        name: "adminChoice",
-        message: "Where in (administration) do you want to create the page?",
-        choices: ["Under admin folder", "New location"],
-      },
-    ]);
+  const { routeType } = await inquirer.prompt([
+    {
+      type: "list",
+      name: "routeType",
+      message: "Where should this route be categorized?",
+      choices: ["Public", "Auth", "Private"],
+    },
+  ]);
 
-    if (adminChoice === "Under admin folder") {
-      basePath = path.join(basePath, "(administration)", "admin");
-      isClientPage = true;
-      routePath = `(administration)/admin/${routeName}`;
-    } else {
-      basePath = path.join(basePath, "(administration)");
-      routePath = `(administration)/${routeName}`;
-    }
-  } else if (pageType === "(client)") {
-    basePath = path.join(basePath, "(client)");
-    isClientPage = true;
-    routePath = `(client)/${routeName}`;
-  } else if (pageType === "(other)") {
-    const { folderName } = await inquirer.prompt([
-      {
-        type: "input",
-        name: "folderName",
-        message: "Enter the name of the new folder:",
-        validate: (input) =>
-          input.trim() !== "" || "Folder name cannot be empty",
-      },
-    ]);
-    newFolderName = folderName.trim();
-    basePath = path.join(basePath, `(${newFolderName})`);
-    routePath = `(${newFolderName})/${routeName}`;
+  const routeParts = routeName.split("/");
+  const groupName = routeParts[0].replace(/[()]/g, ""); // Remove parentheses
+  const basePath = path.join(__dirname, "app", "[lang]", `(${groupName})`);
+  const fullPath = path.join(basePath, ...routeParts.slice(1));
 
-    // Create layout.tsx in the new folder
+  try {
+    // Create the main layout for the new group route if it doesn't exist
     const layoutPath = path.join(basePath, "layout.tsx");
-    const layoutContent = `
+    try {
+      await fs.access(layoutPath);
+    } catch (error) {
+      // If access fails, the file doesn't exist, so create it
+      const layoutContent = `
 import React from 'react';
 
 export default function ${
-      newFolderName.charAt(0).toUpperCase() + newFolderName.slice(1)
-    }Layout({
+        groupName.charAt(0).toUpperCase() + groupName.slice(1)
+      }Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
     <div>
-      <h1>${
-        newFolderName.charAt(0).toUpperCase() + newFolderName.slice(1)
-      } Layout</h1>
+      <h1>${groupName.charAt(0).toUpperCase() + groupName.slice(1)} Layout</h1>
       {children}
     </div>
   );
 }
 `;
-    await fs.mkdir(basePath, { recursive: true });
-    await fs.writeFile(layoutPath, layoutContent);
-    console.log(`Created layout.tsx in ${basePath}`);
-  }
+      await fs.mkdir(basePath, { recursive: true });
+      await fs.writeFile(layoutPath, layoutContent);
+      console.log(`Created layout.tsx in ${basePath}`);
+    }
 
-  const fullPath = path.join(basePath, routeName);
-
-  try {
+    // Create the new page
     await fs.mkdir(fullPath, { recursive: true });
     const pageContent = `
 import React from 'react';
 
 export default function ${
-      routeName.charAt(0).toUpperCase() + routeName.slice(1)
+      routeParts[routeParts.length - 1].charAt(0).toUpperCase() +
+      routeParts[routeParts.length - 1].slice(1)
     }Page() {
   return (
     <div>
-      <h1>${routeName}</h1>
+      <h1>${routeParts[routeParts.length - 1]}</h1>
     </div>
   );
 }
@@ -216,7 +183,10 @@ export default function ${
     console.log(`Created new page: ${path.join(fullPath, "page.tsx")}`);
 
     // Add the new route to app.config.ts
-    await addRouteToConfig(routeName, routePath, isClientPage);
+    await addRouteToConfig(routeParts[routeParts.length - 1], routeName, true);
+
+    // Add the new route to routes.ts
+    await addRouteToRoutesFile(routeName, routeType);
   } catch (error) {
     console.error("Error creating new page:", error);
   }
@@ -245,6 +215,43 @@ async function addRouteToConfig(routeName, routePath, isClientPage) {
     console.log(`Added new route to app.config.ts: ${routeName}`);
   } else {
     console.error("Could not find menu array in app.config.ts");
+  }
+}
+
+async function addRouteToRoutesFile(routeName, routeType) {
+  const routesPath = path.join(__dirname, "routes.ts");
+  let routesContent = await fs.readFile(routesPath, "utf8");
+
+  // Remove any route group from the routeName
+  const cleanedRouteName = routeName.replace(/\(.*?\)\//, "/");
+
+  const routeEntry = `...i18n.locales.map((locale) => \`/\${locale}${cleanedRouteName}\`),`;
+
+  let regex;
+  switch (routeType) {
+    case "Public":
+      regex = /(export const publicRoutes: string\[\] = \[)([\s\S]*?)(\];)/;
+      break;
+    case "Auth":
+      regex = /(export const authRoutes: string\[\] = \[)([\s\S]*?)(\];)/;
+      break;
+    case "Private":
+      regex = /(export const privateRoutes: string\[\] = \[)([\s\S]*?)(\];)/;
+      break;
+    default:
+      console.error("Invalid route type");
+      return;
+  }
+
+  const match = routesContent.match(regex);
+  if (match) {
+    const updatedRoutes = match[1] + match[2] + routeEntry + match[3];
+    routesContent = routesContent.replace(regex, updatedRoutes);
+
+    await fs.writeFile(routesPath, routesContent);
+    console.log(`Added new route to ${routeType} routes: ${cleanedRouteName}`);
+  } else {
+    console.error(`Could not find ${routeType} routes array in routes.ts`);
   }
 }
 

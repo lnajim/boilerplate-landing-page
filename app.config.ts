@@ -40,73 +40,18 @@ export const appConfig: AppConfig = {
   address: "123 Main St, City, Country",
   menu: [
     {
-      key: "/",
-      path: "(client)/",
-      isPage: true, // Set to true to generate a page
-      isClientPage: true,
-    },
-    {
-      key: "services",
-      path: "(client)/services",
-      isPage: true, // Set to true to generate a page
-      isClientPage: true,
-    },
-    {
       key: "about",
       path: "(client)/about",
-      isPage: true, // Set to true to generate a page
+      isPage: true,
       isClientPage: true,
     },
-    {
-      key: "contact",
-      path: "(client)/contact",
-      isPage: true, // Set to true to generate a page
-      isClientPage: true,
-    },
+  
     {
       key: "gallery",
       path: "(client)/gallery",
-      isPage: true, // Set to true to generate a page
+      isPage: true,
       isClientPage: true,
-    },
-    {
-      key: "dashboard",
-      path: "(administration)/admin/dashboard",
-      isPage: true,
-      isClientPage: false,
-      isUserMenu: true,
-      showInAdminArea: false,
-      icon: Icons.dashboard,
-    },
-    {
-      key: "clients",
-      path: "(administration)/admin/clients",
-      isPage: true,
-      isClientPage: false,
-      icon: Icons.client,
-    },
-    {
-      key: "analytics",
-      path: "(administration)/admin/analytics",
-      isPage: true,
-      isClientPage: false,
-      icon: Icons.barChart,
-    },
-    {
-      key: "settings",
-      path: "(administration)/admin/settings",
-      isPage: true,
-      isClientPage: false,
-      icon: Icons.settings,
-    },
-    {
-      key: "contact",
-      path: "(administration)/admin/contact",
-      isPage: true,
-      isClientPage: false,
-      icon: Icons.mail,
-    },
-  ],
+    },],
   header: {
     applicationName: "Resto Genius",
     authentifcation: true,
