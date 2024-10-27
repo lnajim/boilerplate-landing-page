@@ -5,6 +5,7 @@ import React from 'react'
 import LanguageSelector from './LanguageSelector'
 import { Button } from "@/components/ui/button"
 import useAuthModalsStore from "@/stores/authModalsStore"
+import useTranslationStore from '@/stores/TranslationStore'
 
 // Define an interface for the header config item
 interface HeaderConfigItem {
@@ -23,6 +24,7 @@ interface MobileMenuProps {
 
 const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, closeMenu, navItems, dictionary, headerConfig, showAuthentication }) => {
 	const { setShowLoginDialog, setShowRegisterDialog } = useAuthModalsStore()
+	const { language } = useTranslationStore()
 
 	const handleLoginClick = () => {
 		setShowLoginDialog(true)
@@ -40,7 +42,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, closeMenu, navItems, di
 				<ul className="space-y-4 text-center">
 					{navItems.map((item) => (
 						<li key={item}>
-							<Link href={headerConfig.find((config: HeaderConfigItem) => config.key === item)?.path || '#'} className="text-primary-foreground text-xl hover:text-secondary" onClick={closeMenu}>
+							<Link href={`/${language}/${item}`} className="text-primary-foreground text-xl hover:text-secondary" onClick={closeMenu}>
 								{dictionary.Header[item]}
 							</Link>
 						</li>

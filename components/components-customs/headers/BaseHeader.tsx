@@ -13,9 +13,10 @@ import MobileMenu from "../MobileMenu"
 
 interface BaseHeaderProps {
 	isGradient?: boolean;
+	navItems: Array<string>;
 }
 
-const BaseHeader: React.FC<BaseHeaderProps> = ({ isGradient = false }) => {
+const BaseHeader: React.FC<BaseHeaderProps> = ({ isGradient = false, navItems }) => {
 	const { language, dictionary, setLanguage } = useTranslationStore()
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 	const [scrolled, setScrolled] = useState(false)
@@ -36,8 +37,6 @@ const BaseHeader: React.FC<BaseHeaderProps> = ({ isGradient = false }) => {
 			return () => window.removeEventListener('scroll', handleScroll)
 		}
 	}, [setLanguage, language, isGradient])
-
-	const navItems = appConfig.menu.map((item) => item.key) as Array<keyof typeof dictionary.Header>
 
 	const toggleMobileMenu = () => {
 		setIsMobileMenuOpen(!isMobileMenuOpen)

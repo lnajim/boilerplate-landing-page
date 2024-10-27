@@ -40,7 +40,7 @@ export const appConfig: AppConfig = {
   address: "123 Main St, City, Country",
   menu: [
     {
-      key: "home",
+      key: "/",
       path: "(client)/",
       isPage: true, // Set to true to generate a page
       isClientPage: true,

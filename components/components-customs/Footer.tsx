@@ -1,5 +1,4 @@
-// components/Footer.tsx
-
+'use client'
 import useTranslationStore from "@/stores/TranslationStore"
 
 interface FooterProps {

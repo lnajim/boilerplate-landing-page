@@ -1,43 +1,47 @@
-import '@/app/globals.css';
-import Image from 'next/image';
+import { Inter } from 'next/font/google'
+import '@/app/globals.css'
+import TanstackProvider from '@/providers/tanstack-provider';
+import { Toaster } from '@/components/ui/toaster';
+import AuthModalsProvider from '@/components/components-customs/AuthModalsProvider';
+import { SessionProvider } from "next-auth/react";
+import { i18n } from '@/i18n-config';
+import { appConfig } from '@/app.config';
 
-export const metadata = {
-	title: 'Resto-Genius',
-	description: 'Restaurant management system'
-};
+import { Footer } from "@/components/components-customs"
+import Header from "@/components/components-customs/headers/Header"
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+const inter = Inter({ subsets: ['latin'] })
+
+export async function generateStaticParams() {
+	return i18n.locales.map((locale) => ({ lang: locale }))
+}
+
+export default function RootLayout({
+	children,
+	params,
+}: {
+	children: React.ReactNode
+	params: { lang: string }
+}) {
+	// Filter navItems for the (client) group
+	const clientNavItems = appConfig.menu
+		.filter(item => item.path.startsWith('(client)'))
+		.map(item => item.key);
+
 	return (
-		<div>
-			{/* Background Image for Mobile */}
-			<Image
-				className="block md:hidden"
-				src="/login-background.webp"
-				alt="Background"
-				fill
-				objectFit="cover"
-				quality={100}
-			/>
-
-			<div className="relative min-h-screen flex flex-col justify-center md:flex-row">
-				{/* Logo for Desktop */}
-				<div className="hidden md:block md:absolute md:w-[240px] md:h-[62px] md:top-[38px] md:left-[41px]">
-					<Image src="/logo.svg" alt="Logo" width={240} height={61} />
-				</div>
-
-				{/* Unified Layout for Mobile and Desktop */}
-				<div className="bg-white h-fit p-12 flex flex-col-reverse items-center rounded-md m-4 shadow-md md:flex-row md:items-center md:justify-center md:h-screen md:w-1/2 md:m-0 md:shadow-none">
-					<Image className="md:hidden" src="/logo.svg" alt="Logo" width={240} height={61} />
-					<div className="w-full max-w-md">{children}</div>
-				</div>
-
-				{/* Background Image for Desktop */}
-				<div className="hidden md:block md:w-1/2 md:relative">
-					<div className="absolute inset-0">
-						<Image src="/login-background.webp" alt="Background" fill objectFit="cover" quality={100} />
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+		<html lang={params.lang}>
+			<body className={inter.className}>
+				<SessionProvider>
+					<TanstackProvider>
+						<AuthModalsProvider>
+							<Header navItems={clientNavItems} />
+							{children}
+							<Toaster />
+							<Footer />
+						</AuthModalsProvider>
+					</TanstackProvider>
+				</SessionProvider>
+			</body>
+		</html>
+	)
 }

@@ -1,5 +1,11 @@
 import BaseHeader from './BaseHeader'
 
-const Header: React.FC = () => <BaseHeader isGradient={false} />
+interface HeaderProps {
+	navItems: Array<string>;
+}
+
+const Header: React.FC<HeaderProps> = ({ navItems }) => (
+	<BaseHeader isGradient={false} navItems={navItems} />
+)
 
 export default Header

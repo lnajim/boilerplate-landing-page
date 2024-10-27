@@ -1,5 +1,11 @@
 import BaseHeader from './BaseHeader'
 
-const GradientHeader: React.FC = () => <BaseHeader isGradient={true} />
+interface GradientHeaderProps {
+	navItems: Array<string>;
+}
+
+const GradientHeader: React.FC<GradientHeaderProps> = ({ navItems }) => (
+	<BaseHeader isGradient={true} navItems={navItems} />
+)
 
 export default GradientHeader
