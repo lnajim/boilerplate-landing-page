@@ -45,13 +45,24 @@ export const appConfig: AppConfig = {
       isPage: true,
       isClientPage: true,
     },
-  
+
     {
       key: "gallery",
       path: "(client)/gallery",
       isPage: true,
       isClientPage: true,
-    },],
+    },
+
+    {
+      key: "dashboard",
+      path: "(administration)/admin/dashboard",
+      isPage: true,
+      isClientPage: false,
+      isUserMenu: true,
+      showInAdminArea: false,
+      icon: Icons.dashboard,
+    },
+  ],
   header: {
     applicationName: "Resto Genius",
     authentifcation: true,
