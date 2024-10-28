@@ -33,8 +33,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, closeMenu, navItems, di
 	}
 
 	return (
-		<div className={`lg:hidden fixed inset-x-0 top-[72px] z-40 mt-5 bg-primary bg-opacity-95 transition-all duration-300 ${isOpen ? 'max-h-screen opacity-100 ' : 'max-h-0 opacity-0 overflow-hidden'}`}>
-			<div className="flex flex-col items-center py-4">
+		<div className={`lg:hidden fixed inset-x-0 top-[68px] z-40  bg-primary bg-opacity-95 transition-all duration-300 ${isOpen ? 'max-h-screen opacity-100 ' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+			<div className="flex flex-col items-center ">
 				<ul className="space-y-4 text-center">
 					{navItems.map((item) => (
 						<li key={item}>
