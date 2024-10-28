@@ -1,4 +1,10 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Resto Genius CLI
+
+This is a custom Command Line Interface (CLI) tool for managing the Resto Genius project. It provides commands to generate pages and start an interactive mode for creating new pages and managing routes.
+
+## Installation
+
+To use this CLI, ensure you have Node.js installed on your system. Then, clone the repository and navigate to the project directory.
 
 ## Getting Started
 

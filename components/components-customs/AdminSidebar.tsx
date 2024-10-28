@@ -28,7 +28,7 @@ export default function AdminSidebar({ isExpanded }: AdminSidebarProps) {
 		return () => window.removeEventListener('resize', handleResize)
 	}, [])
 
-	const adminMenuItems = appConfig.menu.filter(item => item.path.startsWith('(administration)'))
+	const adminMenuItems = appConfig.backendMenu.filter(item => item.path.startsWith('(administration)'))
 
 	const getTranslation = (key: string) => {
 		if (!dictionary || !dictionary.Menu) {

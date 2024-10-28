@@ -25,7 +25,7 @@ export default function RootLayout({
 	params: { lang: string }
 }) {
 	// Filter navItems for the (client) group
-	const clientNavItems = appConfig.menu
+	const clientNavItems = appConfig.frontendMenu
 		.filter(item => item.path.startsWith('(client)'))
 		.map(item => item.key);
 
@@ -36,7 +36,6 @@ export default function RootLayout({
 				<SessionProvider>
 					<TanstackProvider>
 						<AuthModalsProvider>
-
 							<Header navItems={clientNavItems} />
 							<div className="pt-[90px] bg-red-300 min-h-screen ">
 								<Container>

@@ -1,11 +1,5 @@
-import GradientFloatingHero from "@/components/components-customs/hero-sections/GradientFloatingHero";
+import React from 'react';
 
-
-export default function HomePage() {
-
-  return (
-    <div>
-      <GradientFloatingHero />
-    </div>
-  )
+export default function ClientPage() {
+	return <div>ClientPage</div>;
 }

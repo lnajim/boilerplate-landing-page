@@ -8,6 +8,7 @@ export interface MenuItem {
   isClientPage: boolean;
   isUserMenu?: boolean;
   showInAdminArea?: boolean;
+  showInFrontend?: boolean;
   icon?: Icon;
 }
 
@@ -27,7 +28,8 @@ export interface AppConfig {
   email: string;
   phone: string;
   address: string;
-  menu: MenuItem[];
+  frontendMenu: MenuItem[]; // Updated to separate frontend menu
+  backendMenu: MenuItem[]; // Updated to separate backend menu
   header: HeaderConfig;
   heroSection: HeroSectionConfig;
 }

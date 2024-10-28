@@ -38,28 +38,24 @@ export const appConfig: AppConfig = {
   email: "contact@restoggenius.com",
   phone: "+33 6 12 34 56 78",
   address: "123 Main St, City, Country",
-  menu: [
-    {
-      key: "about",
-      path: "(client)/about",
-      isPage: true,
-      isClientPage: true,
-    },
-
-    {
-      key: "gallery",
-      path: "(client)/gallery",
-      isPage: true,
-      isClientPage: true,
-    },
-
+  frontendMenu: [
     {
       key: "dashboard",
       path: "(administration)/admin/dashboard",
       isPage: true,
       isClientPage: false,
       isUserMenu: true,
-      showInAdminArea: false,
+    },
+  ],
+  backendMenu: [
+    {
+      key: "dashboard",
+      path: "(administration)/admin/dashboard",
+      isPage: true,
+      isClientPage: false,
+      isUserMenu: true,
+      showInAdminArea: true,
+      showInFrontend: true,
       icon: Icons.dashboard,
     },
   ],

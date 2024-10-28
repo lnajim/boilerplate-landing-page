@@ -8,8 +8,6 @@ import { i18n } from "@/i18n-config";
 export const publicRoutes: string[] = [
   ...i18n.locales.map((locale) => `/${locale}`),
   ...i18n.locales.map((locale) => `/${locale}/auth/new-verification`),
-  ...i18n.locales.map((locale) => `/${locale}/about`),
-  ...i18n.locales.map((locale) => `/${locale}/gallery`),
 ];
 
 /**

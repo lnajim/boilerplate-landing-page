@@ -44,10 +44,9 @@ const AuthenticationButton = ({ isAdminArea = false }: AuthenticationButtonProps
 		setIsOpen(false)
 	}
 
-	const userMenuItems = appConfig.menu.filter(item =>
-		item.isUserMenu && (!isAdminArea || item.showInAdminArea)
+	const userMenuItems = (isAdminArea ? appConfig.backendMenu : appConfig.frontendMenu).filter(item =>
+		item.isUserMenu && (!isAdminArea || item.key !== "dashboard")
 	)
-
 	return (
 		<div className="relative" ref={menuRef}>
 			<div className="flex flex-row items-center gap-3">
@@ -152,4 +151,3 @@ const AuthenticationButton = ({ isAdminArea = false }: AuthenticationButtonProps
 }
 
 export default AuthenticationButton
-
