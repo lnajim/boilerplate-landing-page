@@ -37,7 +37,7 @@ export default function RootLayout({
 					<TanstackProvider>
 						<AuthModalsProvider>
 							<Header navItems={clientNavItems} />
-							<div className="pt-[90px] bg-red-300 min-h-screen ">
+							<div className="pt-[90px]  min-h-screen ">
 								<Container>
 									{children}
 								</Container>

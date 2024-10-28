@@ -58,6 +58,15 @@ export const appConfig: AppConfig = {
       showInFrontend: true,
       icon: Icons.dashboard,
     },
+
+    {
+      key: "settings",
+      path: "(administration)/admin/settings",
+      isPage: true,
+      isClientPage: false,
+      isUserMenu: false,
+      showInAdminArea: false,
+    },
   ],
   header: {
     applicationName: "Resto Genius",

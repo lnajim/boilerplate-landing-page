@@ -15,7 +15,7 @@ export default function AdminBottomNav() {
 	const [touchStart, setTouchStart] = useState<number | null>(null)
 	const [touchEnd, setTouchEnd] = useState<number | null>(null)
 
-	const adminMenuItems = appConfig.menu.filter(item => item.path.startsWith('(administration)'))
+	const adminMenuItems = appConfig.backendMenu.filter(item => item.path.startsWith('(administration)'))
 
 	const getTranslation = (key: string) => {
 		if (!dictionary || !dictionary.Menu) {
@@ -52,7 +52,7 @@ export default function AdminBottomNav() {
 	}, [])
 
 	return (
-		<nav className="fixed bottom-0 left-0 right-0 bg-zinc-800 border-t z-50 md:hidden w-full h-16">
+		<nav className="fixed bottom-0 left-0 right-0 bg-secondary border-t z-50 md:hidden w-full ">
 			<div className="relative h-full">
 				<div
 					ref={scrollContainerRef}
@@ -71,7 +71,7 @@ export default function AdminBottomNav() {
 								className={cn(
 									"flex flex-col items-center justify-center py-2 px-4 transition-colors min-w-[80px]",
 									pathname.includes(href)
-										? "text-white"
+										? "activeButton" // Apply the activeButton class
 										: "text-gray-200 hover:text-white"
 								)}
 							>

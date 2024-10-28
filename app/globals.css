@@ -66,4 +66,15 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .activeButton {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+  }
+
+  .activeButton:hover {
+    background-color: hsl(var(--primary-foreground)); /* Swap colors on hover */
+    color: hsl(var(--primary)); /* Swap colors on hover */
+  }
 }
